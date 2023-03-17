@@ -1,29 +1,33 @@
 version: 2.1
 
-# Define the jobs we want to run for this project
+parameters:
+  action:
+    type: enum
+    enum: [build, report]
+    default: build
+
 jobs:
   build:
-    docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    machine: true
     steps:
       - checkout
-      - run: echo "this is the build job"
-  test:
-    docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: echo "this is the test job"
+      - run: ./run-tests.sh
 
-# Orchestrate our job run sequence
+  report:
+    machine: true
+    steps:
+      - checkout
+      - run: ./create-report.sh
+
 workflows:
-  build_and_test:
+  build:
+    when:
+      equal: [ build, << pipeline.parameters.action >> ]
     jobs:
       - build
-      - test
+
+  report:
+    when:
+      equal: [ report, << pipeline.parameters.action >> ]
+    jobs:
+      - report
