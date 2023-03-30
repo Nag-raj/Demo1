@@ -1,0 +1,23 @@
+.cmp-title {}
+
+.cmp-title__text {
+  margin-bottom: rem(0) !important;
+}
+
+.cmp-title__link {}
+
+.title-text {
+  .cmp-title__text {
+    padding: 0;
+
+    @include tablet-only {
+      padding: 0;
+    }
+
+    @include mobile-only {
+      padding: 0;
+      font: $font-size-bold-h3;
+      letter-spacing: rem(0.64) !important;
+    }
+  }
+}

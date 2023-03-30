@@ -1,0 +1,21 @@
+{
+    "componenetName": "Card Component",
+    "partialName": "card-component",
+    "isMolecule": true,
+    "variations": [
+      {
+        "variationType": "Default",
+        "config": {
+          "card": {
+            "fruit": "Apple",
+            "size": "Large",
+            "color": "Red",
+            "button": {
+              "Title": "This is a card button"
+            }
+          }
+        }
+      }
+    ]
+  }
+  

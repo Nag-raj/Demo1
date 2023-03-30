@@ -1,0 +1,288 @@
+@import "../../site/_mixins.scss";
+@import "../../site/_variables.scss";
+@import "../../site/_base.scss";
+
+.orderSummary {
+  &__container-box {
+    background-color: $white;
+    // width: rem(490);
+    height: auto;
+    padding: rem(30);
+
+    @include mobile-only {
+      width: auto;
+      height: auto;
+      padding: rem(16);
+    }
+
+    @include tablet-only {
+      //width: rem(387);
+      height: auto;
+      padding: rem(15);
+    }
+
+    .shopping-btn-container {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+      margin-top: rem(20);
+      position: relative;
+
+      @include mobile-only {
+        margin-top: 0;
+      }
+
+      #shoppingBtn {
+        background: $blue 0 0 no-repeat padding-box;
+        border-radius: 0;
+        align-items: center;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+
+        &.placeOrder-btn {
+          width: rem(168);
+        }
+
+        &.proceedtoCheckout-btn {
+          width: rem(236);
+        }
+
+        @include mobile-only {
+          margin-top: rem(25);
+        }
+
+        @include tablet-only {
+          margin-top: rem(15);
+        }
+
+        a {
+          align-items: center;
+          width: rem(190);
+          height: rem(54);
+          justify-content: center;
+          display: flex;
+        }
+
+        .shopping-arrow-white {
+          display: none;
+        }
+
+        .shopping-arrow {
+          height: rem(10);
+          margin-left: rem(10);
+          margin-top: rem(3);
+        }
+
+        &:hover {
+          top: rem(268);
+          left: rem(1349);
+          border: rem(2) solid var(---08107b);
+          border: rem(2) solid $blue;
+          opacity: 0.8;
+          background-color: $white;
+          color: $blue;
+
+          a {
+            color: $blue;
+          }
+
+          .shopping-arrow {
+            display: none;
+          }
+
+          .shopping-arrow-white {
+            display: block;
+            height: rem(10);
+            margin-left: rem(10);
+            margin-top: rem(3);
+            transform: rotate(180deg);
+          }
+        }
+
+        &:disabled {
+          background-color: $medium-gray;
+          border: $medium-gray;
+          pointer-events: none;
+
+          #shoppingText {
+            color: $black;
+            padding: 0 rem(30);
+            display: flex;
+            flex-direction: row;
+
+            span {
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+
+      #shoppingText {
+        padding: rem(0) !important;
+        text-decoration: none;
+        color: $white;
+      }
+
+      svg {
+        height: rem(10);
+        margin-left: rem(8);
+        margin-top: rem(5);
+      }
+
+      .shopping-btn-container:hover {
+        path {
+          fill: $blue;
+        }
+      }
+    }
+
+    button {
+      background: var(---08107b) 0% 0% no-repeat padding-box;
+      background: $blue 0% 0% no-repeat padding-box;
+      border-radius: 0;
+      height: rem(57);
+    }
+  }
+
+  &__text-content {
+    display: flex;
+    align-items: baseline;
+    text-align: left;
+    padding: rem(20) 0 0 0;
+    font: normal normal 400 $font-size-17 / rem(26) $font-family;
+
+    @include tablet-only {
+      padding: rem(15) 0 0 0;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    &--purchase-disclaimer {
+      margin-right: rem(10);
+      position: relative;
+      top: rem(2);
+      width: rem(16);
+      height: rem(16);
+    }
+  }
+
+  &__heading {
+    margin: 0;
+    color: $black;
+    font: normal normal bold $font-size-mob-h2/rem(32) Helvetica !important;
+    padding-bottom: rem(20);
+
+    @include tablet-mobile-both {
+      font: normal normal bold $font-size-small2/rem(34) Helvetica !important;
+      padding-bottom: rem(15);
+    }
+
+    @include mobile-only {
+      padding-bottom: rem(20);
+    }
+
+    @include desktop-mid {
+      font: normal normal bold $font-size-small2/rem(26) Helvetica !important;
+      padding-bottom: rem(15);
+    }
+  }
+
+  &__table-data {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: rem(1) solid grey;
+    border-bottom: rem(1) solid grey;
+    padding: rem(20) 0;
+
+    @include mobile-only {
+      padding: rem(20) 0;
+    }
+
+    @include tablet-only {
+      padding: rem(15) 0;
+    }
+
+    .bold {
+      padding-bottom: 0;
+      font: normal normal bold $font-size-17 / rem(26) $font-family;
+      @include desktop-mid {
+        font: normal normal bold $font-size-mob-h6/rem(23) Helvetica !important;
+      }
+    }
+  }
+
+  span {
+    color: $dark-gray;
+  }
+
+  &__left-content {
+    width: 50%;
+    padding-bottom: rem(15);
+    font: normal normal 400 $font-size-17 / rem(26) $font-family;
+
+    @include desktop-mid {
+      font: normal normal 400 $font-size-mob-h6/rem(23) Helvetica !important;
+    }
+  }
+
+  &__right-content {
+    width: 50%;
+    padding-bottom: rem(15);
+    text-align: end;
+    font: normal normal 400 $font-size-17 / rem(26) $font-family;
+    @include desktop-mid {
+      font: normal normal 400 $font-size-mob-h6/rem(23) Helvetica !important;
+    }
+  }
+
+  &__link {
+    text-align: center;
+    margin-top: rem(14);
+
+    a {
+      color: $blue;
+      font: normal normal 400 $font-size-17 / rem(26) $font-family;
+
+      @include tablet-mobile-both {
+        font: normal normal 400 $font-size-15 / rem(22) $font-family;
+        margin-top: rem(15);
+      }
+    }
+
+    .content-text {
+      display: none;
+    }
+  }
+}
+
+.orderSummary__container-box.sticky-content {
+  display: none;
+
+  @include mobile-only {
+    display: block;
+    padding: 0;
+    border-top: 0.0625rem solid #cad1d8;
+    position: fixed;
+    z-index: 99;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    .orderSummary__table-data {
+      justify-content: center;
+      border: none;
+      padding: rem(15) 0 rem(10) 0;
+    }
+
+    .shopping-btn-container {
+      #shoppingBtn {
+        margin-bottom: rem(15);
+        margin-top: 0;
+      }
+    }
+  }
+}

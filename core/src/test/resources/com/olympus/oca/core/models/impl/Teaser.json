@@ -1,0 +1,29 @@
+{
+	
+	"jcr:title": "home title",
+	"fileReference": "/content/dam/olympus/asset.jpg",
+	"alt": "green",
+	"icon": "/content/dam/olympus/icons8-amazon-alexa-logo-100.png",
+	"jcr:description": "<p>home description of the olympus teaser component</p>\r\n",
+	"sling:resourceType": "olympus/components/teaser",
+	"linksBox": "true",
+	"linksBoxText": "Take Action",
+	"actions": {
+		"jcr:primaryType": "nt:unstructured",
+		"item0": {
+			"jcr:primaryType": "nt:unstructured",
+			"link": "/content/olympus/us/en/products",
+			"text": "Catalog Page",
+			"linkTarget": "_self"
+		}
+	},
+	"textTileMulti": {
+	  "jcr:primaryType": "nt:unstructured",
+	  "item0": {
+		"jcr:primaryType": "nt:unstructured",
+		"linkPath": "/content/olympus/us/en",
+		"tileText": "Title text1",
+		"iconPath": "/content/olympus/us/en"
+	  }
+	}
+}

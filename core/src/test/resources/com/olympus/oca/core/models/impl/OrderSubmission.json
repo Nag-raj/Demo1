@@ -1,0 +1,21 @@
+{
+  "jcr:primaryType": "nt:unstructured",
+  "jcr:createdBy": "admin",
+  "description": "Description",
+  "quantity": "Quantity",
+  "jcr:lastModifiedBy": "admin",
+  "orderStatusLabel": "Processing",
+  "totalPrice": "20000",
+  "jcr:created": "Fri Mar 10 2023 13:45:54 GMT+0530",
+  "product": "Variance",
+  "poNumber": "68742985",
+  "modelNumber": "Item#",
+  "datePlaced": "6/3/2023",
+  "jcr:lastModified": "Fri Mar 10 2023 13:51:11 GMT+0530",
+  "orderConfirmDescription": "Your order is processing .you will recieve an email",
+  "shippingAddress": "Shipping Address",
+  "sling:resourceType": "olympus/components/ordersubmission",
+  "paymentMethod": "Payment Method",
+  "orderConfirmationTitle": "Thank you",
+  "orderNumber": "41638742"
+}

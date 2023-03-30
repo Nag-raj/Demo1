@@ -1,0 +1,32 @@
+@import '../../site/_mixins.scss';
+@import '../../site/_variables.scss';
+@import '../../site/_base.scss';
+
+.productcollection__pagination {
+  display: flex;
+  grid-column: 2;
+  justify-content: center;
+  align-items: center;
+  .MuiPagination-ul {
+    align-items: center;
+    display: flex;
+    grid-column: 2;
+    justify-content: center;
+    .li {
+      color: $dark-gray;
+      margin: 0 0.1875rem;
+      text-decoration: none;
+      width: 1.875rem;
+    }
+  }
+  .MuiPaginationItem-textPrimary.Mui-selected {
+    background: $blue;
+    color: $white;
+    display: flex;
+    justify-content: center;
+    border-radius: rem(0);
+    &:hover {
+      background: $blue;
+    }
+  }
+}

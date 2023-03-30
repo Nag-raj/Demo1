@@ -1,0 +1,18 @@
+{
+  "jcr:primaryType": "nt:unstructured",
+  "jcr:createdBy": "admin",
+  "jcr:lastModifiedBy": "admin",
+  "termsofuse": "this is terms ",
+  "jcr:created": "Mon Feb 27 2023 12:08:14 GMT+0530",
+  "termsofuseurl": "/content/olympus-customer-portal/us/en/my-olympus/reset-password.html",
+  "id": "id test",
+  "checkoutPagePath": "/content/olympus-customer-portal/us/en/my-olympus/reset-password.html",
+  "shopPagePath": "/content/olympus-customer-portal/us/en/my-olympus/reset-password.html",
+  "disclaimer": "this is disclaimer test",
+  "paymentMethodText": "Payment Method",
+  "paymentMethodDesc": "If you proceed without entering credit card information",
+  "payWithCreditCard": "Pay with Credit Card",
+  "payViaInvoice": "Pay via Invoice",
+  "jcr:lastModified": "Mon Feb 27 2023 18:12:26 GMT+0530",
+  "sling:resourceType": "olympus/components/commerce/checkoutpage"
+}

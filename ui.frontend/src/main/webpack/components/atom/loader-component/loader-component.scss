@@ -1,0 +1,97 @@
+.cmp-loader-v1 {
+    width: 100%;
+    height: rem(400);
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+
+    .cmp-loader {
+        min-height: rem(243);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+
+        &-image {
+            background: url(/assets/icons/Synchronize.svg) no-repeat padding-box;
+            width: rem(150);
+            margin-left: rem(-20);
+            margin-bottom: rem(20);
+            animation: spinner 2s linear infinite;
+        }
+
+        &-text {
+            color: $blue;
+            font: $font-size-bold-h2;
+            letter-spacing: rem(0.96);
+            display: inline-flex;
+
+
+            &-dots {
+                position: relative;
+                display: inline-flex;
+                top: rem(33);
+            }
+
+            &__dot1 {
+                background: $blue;
+                width: rem(5);
+                height: rem(5);
+                margin: rem(5);
+                animation: jump 1.6s -0.32s linear infinite;
+            }
+
+            &__dot2 {
+                background: $blue;
+                width: rem(5);
+                height: rem(5);
+                margin: rem(5);
+                animation: jump 1.6s -0.16s linear infinite;
+            }
+
+            &__dot3 {
+                background: $blue;
+                width: rem(5);
+                height: rem(5);
+                margin: rem(5);
+                animation: jump 1.6s linear infinite;
+            }
+            @include desktop-mid {
+                font-size: rem(32);
+                &-dots {
+                    top: rem(18);
+                }
+                &__dot1, &__dot2, &__dot3 {
+                    width: rem(4);
+                    height: rem(4);
+                    margin: rem(4);
+                }
+            }
+        }
+    }
+
+    @keyframes spinner {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes jump {
+
+        0%,
+        80%,
+        100% {
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        }
+
+        40% {
+            -webkit-transform: scale(2.0);
+            transform: scale(2.0);
+        }
+    }
+}

@@ -1,0 +1,91 @@
+<sly
+  data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+></sly>
+<sly
+  data-sly-use.headerNav="com.olympus.oca.core.models.HeaderNavigationModel"
+></sly>
+<sly
+  data-sly-use.clientLib="${'/libs/granite/sightly/templates/clientlib.html'}"
+/>
+<sly data-sly-call="${clientLib.all @ categories='olympus.vendor'}" />
+<sly data-sly-call="${clientLib.all @ categories='olympus.site'}" />
+
+<div id="overlay" class="overlay-wrapper"></div>
+
+<div id="notif">
+  <div class="cart-header">
+    <div class="cart-text">${headerNav.cartTitle}</div>
+
+    <span class="dot" id="closePanel">
+      <a href="javascript:void(0)">
+        <img
+          src="${headerNav.closeIcon}"
+          class="close-button"
+          alt="Close button"
+        />
+      </a>
+    </span>
+  </div>
+
+  <div class="cart-body">
+    <img src="${headerNav.cartIconInOverlay}" alt="Cart Panel" />
+
+    <div class="cart-text">${headerNav.subHeading}</div>
+    <div class="shopping-btn-container">
+      <button id="shoppingBtn" type="button" class="btn btn-primary">
+        <a
+          href="${headerNav.buttonLinkPath @ extension='html'}"
+          id="shoppingText"
+          >${headerNav.buttonLabel}
+          <img
+            class="shopping-arrow"
+            src="/content/dam/olympus/icon/Arrow_White.svg"
+            alt="arrow"
+          />
+          <img
+            class="shopping-arrow-white"
+            src="/content/dam/olympus/icon/Arrow_OlyBlue.svg"
+            alt="arrow"
+          />
+        </a>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="blue-navigation">
+  <div class="blue-content">
+    <sly data-sly-test="${headerNav.homeIcon}">
+      <img src="${headerNav.homeIcon}" alt="Home" />
+    </sly>
+    <a href="${headerNav.homeLinkPath @ extension='html'}">
+      <div>${headerNav.homeLabel @ context='html'}</div></a
+    >
+    <img
+      src="/etc.clientlibs/olympus/clientlibs/clientlib-site/resources/assets/icons/Arrow_Yellow.svg"
+      alt="Yellow arrow"
+    />
+    <div class="blue-nav-name">${headerNav.greetingLabel}, <span id="customer-name"></span></div>
+  </div>
+
+  <div class="blue-content-right">
+    <div class="blue-account">Shopping for:</div>
+    <sly
+      data-sly-resource="${ 'accountPopup' @ resourceType = '/apps/olympus/components/accountPopup'}"
+    ></sly>
+    <div class="blue-nav-icons">
+      <a href="${headerNav.helpLinkPath @ extension='html'}">
+        <img src="${headerNav.helpIcon}" alt="Question mark" />
+      </a>
+      <a id="hoverme" data-link="${headerNav.cartPagePath @ extension='html'}">
+        <img src="${headerNav.cartIcon}" alt="Cart Drawer" />
+        <span id="minicart-value"></span>
+      </a>
+      <a href=""
+        hidden><img src="${headerNav.notificationIcon}" alt="Notifications" />
+      </a>
+    </div>
+  </div>
+</div>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty = ! text}"></sly>

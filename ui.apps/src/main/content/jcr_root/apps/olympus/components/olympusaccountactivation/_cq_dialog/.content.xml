@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Olympus Account Activation"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/tabs"
+            maximized="{Boolean}true">
+            <items jcr:primaryType="nt:unstructured">
+                <properties
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Properties"
+                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                    margin="{Boolean}true">
+                    <items jcr:primaryType="nt:unstructured">
+                        <columns
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                            margin="{Boolean}true">
+                            <items jcr:primaryType="nt:unstructured">
+                                <column
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                    <items jcr:primaryType="nt:unstructured">
+                                    <activateAccount
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldDescription="Activate Account Text"
+                                        fieldLabel="Activate Account Text"
+                                        name="./activateAccount"/>
+                                    <activateAccountDescription
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldDescription="Activate Account Description Text"
+                                        fieldLabel="Activate Account Description Text"
+                                        name="./activateAccountDescription"/>
+                                    <personalInformation
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldDescription="Personal Information Text"
+                                        fieldLabel="Personal Information Text"
+                                        name="./personalInformation"/>
+                                    <informationIcon
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+                                        allowUpload="{Boolean}false"
+                                        class="cq-droptarget"
+                                        fieldLabel="Information Icon"
+                                        fileNameParameter="./fileName"
+                                        fileReferenceParameter="./informationIcon"
+                                        mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+                                        name="./file"/>
+                                    <confirmEmailTitle
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldDescription="Confirm Email Title"
+                                        fieldLabel="Confirm Email Title"
+                                        name="./confirmEmailTitle"/>
+                                    <confirmEmailDesc
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                                        fieldDescription="Confirm Email Description"
+                                        fieldLabel="Confirm Email Description"
+                                        name="./confirmEmailDesc"/>
+                                    <authorization
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldDescription="Authorization Checkbox"
+                                        fieldLabel="Authorization Checkbox"
+                                        name="./authorization"/>
+                                    </items>
+                                </column>
+                            </items>
+                        </columns>
+                    </items>
+                </properties>
+                <linkfields
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Link Fields"
+                sling:resourceType="granite/ui/components/coral/foundation/container"
+                margin="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <columns
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <column
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <termsofuseText
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldDescription="terms of use text"
+                                        fieldLabel="Terms of use text"
+                                        name="./termsofuseText"/>
+                                    <termsofuseLinkText
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldDescription="terms of use text"
+                                        fieldLabel="Terms of use link text"
+                                        name="./termsofuseLinkText"/>
+                                    <termsofuseLinkUrl
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathbrowser"
+                                        rootPath="/content/olympus-customer-portal/"
+                                        fieldDescription="Terms of Use link url"
+                                        fieldLabel="Terms of Use link url"
+                                        name="./termsofuseLinkUrl"/>
+                                    <privacyStatementText
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldDescription="terms of use text"
+                                        fieldLabel="Privacy Statement text"
+                                        name="./privacyStatementText"/>
+                                    <privacyStatementLinkText
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldDescription="terms of use text"
+                                        fieldLabel="Privacy Statement link text"
+                                        name="./privacyStatementLinkText"/>
+                                    <privacyStatementLinkUrl
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathbrowser"
+                                        rootPath="/content/olympus-customer-portal/"
+                                        fieldDescription="Terms of Use link url"
+                                        fieldLabel="Privacy Statement link url"
+                                        name="./privacyStatementLinkUrl"/>
+                                </items>
+                            </column>
+                        </items>
+                    </columns>
+                </items>
+            </linkfields>
+            <jobCategory
+            jcr:primaryType="nt:unstructured"
+            jcr:title="Job Category"
+            sling:resourceType="granite/ui/components/coral/foundation/container"
+            margin="{Boolean}true">
+            <items jcr:primaryType="nt:unstructured">
+                <columns
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                    margin="{Boolean}true">
+                    <items jcr:primaryType="nt:unstructured">
+                        <column
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                            <items jcr:primaryType="nt:unstructured">
+                                <jobCategoryTitle
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldDescription="Job Category Title"
+                                fieldLabel="Job Category Title"
+                                name="./jobCategoryTitle"/>
+                                <jobCategoryMulti
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                composite="{Boolean}true"
+                                fieldLabel="Job Category">
+                            <field
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/well"
+                                    name="./jobCategoryMulti">
+                                <items jcr:primaryType="nt:unstructured">
+                                <jobCategoryKey
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="Job Category Key"
+                                    fieldLabel="Job Category Key"
+                                    name="./jobCategoryKey"/>
+                                <jobCategoryValue
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="Job Category Value"
+                                    fieldLabel="Job Category Value"
+                                    name="./jobCategoryValue"/>
+                                </items>
+                            </field>
+                        </jobCategoryMulti>
+                            </items>
+                        </column>
+                    </items>
+                </columns>
+            </items>
+        </jobCategory>
+        <speciality
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Speciality"
+        sling:resourceType="granite/ui/components/coral/foundation/container"
+        margin="{Boolean}true">
+        <items jcr:primaryType="nt:unstructured">
+            <columns
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                margin="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <column
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <specialityTitle
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldDescription="Speciality Title"
+                            fieldLabel="Speciality Title"
+                            name="./specialityTitle"/>
+                            <specialityMulti
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                            composite="{Boolean}true"
+                            fieldLabel="Speciality">
+                        <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/well"
+                                name="./specialityMulti">
+                            <items jcr:primaryType="nt:unstructured">
+                            <specialityKey
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldDescription="Speciality Key"
+                                fieldLabel="Speciality Key"
+                                name="./specialityKey"/>
+                            <specialityValue
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldDescription="Speciality Value"
+                                fieldLabel="Speciality Value"
+                                name="./specialityValue"/>
+                            </items>
+                        </field>
+                    </specialityMulti>
+                        </items>
+                    </column>
+                </items>
+            </columns>
+        </items>
+    </speciality>
+            </items>
+        </tabs>
+        </items>
+    </content>
+</jcr:root>

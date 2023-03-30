@@ -1,0 +1,14 @@
+{
+    "componentName": "Header Component",
+    "partialName": "header-component",
+    "isOrganism": true,
+    "variations": [
+      {
+        "variationType": "Default",
+        "config": {
+            
+        }
+      }
+    ]
+  }
+  

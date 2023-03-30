@@ -1,0 +1,222 @@
+@import "../../../site/mixins";
+@import "../../../site/_variables.scss";
+@import "../../../site/_base.scss";
+
+.orderList__orderData {
+    display: flex !important;
+    flex-direction: row;
+    margin: rem(12) rem(1) rem(1) rem(6);
+}
+
+.orderList__orderData-content {
+    display: flex;
+    width: 50%;
+    padding: rem(10);
+    flex-direction: column;
+    font: $font-size-bold-p;
+    letter-spacing: 0.34px;
+    color: $dark-gray;
+    opacity: 1;
+
+    @include mobile-only {
+        font: normal normal bold 13px/20px Helvetica;
+        letter-spacing: 0.26px;
+    }
+}
+
+.orderList__orderData-price {
+    display: flex;
+    width: 50%;
+    padding: rem(10);
+    align-items: end;
+}
+
+.orderList__orderData-price-data {
+    width: 100%;
+    text-align: end;
+    font: $font-size-regular-p;
+    letter-spacing: 0.34px;
+    color: $dark-gray;
+    opacity: 1;
+    @include mobile-only{
+        text-align: start;
+        font: normal normal normal 13px/20px Helvetica;
+        letter-spacing: 0.26px;
+    }
+}
+
+.orderList {
+    .MuiBox-root {
+        margin-left: rem(16);
+        border-left: 5px solid $sky-blue;
+
+        @include mobile-only {
+            margin-left: 0px;
+            padding: rem(15);
+        }
+    }
+}
+
+.orderList__product-detail-list {
+    display: flex;
+    flex-direction: column;
+    padding: rem(6);
+    // margin: 16px 16px 16px -5px;
+
+    @include mobile-only {
+        margin: 0px;
+    }
+}
+
+.orderList__product-detail-status {
+    background: $gray 0% 0% no-repeat padding-box;
+    opacity: 1;
+    font: normal normal bold 16px/26px Helvetica;
+    letter-spacing: 0.32px;
+    color: $white;
+    opacity: 1;
+    padding: rem(5) rem(16) rem(5) rem(16);
+    margin: rem(12) rem(12) rem(12) rem(2);
+    text-transform: capitalize;
+
+    @include mobile-only {
+        width: 30%;
+    }
+}
+
+.orderList__product-detail-title {
+    font: normal normal bold 24px/29px Helvetica;
+    letter-spacing: 0px;
+    color: $black;
+    opacity: 1;
+    padding: rem(6);
+}
+
+.orderList__product-detail-header {
+    display: flex;
+    flex-direction: row;
+    border-top: rem(1) solid $border-gray;
+    border-bottom: rem(1) solid $border-gray;
+    padding: rem(10) rem(10) rem(10) rem(0);
+    width: 100%;
+    font: $font-size-bold-p;
+    letter-spacing: 0.34px;
+    color: $dark-gray;
+    opacity: 1;
+
+    &-model {
+        width: 20%;
+        margin-right: 20px;
+    }
+
+    &-product {
+        width: 35%;
+        margin-right: 20px;
+    }
+
+    &-quote {
+        width: 35%;
+        margin-right: 20px;
+        // text-align: center;
+    }
+
+    &-quantity {
+        width: 10%;
+        margin-right: 20px;
+    }
+}
+
+.orderList__product-detail-data {
+    display: flex;
+    flex-direction: row;
+    padding: rem(6) rem(6) rem(6) rem(0);
+    width: 100%;
+
+    &-model {
+        width: 20%;
+        margin-right: 20px;
+    }
+
+    &-product {
+        width: 35%;
+        margin-right: 20px;
+    }
+
+    &-quote {
+        width: 35%;
+        margin-right: 20px;
+        // text-align: center;
+    }
+
+    &-quantity {
+        width: 10%;
+        margin-right: 20px;
+    }
+}
+
+// @include tablet-only {
+//     .orderList{
+//         width: 90vw;
+//     }
+//     .orderList__orderData-content{
+//         width: 60%;
+//     }
+//     .orderList__product-detail-status{
+//         width: 13%;
+//     }
+// }
+
+@include mobile-only {
+
+    .orderList__orderData {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: rem(0);
+    }
+
+    .orderList__orderData-content {
+        font: normal normal bold 13px/20px Helvetica;
+        letter-spacing: 0.26px;
+        width: 100%;
+        text-align: start;
+        color: $dark-gray;
+    }
+
+    .orderList__orderData-price {
+        font: normal normal normal 13px/20px Helvetica;
+        letter-spacing: 0.26px;
+        color: $dark-gray;
+    }
+    .orderList__product-detail-header {
+        display: none;
+    }
+
+    .orderList__product-detail-data {
+        flex-direction: column;
+        border-top: rem(1) solid $border-gray;
+        border-bottom: rem(1) solid $border-gray;
+
+        &-model,
+        &-product,
+        &-quote,
+        &-quantity {
+            width: 100%;
+            text-align: start;
+            margin: rem(3) rem(3) rem(12) 0;
+        }
+    }
+}
+
+.orderList__product-mobile {
+    display: none;
+
+    @include mobile-only {
+        display: flex;
+        flex-direction: column;
+        font: $font-size-bold-p;
+        letter-spacing: 0.34px;
+        color: $dark-gray;
+        opacity: 1;
+    }
+}

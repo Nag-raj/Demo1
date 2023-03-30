@@ -1,0 +1,15 @@
+{
+    "componentName": "Button Component",
+    "partialName": "button-component",
+    "isAtom": true,
+    "variations": [
+        {
+            "variationType": "Default",
+            "config": {
+                "button" : {
+                    "Title": "This is a button"
+                }
+            }
+        }
+    ]
+}

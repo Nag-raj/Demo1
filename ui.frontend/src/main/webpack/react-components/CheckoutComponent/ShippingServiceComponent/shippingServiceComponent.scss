@@ -1,0 +1,316 @@
+@import "../../../site/mixins";
+@import "../../../site/_variables.scss";
+@import "../../../site/_base.scss";
+
+.checkout-shipping {
+  margin-top: rem(32);
+  .shipping-carrier-link {
+    color: $blue;
+    text-decoration: underline;
+  }
+  .checkout-title {
+    padding: rem(30);
+    color: $blue-v3;
+    font: normal normal 700 3pc/3.5625rem Helvetica;
+    letter-spacing: 0.06rem;
+    margin-bottom: 1.0625rem;
+    margin-top: 0;
+  }
+  .shipping-panel {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    .MuiSelect-select {
+      input {
+        transition-duration: 0s !important;
+        color: $black;
+        font-size: rem(20);
+      }
+      svg {
+        display: none;
+      }
+    }
+    @include mobile-only {
+      width: 100%;
+      margin-top: rem(20);
+    }
+    p {
+      margin-top: rem(14) !important;
+      margin-bottom: 0px;
+      font: var(--unnamed-font-style-normal) normal
+        var(--unnamed-font-weight-normal) var(--unnamed-font-size-20) /
+        var(--unnamed-line-spacing-24) var(--unnamed-font-family-helvetica);
+      color: $black;
+    }
+  }
+  .shipping-panel-textfield {
+    display: flex;
+    flex-direction: column;
+    width: 48% !important;
+    margin-top: rem(15);
+    @include mobile-only {
+      width: 100%;
+    }
+    .MuiFormControl-root label {
+      left: 0px !important;
+      font-size: rem(15) !important;
+      top: rem(-4);
+    }
+    .css-zrqpq1::before {
+      border-bottom: 0px;
+    }
+    .css-zrqpq1::after {
+      border-bottom: 0px;
+    }
+    .css-zrqpq1:hover:not(.Mui-disabled, .Mui-error)::before {
+      border-bottom: 0px;
+    }
+  }
+  .MuiBox-root {
+    background-color: white;
+    padding: rem(30);
+    //width: 60%;
+    @include tablet-mobile-both {
+      width: 100%;
+      padding: rem(15);
+    }
+  }
+  .MuiTextField-root {
+    border: 1px solid $border-gray !important;
+    height: rem(37);
+    label {
+      margin-top: rem(-7);
+      margin-left: rem(10);
+    }
+    input {
+      &::after {
+        border-bottom: 0px;
+      }
+    }
+  }
+  .shipping-heading {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: rem(40);
+    border-bottom: 1px solid $border-gray;
+    @include mobile-only {
+      height: rem(80);
+    }
+    a {
+      cursor: pointer;
+    }
+    & > h3 {
+      margin: rem(0);
+      font: normal normal 700 26px Helvetica;
+    }
+  }
+  .shipping-dropdown {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: rem(24);
+    @include mobile-only {
+      flex-direction: column;
+    }
+    .MuiFormControl-root {
+      @include mobile-only {
+        width: 100%;
+      }
+      .css-fvipm8 {
+        border-radius: rem(0);
+      }
+      .Mui-focused {
+        color: $black;
+      }
+      label {
+        font-weight: bold;
+        display: flex;
+        color: $black;
+        font-size: rem(20);
+        left: rem(-12);
+        font-family: $font-family;
+      }
+      label + .css-o3ukdw {
+        border: 1px solid $border-gray;
+        padding: rem(2) rem(12);
+        color: $dark-gray;
+        margin-top: 22px;
+      }
+      .css-o3ukdw::before {
+        border-bottom: 0px;
+      }
+      .css-1cccqvr:focus {
+        outline: none;
+        background-color: $white;
+      }
+      .css-o3ukdw::after {
+        border-bottom: rem(0);
+      }
+      .MuiFormHelperText-root {
+        margin: 0px;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 0.75rem;
+      }
+    }
+  }
+  .disclaimer {
+    display: flex;
+    background-color: $blue;
+    padding: 24px;
+    color: $white;
+    margin-top: rem(13);
+  }
+  .delivery-text {
+    margin: 5px 0px;
+    font-size: rem(12);
+    color: $dark-gray;
+  }
+  .shopping-btn-container:hover {
+    path {
+      fill: $blue;
+    }
+  }
+  .shopping-btn-container {
+    .btn:hover {
+      background-color: $white;
+      border: 1px solid $blue;
+      a {
+        color: $blue;
+      }
+    }
+    margin-top: rem(10);
+    #shoppingText {
+      padding: rem(0) !important;
+      text-decoration: none;
+      color: $white;
+      &:hover {
+        color: $blue;
+      }
+    }
+
+    #learnText {
+      text-decoration: none;
+      color: $blue;
+      background-color: $white;
+    }
+    align-items: center;
+    display: inline-flex;
+    flex-direction: row;
+    svg {
+      height: rem(10);
+      margin-left: rem(8);
+      margin-top: rem(5);
+    }
+    .shopping-btn-container:hover {
+      path {
+        fill: $blue;
+      }
+    }
+  }
+  button {
+    background: var(---08107b) 0% 0% no-repeat padding-box;
+    background: #08107b 0% 0% no-repeat padding-box;
+    border-radius: 0px;
+    padding: rem(0) !important;
+    margin-top: 10px;
+    margin-right: 10px;
+    border: 1px solid $blue;
+    cursor: pointer;
+  }
+  .carrier-confirm {
+    display: flex;
+    flex-direction: column;
+    margin-top: rem(20);
+    .ups {
+      font-weight: 600;
+      color: $dark-gray;
+      margin: 0;
+      font-size: rem(13);
+    }
+    p {
+      margin: 0px;
+      font-size: rem(13);
+    }
+  }
+  #shoppingBtn {
+    .confirm {
+      background-color: $blue;
+      border: 1px solid $blue;
+    }
+    .cancel {
+      background-color: $white;
+      border: 1px solid $blue;
+    }
+    a {
+      color: $white;
+      padding: 0 !important;
+      text-decoration: none;
+      align-items: center;
+      height: rem(43);
+      justify-content: center;
+      width: rem(90);
+      display: flex;
+    }
+  }
+  #cancelBtn {
+    a {
+      color: $white;
+      padding: 0 !important;
+      text-decoration: none;
+      align-items: center;
+      height: 43px;
+      justify-content: center;
+      width: rem(90);
+      display: flex;
+    }
+  }
+  .cancel-button {
+    background-color: $white;
+    color: $blue !important;
+    cursor: pointer;
+  }
+  .cancel-panel {
+    border: 1px solid $blue !important;
+    color: $blue !important;
+  }
+  .MuiModal-backdrop {
+    transition: none !important;
+  }
+  .css-1utq5rl {
+    display: none;
+  }
+  .MuiSvgIcon-root {
+    margin: rem(6);
+    width: rem(16);
+  }
+  .MuiSelect-iconOpen {
+    width: 1pc;
+    margin-right: rem(6);
+    margin-top: rem(-4);
+  }
+  .ShippingNumber__input-suite {
+    background: $white 0% 0% no-repeat padding-box;
+    border: 1px solid $border-gray;
+    opacity: 1;
+    width: 90%;
+    padding: rem(7);
+    font: normal normal 300 $font-size-17/rem(26) Helvetica;
+    letter-spacing: rem(0.34);
+    color: $dark-gray;
+    &:focus,
+    :focus-visible {
+      outline: none;
+    }
+  }
+}
+.css-177ic5c {
+  border-radius: 0px !important;
+}
+.css-1km1ehz.Mui-selected {
+  background-color: $white !important;
+}
+.css-1km1ehz.Mui-selected:hover {
+  background-color: $border-gray !important;
+}

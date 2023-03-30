@@ -1,0 +1,14 @@
+{
+	
+	"jcr:title": "Account pop up title",
+	"fileReference": "/content/dam/olympus/asset.jpg",
+	"alt": "green",
+	"icon": "/content/dam/olympus/icons8-amazon-alexa-logo-100.png",
+	"jcr:description": "<p>home description of the olympus teaser component</p>\r\n",
+	"sling:resourceType": "olympus/components/accountPopup",
+	"jcr:primaryType": "nt:unstructured",
+	"description": "description",
+	"accountsDropDown": "accountsDropDown",
+	"title": "title"
+}
+

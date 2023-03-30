@@ -1,0 +1,238 @@
+<sly data-sly-use.model="com.olympus.oca.core.models.AccountActivationModel" data-sly-use.templates="core/wcm/components/commons/v1/templates.html" />
+<div class="activate-your-account">
+   <div>
+      <p class="activate-your-account__heading" data-sly-test="${model.activateAccount}">${model.activateAccount}</p>
+   </div>
+   <div class="activate-your-account__description" data-sly-test="${model.activateAccountDescription}">
+      <p>${model.activateAccountDescription}</p>
+   </div>
+   <div>
+      <div class="personal-information">
+         <div>
+            <p class="personal-information__title" data-sly-test="${model.personalInformation}">${model.personalInformation}</p>
+         </div>
+         <hr />
+         <div class="row personal-information__details">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+               <div class="pi-title">
+                  Name
+                  <p class="account-number">John Smith</p>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3">
+               <div class="pi-title">
+                  Phone
+                  <p>1234567890</p>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3">
+               <div class="pi-title">
+                  Email
+                  <input
+                     id="personalEmail"
+                     type="text"
+                     value=""
+                     class="personalEmail__input"
+                     onblur="saveEmail(event)"
+                     />
+                  <p class="personalEmail__text">Email@gmail.com</p>
+                  <span class="personalEmail__err"></span>
+                  <p><a
+                     href="#"
+                     class="hyperlink"
+                     onclick="enablePersonalEmail()"
+                     >Edit</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+         <div class="row personal-information__confirmworkemail">
+            <div data-sly-test="${model.informationIcon}" class="col-sm-1 col-md-2 col-lg-1 personal-information__confirmworkemail--icon">
+               <img src="${model.informationIcon}" alt="confirm_workemail_info">
+            </div>
+            <div class="col-sm-11 col-md-10 col-lg-11 personal-information__confirmworkemail--info">
+               <p class="personal-information__confirmworkemail--info_title" data-sly-test="${model.confirmEmailTitle}">${model.confirmEmailTitle}</p>
+               <p data-sly-test="${model.confirmEmailDesc}">${model.confirmEmailDesc}</p>
+            </div>
+         </div>
+      </div>
+      <form
+         class="container"
+         id=""
+         action=""
+         >
+         <div class="row account-nickname">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+               <p class="pi-title">Account Number</p>
+               <p class="account-number">200XXXX</p>
+               <div class="set-as-default">
+                  <input
+                     type="radio"
+                     class="radio-btn"
+                     id="radio1"
+                     name="accountNumber_radio"
+                     value=""
+                     />
+                  <label for="" class="set-as-default-text">Set as
+                  Default</label>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+               <label for="" class="pi-title asterisk">Account Nickname</label>
+               <input
+                  type="text"
+                  placeholder="Hospital Name"
+                  class="input-field accountNickname"
+                  value="${model.accountNickname}"
+                  />
+               <i class="" aria-hidden="true"></i>
+               <span class="accountNickname_err"></span>
+            </div>
+         </div>
+         <div class="row account-nickname">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+               <p class="pi-title"> Account Number</p>
+               <p class="account-number">200XXXX</p>
+               <div class="set-as-default">
+                  <input
+                     type="radio"
+                     class="radio-btn"
+                     id="radio2"
+                     name="accountNumber_radio"
+                     value=""
+                     />
+                  <label for="" class="set-as-default-text">Set as
+                  Default</label>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+               <p class="pi-title asterisk">Account Nickname</p>
+               <input
+                  type="text"
+                  name="hospital Name"
+                  placeholder="Hospital Name"
+                  class="input-field accountNickname"
+                  value="${model.accountNickname}"
+                  />
+               <i class="" aria-hidden="true"></i>
+               <span class="accountNickname_err"></span>
+            </div>
+         </div>
+         <div class="row dropdowns">
+            <div class="col-sm-12 col-md-6 col-lg-6 dropdowns__mobile">
+               <div>
+                  <p class="asterisk pi-title" data-sly-test="${model.jobCategoryTitle}">${model.jobCategoryTitle}</p>
+               </div>
+               <div>
+                  <select
+                     name="jobCategory"
+                     id="jobCategory"
+                     class="account-number input-field"
+                     >
+                     <sly data-sly-list.jobCategories="${model.getJobCategories}">
+                        <option data-sly-test="${jobCategoriesList.index == 0}" disabled selected>${jobCategories.jobCategoryValue}</option>
+                        <option data-sly-test="${jobCategoriesList.index > 0}" value="${jobCategories.jobCategoryKey}">${jobCategories.jobCategoryValue}</option>
+                     </sly>
+                  </select>
+                  <i class="" aria-hidden="true"></i>
+                  <span class="jobcategory_err"></span>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+               <div>
+                  <p class="pi-title"data-sly-test="${model.specialityTitle}">${model.specialityTitle}</p>
+               </div>
+               <div>
+                  <select
+                     name="speciality"
+                     id="speciality"
+                     class="account-number input-field"
+                     >
+                     <sly data-sly-list.specialities="${model.getJobSpecialities}">
+                        <option data-sly-test="${specialitiesList.index == 0}" disabled selected>${specialities.specialityValue}</option>
+                        <option data-sly-test="${specialitiesList.index > 0}" value="${specialities.specialityKey}">${specialities.specialityValue}</option>
+                     </sly>
+                  </select>
+                  <i class="" aria-hidden="true"></i>
+                  <span class="speciality_err"></span>
+               </div>
+            </div>
+         </div>
+         <div class="row dropdowns pi-title">
+            <div class="col-sm-12 col-md-6 col-lg-6 dropdowns__mobile">
+               <label class="pi-title asterisk">Password:
+               </label>
+               <input
+                  type="password"
+                  id="password"
+                  placeholder="Enter password"
+                  value="${model.password}"
+                  class="input-field"
+                  />
+               <i class="" aria-hidden="true"></i>
+               <span class="password__err"></span>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 passwords">
+               <label class="pi-title asterisk">Confirm Password:
+               </label>
+               <input
+                  type="password"
+                  id="confirmpassword"
+                  placeholder="Confirm Password"
+                  value="${model.confirmPassword}"
+                  class="input-field"
+                  />
+               <i class="" aria-hidden="true"></i>
+               <span class="confirmpassword__err"></span>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-12 col-md-12 col-12">
+               <div class="check-box-text">
+                  <label class="checkbox-container" for="termsofuse">
+                     <p class="checkbox-lable" data-sly-test="${model.termsofuseText}">${model.termsofuseText}
+                        <a data-sly-test="${model.termsofuseLinkUrl}" href="${model.termsofuseLinkUrl}" class="hyperlink termsofuse__link" target="_blank">${model.termsofuseLinkText}</a>
+                     </p>
+                     <input
+                        type="checkbox"
+                        id="termsofuse"
+                        name="termsofuse"
+                        value="${model.checkbox1}"
+                        />
+                     <p class="checkmark"></p>
+                  </label>
+                  <span class="termsofuse__err"></span>
+               </div>
+               <div class="check-box-text">
+                  <label class="checkbox-container" for="authorized">
+                     <p class="checkbox-lable" data-sly-test="${model.authorization}">${model.authorization}
+                     </p>
+                     <input
+                        type="checkbox"
+                        id="authorized"
+                        name="authorized"
+                        value="${model.checkbox2}"
+                        />
+                     <p class="checkmark"></p>
+                  </label>
+                  <span class="authorized__err"></span>
+               </div>
+               <p class="olympus-privacy-statement" data-sly-test="${model.privacyStatementText}">${model.privacyStatementText}
+                  <a data-sly-test="${model.privacyStatementLinkUrl}" href="${model.privacyStatementLinkUrl}" class="hyperlink" target="_blank">${model.privacyStatementLinkText}</a>.
+               </p>
+            </div>
+         </div>
+         <hr />
+         <div class="buttons">
+            <div>
+               <button
+                  class="submit-btn"
+                  type="submit"
+                  id="submit"
+                  value="Submit"
+                  >Submit</button>
+            </div>
+         </div>
+      </form>
+   </div>
+</div>

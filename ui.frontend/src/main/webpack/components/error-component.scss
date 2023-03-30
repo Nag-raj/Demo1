@@ -1,0 +1,118 @@
+.error-title-center {
+    h1 {
+        font-size: rem(126);
+        text-align: center;
+        margin: 0;
+        @include mobile-only {
+            font-size: $font-size-mob-h1;
+            padding-top: rem(52);
+        }
+    }
+}
+
+.error-subtitle-center {
+    h2 {
+        text-align: center;
+        margin: 0;
+        font-size: rem(32) !important;
+        line-height: 1rem !important;
+        @include mobile-only {
+            font-size: $font-size-mob-h2 !important;
+        }
+    }
+}
+
+.error-description-center {
+    .cmp-teaser__description p {
+        text-align: center;
+        font: $font-size-regular-p;
+        margin: rem(20) 0;
+        @include mobile-only {
+            font-size: $font-size-mob-h6;
+            padding: rem(0) rem(16);
+        }
+    }
+}
+
+.error-button-center {
+    display: flex !important;
+    justify-content: center;
+
+    .cmp-button {
+        color: #fff;
+        background: $blue 0% 0% no-repeat padding-box;
+        text-decoration: none;
+        padding: rem(16) rem(30);
+        width: auto;
+        font: $font-size-regular-p;
+        @include mobile-only {
+            padding: rem(15) rem(25);
+            font-size: $font-size-small1;
+        }
+    }
+}
+.error-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+  .cmp-teaser__icon {
+    height: 0px;
+  }
+  .cmp-container {
+    text-align: center;
+    width: rem(572);
+    padding: rem(30);
+    .cmp-image {
+      background-color: $red;
+      padding: rem(10);
+      border-radius: 100%;
+      width: rem(70);
+      height: rem(70);
+      display: block;
+      margin: 0 auto;
+      .cmp-image__image {
+        margin: rem(10);
+        height: rem(40);
+        width: rem(45);
+      }
+    }
+    h3 {
+      margin-bottom: 0;
+    }
+    p {
+      font-size: $font-size-mob-h5;
+      color: $dark-gray;
+    }
+    .title{
+        .cmp-title{
+            .cmp-title__text{
+                .h1{
+                    font: normal normal bold rem(206)/rem(247) Helvetica;
+                }
+                .h2{
+                   margin-top: rem(0);
+                   margin-bottom: rem(0);
+                }
+            }
+        }
+    }
+  }
+}
+
+@media only screen and (min-width: 766px) and (max-width: 1024px) {
+  .error-block {
+    .cmp-container {
+      width: rem(638);
+    }
+  }
+}
+
+@include mobile-only {
+  .error-block {
+    .cmp-container {
+      width: rem(362);
+      margin: 0 rem(16);
+    }
+  }
+}

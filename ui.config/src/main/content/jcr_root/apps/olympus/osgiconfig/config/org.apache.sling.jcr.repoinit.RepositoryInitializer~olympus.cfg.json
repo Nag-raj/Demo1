@@ -1,0 +1,7 @@
+{
+    "scripts": [
+        "create path (sling:OrderedFolder) /content/dam/olympus",
+        "create path (nt:unstructured) /content/dam/olympus/jcr:content",
+        "set properties on /content/dam/olympus/jcr:content\n  set cq:conf{String} to /conf/olympus\n  set jcr:title{String} to \"OCA customer portal\"\nend"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "componentName": "Search Component",
+    "partialName": "search-component",
+    "isAtom": true,
+    "variations": [
+      {
+        "variationType": "Default",
+        "config": {
+            "title": "Loading"
+        }
+      }
+    ]
+  }
+  
