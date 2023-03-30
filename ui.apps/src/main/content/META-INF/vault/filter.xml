@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<workspaceFilter version="1.0">
-    <filter root="/apps/olympus/clientlibs"/>
-    <filter root="/apps/olympus/components"/>
-    <filter root="/apps/olympus/i18n"/>
-    <filter root="/apps/olympus/templates"/>
-    <filter root="/apps/sling/servlet/errorhandler"></filter>
-</workspaceFilter>
