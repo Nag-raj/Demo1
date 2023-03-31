@@ -1,0 +1,16 @@
+{
+    "componentName": "Model Popup Component",
+    "partialName": "model-popup-component",
+    "isOrganism": true,
+    "variations": [
+      {
+        "variationType": "Default",
+        "config": {
+          "navigation": {
+            "name": "Dr.Smith"
+          }
+        }
+      }
+    ]
+  }
+  

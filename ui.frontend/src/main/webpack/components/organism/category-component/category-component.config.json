@@ -1,0 +1,13 @@
+{
+    "componentName": "Shop Category Component",
+    "partialName": "category-component",
+    "isOrganism": true,
+    "variations": [
+      {
+        "variationType": "Default",
+        "config": {
+        }
+      }
+    ]
+  }
+  

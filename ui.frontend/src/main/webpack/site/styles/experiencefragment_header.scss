@@ -1,0 +1,293 @@
+//== XF Header style, used on page template
+
+header.experiencefragment {
+  background-color: $white;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+
+  a {
+    color: $blue;
+    text-decoration: none;
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-foreground-dark;
+    }
+
+    &:focus {
+      color: $color-link;
+      text-decoration: underline;
+      padding: rem(0);
+      background-color: inherit;
+      @media (prefers-color-scheme: dark) {
+        color: $color-link-dark;
+      }
+    }
+  }
+
+  .cmp-container {
+    display: flex;
+    flex-direction: column;
+    height: rem(65);
+    max-height: rem(65);
+    border-bottom: rem(1) solid $border-gray;
+
+    .aem-Grid {
+      display: flex !important;
+      height: inherit;
+      align-items: center;
+    }
+
+    .image {
+      width: auto !important;
+    }
+
+    .cmp-image {
+      width: rem(186);
+      height: rem(35);
+      margin: rem(20) rem(30);
+    }
+
+    .navigation {
+      border: none;
+      height: 100%;
+
+      .cmp-navigation {
+        height: inherit;
+
+        &__group {
+          align-items: center;
+          height: inherit;
+          padding: 0;
+          margin: rem(0) rem(0) !important;
+
+          li {
+            display: flex;
+            height: 100%;
+
+            a {
+              font-weight: bold;
+              align-self: center;
+
+              &:focus {
+                text-decoration: none;
+                color: $blue;
+                padding: rem(0);
+                background-color: inherit;
+              }
+            }
+          }
+
+          .cmp-navigation__item--active {
+            @include desktop-only {
+              border-bottom: rem(5) solid $yellow;
+              padding-bottom: rem(3.5) !important;
+            }
+          }
+          .cmp-navigation__item:hover {
+            border-bottom: rem(5) solid $yellow;
+            padding-bottom: rem(3.5) !important;
+          }
+        }
+      }
+    }
+
+    @include desktop-large {
+      #profile-logo {
+        width: rem(20);
+        height: rem(20);
+        padding: 0 rem(24);
+        border-left: rem(1) solid $gray;
+        margin-left: 0;
+        img {
+          width: rem(20) !important;
+          vertical-align: top;
+        }
+      }
+
+      #close-menu,
+      #hamburger-menu {
+        display: none;
+      }
+
+      .text {
+        margin: auto;
+
+        p {
+          float: right;
+          margin: auto;
+
+          a {
+            padding-right: rem(10);
+            font: normal normal 300 $font-size-mob-h6 / rem(26) Helvetica;
+            letter-spacing: rem(0.3);
+            color: $dark-gray;
+            list-style: none;
+            margin: 0;
+
+            &:focus {
+              color: $dark-gray;
+              text-decoration: none;
+              // padding: rem(0);
+              background-color: inherit;
+            }
+          }
+        }
+      }
+    }
+    @include tablet-only {
+      #olympus-logo {
+        margin: 1.25rem;
+      }
+
+      #profile-logo {
+        width: rem(20);
+        height: rem(20);
+        padding: 0 rem(26);
+        border-left: rem(1) solid $gray;
+        margin-left: rem(0);
+        img {
+          width: rem(20) !important;
+          vertical-align: top;
+        }
+      }
+
+      #close-menu,
+      #hamburger-menu {
+        display: none;
+      }
+
+      .text {
+        margin: auto;
+        width: 80% !important;
+
+        p {
+          float: right;
+          margin: auto;
+
+          a {
+            padding: 0 rem(13);
+            font: normal normal 300 $font-size-mob-h6 / rem(26) Helvetica;
+            letter-spacing: rem(0.3);
+            color: $dark-gray;
+            list-style: none;
+            margin: 0;
+
+            &:focus {
+              color: $dark-gray;
+              text-decoration: none;
+              // padding: rem(0);
+              background-color: inherit;
+            }
+          }
+        }
+      }
+    }
+
+    @include mobile-only {
+      height: 100%;
+      min-height: rem(57);
+      border-bottom: none;
+      max-height: 100%;
+      z-index: 1000;
+
+      .aem-Grid {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .image {
+        width: 100% !important;
+        max-height: rem(55);
+        position: fixed;
+        top: 0;
+        background-color: $white;
+
+        .cmp-image {
+          margin: 0;
+          width: auto;
+        }
+
+        #profile-logo {
+          position: absolute;
+          top: rem(15);
+          right: rem(60);
+        }
+
+        #close-menu,
+        #hamburger-menu {
+          position: absolute;
+          top: rem(15);
+          right: rem(20);
+        }
+
+        #close-menu {
+          display: none;
+        }
+      }
+
+      #olympus-logo {
+        width: inherit;
+        padding: rem(20) rem(20) rem(9);
+        height: auto;
+        .cmp-image__image {
+          width: rem(117);
+        }
+      }
+
+      .navigation {
+        margin-top: rem(52);
+        display: none;
+
+        .cmp-navigation__group {
+          flex-direction: column;
+          align-items: normal;
+
+          li {
+            font: $blockquote;
+            font-weight: bold;
+            letter-spacing: rem(0.4);
+            margin: rem(20) rem(20) 0;
+            padding: 0 0 rem(20);
+            border-bottom: rem(1) solid $border-gray;
+            display: block;
+
+            &:last-of-type {
+              border-bottom: none;
+            }
+
+            a {
+              color: $dark-gray !important;
+            }
+          }
+        }
+      }
+
+      .text {
+        display: none;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        a {
+          font: $font-size-regular-p;
+          letter-spacing: rem(0.34);
+          margin: rem(20);
+          padding-top: rem(20);
+          color: $dark-gray;
+          border-top: rem(1) solid $border-gray;
+          display: block;
+        }
+
+        img {
+          display: none;
+        }
+      }
+    }
+    @include desktop-large {
+      #olympus-logo {
+        margin: rem(15);
+      }
+    }
+  }
+}

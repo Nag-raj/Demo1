@@ -1,0 +1,19 @@
+.cmp-image {
+}
+.cmp-image__link {
+  margin-right: rem(15);
+}
+.cmp-image__image {
+}
+.cmp-image__title {
+}
+
+.banner-image {
+  margin-bottom: rem(40);
+  @include mobile-only {
+    .cmp-image__image {
+      object-fit: cover !important;
+      height: 200px !important;
+    }
+  }
+}

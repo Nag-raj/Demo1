@@ -1,0 +1,281 @@
+.productcollection__filters {
+    height: max-content;
+
+    @include tablet-mobile-both {
+        display: none;
+        padding: 0;
+        height: 100vh;
+        flex: unset !important;
+    }
+}
+
+.filter-type-wrapper {
+    background: $white 0% 0% no-repeat padding-box;
+    padding: rem(30);
+
+    @include tablet-mobile-both {
+        width: -webkit-fill-available;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        padding: 0;
+        z-index: 9999;
+    }
+}
+
+.productcollection__filters-header {
+    @include mobile-only {
+        padding: 0 rem(16);
+    }
+
+    @include tablet-only {
+        padding: 0 rem(30);
+    }
+}
+
+.productcollection__filters-mobile-header {
+    @include desktop-large {
+        display: none;
+    }
+
+    padding-left: rem(30);
+    background: $light-gray 0% 0% no-repeat padding-box;
+    display: flex;
+    align-items: center;
+
+    @include mobile-only {
+        padding-left: rem(15);
+    }
+
+    .filter-back-icon {
+        width: rem(8);
+        transform: rotate(180deg);
+        margin-right: rem(5);
+    }
+
+    .filter-back-text {
+        font: normal normal bold $font-size/rem(14) Helvetica;
+        letter-spacing: 0;
+        color: $blue-v2;
+    }
+
+    .filter-apply-btn {
+        background: $blue 0% 0% no-repeat padding-box;
+        color: $white;
+        padding: rem(15) rem(30);
+        border: none;
+        margin-left: auto;
+    }
+}
+
+.productcollection__filters-title {
+    font: $font-size-bold-h4;
+    letter-spacing: 0;
+    color: $black;
+    margin-bottom: 0;
+    padding-bottom: rem(20);
+    border-bottom: rem(1) solid $border-gray;
+
+    @include tablet-mobile-both {
+        font: normal normal bold $font-size-small2/rem(34) Helvetica;
+        letter-spacing: rem(0.52);
+        padding-top: rem(20);
+    }
+}
+
+.productcollection__filters-body-oly {
+    padding-left: 0;
+    margin-bottom: 0;
+
+    @include mobile-only {
+        padding: 0 rem(16);
+    }
+
+    @include tablet-only {
+        padding: 0 rem(30);
+    }
+}
+
+.productcollection__current-filters {}
+
+.productcollection__current-filter {}
+
+.productcollection__current-filter-icon {}
+
+.productcollection__filter-oly {
+    list-style: none;
+    padding-bottom: rem(20);
+    border-bottom: rem(1) solid $border-gray;
+}
+
+.productcollection__filter-toggler {
+    display: none;
+}
+
+.productcollection__filter-header-oly {
+    width: 100%;
+
+    @include desktop-large {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.productcollection__filter-icon {
+    margin-left: auto;
+    transform: rotate(270deg);
+    margin-top: rem(20);
+
+    @include tablet-mobile-both {
+        display: none;
+    }
+}
+
+.transform_270 {
+    transform: rotate(90deg) !important;
+    margin-bottom: rem(14) !important;
+}
+
+.remove_togglestyle {
+    padding-bottom: rem(14) !important;
+    font-weight: bold !important
+}
+
+.productcollection__filter-icon--open {}
+
+.productcollection__filter-icon--closed {}
+
+.productcollection__filter-items-oly {
+    padding-left: 0;
+    // padding-top: rem(20);
+    list-style: none;
+    @include desktop-large {
+        display: none;
+    }
+
+    // li {
+    //     display: flex;
+    // }
+    @include tablet-mobile-both {
+        padding-top: 0;
+    }
+}
+
+.productcollection__filter-item-oly {
+    font: $font-size-regular-p;
+    letter-spacing: rem(0.34);
+    color: $dark-gray;
+    margin-left: rem(10);
+    @include tablet-mobile-both {
+        margin-left: rem(0);
+    }
+}
+
+.productcollection__filter-title-oly {
+    display: block;
+    font: $font-size-regular-p;
+    letter-spacing: rem(0.34);
+    color: $dark-gray;
+    padding: rem(20) 0 0;
+
+    // border-bottom: rem(1) solid $border-gray;
+    @include tablet-mobile-both {
+        border-bottom: none;
+        padding-bottom: rem(15);
+        font-weight: bold;
+    }
+}
+
+@include desktop-large {
+    .filter_icon {
+        display: none;
+    }
+}
+
+.filter_icon {
+    padding: 0 0 rem(16);
+
+    a {
+        font: normal normal bold $font-size-mob-h6 /rem(26) Helvetica;
+        letter-spacing: rem(0.3);
+        color: $blue;
+    }
+
+    img {
+        width: rem(23);
+        margin-right: rem(15);
+    }
+
+    @include tablet-only {
+        padding: 0 0 rem(20);
+    }
+}
+
+.checkbox-container {
+    display: flex;
+    position: relative;
+    padding-left: rem(30);
+    margin-bottom: rem(5);
+    cursor: pointer;
+    font: $font-size-regular-p;
+    letter-spacing: rem(0.34);
+    color: $dark-gray;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: rem(5);
+    left: 0;
+    height: rem(16);
+    width: rem(16);
+    background: $white 0% 0% no-repeat padding-box;
+    border: rem(1) solid $gray;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked~.checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+    left: rem(4);
+    top: rem(1);
+    width: rem(5);
+    height: rem(10);
+    border: solid $white;
+    border-width: 0 rem(3) rem(3) 0;
+    transform: rotate(45deg);
+}

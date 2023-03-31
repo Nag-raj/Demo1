@@ -1,0 +1,15 @@
+{
+  "componentName": "Blue Navigation Component",
+  "partialName": "blue-navigation-component",
+  "isOrganism": true,
+  "variations": [
+    {
+      "variationType": "Default",
+      "config": {
+        "navigation": {
+          "name": "Dr.Smith"
+        }
+      }
+    }
+  ]
+}

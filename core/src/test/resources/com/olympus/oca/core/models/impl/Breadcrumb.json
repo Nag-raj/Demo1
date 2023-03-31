@@ -1,0 +1,33 @@
+{
+	"jcr:primaryType": "cq:Page",
+	"jcr:content": {
+		"jcr:primaryType": "cq:PageContent",
+		"jcr:title": "Olympus Page",
+		"cq:template": "/conf/olympus/settings/wcm/templates/page-content",
+		"sling:resourceType": "olympus/components/page",
+		"showbreadcrumb": "true",
+		"root": {
+			"jcr:primaryType": "nt:unstructured",
+			"layout": "responsiveGrid",
+			"sling:resourceType": "olympus/components/container",
+			"container": {
+				"jcr:primaryType": "nt:unstructured",
+				"layout": "responsiveGrid",
+				"sling:resourceType": "olympus/components/container",
+				"container": {
+					"jcr:primaryType": "nt:unstructured",
+					"layout": "responsiveGrid",
+					"sling:resourceType": "olympus/components/container",
+					"breadcrumb": {
+						"jcr:primaryType": "nt:unstructured",
+						"startLevel": "6",
+						"disableShadowing": "false",
+						"showHidden": "false",
+						"hideCurrent": "false",
+						"sling:resourceType": "olympus/components/breadcrumb"
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,95 @@
+@include mobile-only {
+    .cmp-breadcrumb__item-link {
+      color: $dark-gray;
+    }
+    .cmp-breadcrumb__item-link,
+    .cmp-breadcrumb__item-link:hover {
+      padding: rem(2) rem(3);
+    }
+    .cmp-breadcrumb__item--active,
+    .cmp-breadcrumb__item-link:hover {
+      color: $sky-blue;
+      vertical-align: baseline;
+    }
+    .cmp-breadcrumb__list li a:after {
+      content: "|";
+      margin-left: rem(4);
+    }
+  }
+  
+  @include desktop-only {
+    .cmp-breadcrumb {
+      padding: rem(28) 0 0 rem(60);
+      z-index: 3;
+    }
+    .cmp-breadcrumb__list,
+    .cmp-breadcrumb__list li a:after {
+      background-color: $white;
+    }
+    .cmp-breadcrumb__item {
+      padding: rem(5) rem(12) rem(5) rem(20);
+    }
+    .cmp-breadcrumb__item:hover,
+    .cmp-breadcrumb__item--active,
+    .cmp-breadcrumb__item-link:hover,
+    .cmp-breadcrumb__list li:hover a:after {
+      background: $sky-blue;
+    }
+    .cmp-breadcrumb__item:hover .cmp-breadcrumb__item-link,
+    .cmp-breadcrumb__item:hover,
+    .cmp-breadcrumb__item--active,
+    .cmp-breadcrumb__item-link:hover {
+      color: $white;
+    }
+    .cmp-breadcrumb__item-link:hover {
+      padding: rem(2) rem(5);
+      text-decoration: none;
+    }
+    .cmp-breadcrumb__item-link:hover {
+      padding: 0;
+    }
+    .cmp-breadcrumb__list li a:after {
+      content: "";
+      border-radius: 0 0 0 rem(50);
+      -webkit-box-shadow: rem(2) rem(-2) 0 rem(2) $light-gray, rem(3) rem(-3) 0 rem(2) $light-gray;
+      box-shadow: rem(2) rem(-2) 0 rem(2) $light-gray, rem(3) rem(-3) 0 rem(2) $light-gray;
+      height: rem(34);
+      margin-left: rem(-7);
+      margin-top: rem(-5);
+      position: absolute;
+      -webkit-transform: scale(0.707) rotate(45deg);
+      transform: scale(0.707) rotate(45deg);
+      width: rem(34);
+      z-index: 1;
+    }
+  }
+  
+  .cmp-breadcrumb__list {
+    @include mobile-only {
+      padding: rem(16);
+      padding-left: 15px !important;
+
+    }
+    padding-left: 0 !important;
+    margin-bottom: 0;
+    
+  }
+  
+  .cmp-breadcrumb__item--active,
+  .cmp-breadcrumb__item-link {
+    font-size: $font-size-small1;
+  }
+  
+  .cmp-breadcrumb__item-link {
+    text-decoration: none;
+  }
+  .breadcrumb {
+    @include mobile-only {
+      margin-bottom: rem(0) !important;
+    }
+  }
+  .cmp-breadcrumb {
+    @include tablet-only {
+      padding: rem(30) rem(30) rem(0);
+    }
+  }

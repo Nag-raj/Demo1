@@ -1,0 +1,265 @@
+<div class="activate-your-account">
+   <div>
+      <p class="activate-your-account__heading">${model.activateAccount}</p>
+   </div>
+   <div class="activate-your-account__description">
+      <p>${model.activateAccountDescription}</p>
+   </div>
+   <div>
+      <div class="personal-information">
+         <div>
+            <p class="personal-information__title">${model.personalInformation}</p>
+         </div>
+         <hr />
+         <div class="row personal-information__details">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+               <div class="pi-title">
+                  Name
+                  <p class="account-number">John Smith</p>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3">
+               <div class="pi-title">
+                  Phone
+                  <p>1234567890</p>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3">
+               <div class="pi-title">
+                  Email
+                  <input
+                     id="personalEmail"
+                     type="text"
+                     value=""
+                     class="personalEmail__input"
+                     onblur="saveEmail(event)"
+                     />
+                  <p class="personalEmail__text">Email@gmail.com</p>
+                  <span class="personalEmail__err"></span>
+                  <p><a
+                     href="#"
+                     class="hyperlink"
+                     onclick="enablePersonalEmail()"
+                     >Edit</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+         <div class="row personal-information__confirmworkemail">
+            <div class="col-sm-1 col-md-2 col-lg-1 personal-information__confirmworkemail--icon">
+               <img src="/assets/icons/Info.svg" alt="confirm_workemail_info">
+            </div>
+            <div class="col-sm-11 col-md-10 col-lg-11 personal-information__confirmworkemail--info">
+               <p class="personal-information__confirmworkemail--info_title">Confirm that the email provided is a personal work email</p>
+               <p>The email provided will be used to login to the portal and must be verified. Please confirm that the email above is your personal work email, not a shared email address.</p>
+            </div>
+         </div>
+      </div>
+      <form
+         class="container"
+         id=""
+         action=""
+         >
+         <div class="row account-nickname">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+               <p class="pi-title">Account Number</p>
+               <p class="account-number">200XXXX</p>
+               <div class="set-as-default">
+                  <input
+                     type="radio"
+                     class="radio-btn"
+                     id="radio1"
+                     name="radio1"
+                     value=""
+                     />
+                  <label for="" class="set-as-default-text">Set as
+                  Default</label>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+               <label for="" class="pi-title asterisk">Account Nickname</label>
+               <input
+                  type="text"
+                  placeholder="Hospital Name"
+                  class="input-field accountNickname"
+                  value=""
+                  />
+               <i class="" aria-hidden="true"></i>
+               <span class="accountNickname_err"></span>
+            </div>
+         </div>
+         <div class="row account-nickname">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+               <p class="pi-title"> Account Number</p>
+               <p class="account-number">200XXXX</p>
+               <div class="set-as-default">
+                  <input
+                     type="radio"
+                     class="radio-btn"
+                     id="radio2"
+                     name="radio2"
+                     value=""
+                     />
+                  <label for="" class="set-as-default-text">Set as
+                  Default</label>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+               <p class="pi-title asterisk">Account Nickname</p>
+               <input
+                  type="text"
+                  name="hospital Name"
+                  placeholder="Hospital Name"
+                  class="input-field accountNickname"
+                  value=""
+                  />
+               <i class="" aria-hidden="true"></i>
+               <span class="accountNickname_err"></span>
+            </div>
+         </div>
+         <div class="row dropdowns">
+            <div class="col-sm-12 col-md-6 col-lg-6 dropdowns__mobile">
+               <div>
+                  <p class="asterisk pi-title">Job Category </p>
+               </div>
+               <div>
+                  <select
+                     name="jobCategory"
+                     id="jobCategory"
+                     class="account-number input-field"
+                     placeholder="Select One"
+                     >
+                     <option value="" disabled selected>Select One</option>
+                     <option value="Nurse / Nurse Manager">Nurse / Nurse Manager</option>
+                     <option value="Material Manager / Buyer">Material Manager / Buyer</option>
+                     <option value="Account Payer">Account Payer</option>
+                     <option value="Biomed">Biomed</option>
+                     <option value="Doctors">Doctors</option>
+                     <option value="Others">Others</option>
+                  </select>
+                  <i class="" aria-hidden="true"></i>
+                  <span class="jobcategory_err"></span>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+               <div>
+                  <p class="pi-title">Speciality</p>
+               </div>
+               <div>
+                  <select
+                     name="speciality"
+                     id="speciality"
+                     class="account-number input-field"
+                     placeholder="Select One"
+                     >
+                     <option value="" disabled selected>Select One</option>
+                     <option value="Endoscopy">Endoscopy</option>
+                     <option value="Urology">Urology</option>
+                     <option value="Respiratory">Respiratory</option>
+                     <option value="Surgical Endoscopy">Surgical Endoscopy</option>
+                     <option value="ENT">ENT</option>
+                     <option value="Energy">Energy</option>
+                     <option value="System Integrationy">System Integration</option>
+                     <option value="All">All</option>
+                     <option value="Others">Others</option>
+                  </select>
+                  <i class="" aria-hidden="true"></i>
+                  <span class="speciality_err"></span>
+               </div>
+            </div>
+         </div>
+         <div class="row dropdowns pi-title">
+            <div class="col-sm-12 col-md-6 col-lg-6 dropdowns__mobile">
+               <label class="pi-title asterisk">Password:
+               </label>
+               <input
+                  type="password"
+                  id="password"
+                  placeholder="Enter password"
+                  value=""
+                  class="input-field"
+                  />
+               <i class="" aria-hidden="true"></i>
+               <span class="password__err"></span>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 passwords">
+               <label class="pi-title asterisk">Confirm Password:
+               </label>
+               <input
+                  type="password"
+                  id="confirmpassword"
+                  placeholder="Confirm Password"
+                  value=""
+                  class="input-field"
+                  />
+               <i class="" aria-hidden="true"></i>
+               <span class="confirmpassword__err"></span>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-12 col-md-12 col-12">
+               <div class="check-box-text">
+                  <label class="checkbox-container" for="productinfo">
+                     <p class="checkbox-lable">Yes, send me educational and product
+                        information from Olympus. You can unsubscribe at any time.
+                     </p>
+                     <input
+                        type="checkbox"
+                        id="productinfo"
+                        name="productinfo"
+                        value="${model.checkbox1}"
+                        />
+                     <p class="checkmark"></p>
+                  </label>
+                  <span class="product-info__err"></span>
+               </div>
+               <div class="check-box-text">
+                  <label class="checkbox-container" for="termsofuse">
+                     <p class="checkbox-lable">${model.termsOfUse}
+                        <a href="/" class="hyperlink termsofuse__link" target="_blank">Terms of Use</a>
+                     </p>
+                     <input
+                        type="checkbox"
+                        id="termsofuse"
+                        name="termsofuse"
+                        value="${model.checkbox1}"
+                        />
+                     <p class="checkmark"></p>
+                  </label>
+                  <span class="termsofuse__err"></span>
+               </div>
+               <div class="check-box-text">
+                  <label class="checkbox-container" for="authorized">
+                     <p class="checkbox-lable">I am authorized to make purchase and
+                        check order status for the account number listed above.
+                     </p>
+                     <input
+                        type="checkbox"
+                        id="authorized"
+                        name="authorized"
+                        value="${model.checkbox2}"
+                        />
+                     <p class="checkmark"></p>
+                  </label>
+                  <span class="authorized__err"></span>
+               </div>
+               <p class="olympus-privacy-statement">Data provided will be used in
+                  accordance with the
+                  <a href="/" class="hyperlink" target="_blank">Olympus Privacy Statement</a>.
+               </p>
+            </div>
+         </div>
+         <hr />
+         <div class="buttons">
+            <div>
+               <button
+                  class="submit-btn"
+                  type="submit"
+                  id="submit"
+                  value="Submit"
+                  >Submit</button>
+            </div>
+         </div>
+      </form>
+   </div>
+</div>

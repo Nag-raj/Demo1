@@ -1,0 +1,111 @@
+<sly data-sly-test="${wcmmode.edit}">
+	<p data-emptytext=" No products to display in author mode, go to publish mode" class="cq-placeholder"></p>
+</sly>
+<sly data-sly-use.itemTemplate="../commons/productItem.html"
+	 data-sly-use.paginationTemplate="../commons/pagination.html"
+	 data-sly-use.searchResults="com.olympus.oca.core.models.OlympusSearchResults"/>
+
+<article class="searchresults_root"
+		 data-cif-search-input-context="${searchResults.searchStorefrontContext.json}"
+		 data-cif-search-results-context="${searchResults.searchResultsStorefrontContext.json}">
+	<div class="productcollection__root">
+		<div class="filter_icon" data-sly-test="${searchResults.searchResultsSet.totalResults > 0}"><a href="#"><img src="/content/dam/olympus/icon/Filter.svg" alt="filter_icon">Filter</a></div>
+		<div class="productcollection__filters" data-sly-test="${searchResults.searchResultsSet.totalResults > 0}">
+			<div class="l2-l3-category-filter">
+				<form action="">
+					<ul class="category-wrapper-ul"
+						data-sly-list.aggregate="${searchResults.searchResultsSet.searchAggregations}">
+						<li class="category-wrapper-li"
+							data-sly-test="${aggregate.identifier == 'allCategories'}">
+							<input type="radio" id="${aggregate.displayLabel}" name="radios"
+								   value="${aggregate.displayLabel}" />
+							<label for=${aggregate.displayLabel}
+								   data-sly-test="${aggregate.identifier != 'allCategories'}">${aggregate.displayLabel}</label>
+							<ul class="category-wrapper-ul" data-sly-list.aggregateOption="${aggregate.options}">
+								<li class="category-wrapper-li category-list" data-filtertype="${aggregate.identifier}" data-selected="${aggregateOption.count}"><input
+									data-filterparams="${aggregateOption.filterValue @ context ='html'}"
+									type="radio" id="${aggregateOption.displayLabel}" name="radios"
+									value="${aggregateOption.displayLabel}" /> <label
+									for=${aggregateOption.displayLabel}>${aggregateOption.displayLabel}</label>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</form>
+			</div>
+			<div class="filter-type-wrapper">
+				<div class="productcollection__filters-mobile-header"><img class="filter-back-icon"
+						src="/content/dam/olympus/icon/Arrow_Blue.svg"> <span class="filter-back-text">Back</span> <button
+					class="filter-apply-btn">Apply
+				</button>
+				</div>
+				<div class="productcollection__filters-header">
+					<h5 class="productcollection__filters-title">Filter</h5>
+				</div>
+				<ul class="productcollection__filters-body-oly"
+					data-sly-list.aggregate="${searchResults.searchResultsSet.searchAggregations}">
+					<li class="productcollection__filter-oly"
+						data-sly-test="${aggregate.identifier != 'allCategories'}">
+						<!-- <input type="radio" id="price" name="activeFilter" class="productcollection__filter-toggler">  -->
+						<label data-filtertype="${aggregate.identifier @ context ='html'}"
+							   class="productcollection__filter-header-oly">
+							<span class="productcollection__filter-title-oly">${aggregate.displayLabel}</span> <span
+							class="productcollection__filter-icon productcollection__filter-icon--open"> <img
+							src="/content/dam/olympus/icon/Arrow_OlyBlue.svg"></span>
+							<!-- <span class="productcollection__filter-icon productcollection__filter-icon--closed"></span> -->
+						</label>
+						<ul class="productcollection__filter-items-oly"
+							data-sly-list.aggregateOption="${aggregate.options}">
+							<li><label data-filterparams="${aggregateOption.filterValue @ context ='html'}" data-filterselected="${aggregateOption.count}"
+									   class="productcollection__filter-item-oly checkbox-container"><span class="filter-text">${aggregateOption.displayLabel}</span>
+								<input type="checkbox" id="${aggregateOption.displayLabel}"> <span
+									class="checkmark"></span> </label></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="searchbar__root"></div>
+		<div class="productcollection__listing ${searchResults.searchResultsSet.totalResults < 1 ? 'productcollection__height' : ''}">
+			<div class="productcollection__results-count"> ${searchResults.searchResultsSet.totalResults}
+				${searchResults.searchResultsSet.totalResults == 1 ? 'item' : 'items' @ i18n}
+			</div>
+			<!--            <div class="productcollection__sort">            </div>            -->
+			<div class="filter-selection"> <a class="clear-all">Clear All Filters</a> </div>
+			<div class="productcollection__items">
+				<sly data-sly-list.products="${searchResults.products}">
+					<sly
+						data-sly-call="${itemTemplate.item @ item = products, productCollection=searchResults, index = productsList.index}" />
+				</sly>
+			</div>
+			<div class="productcollection__no-results" data-sly-test="${searchResults.searchResultsSet.totalResults < 1}">
+				<h2 class="productcollection__no-results-title">${'No search results found.' @ i18n}</h2>
+				<p class="productcollection__no-results-text">${'No results were found for ‘search term’.' @ i18n}</p>
+                <p class="productcollection__no-results-text">${'Please refine your search term.' @ i18n}</p>
+			</div>
+			<div class="productcollection__pagination">
+				<sly
+					data-sly-call="${paginationTemplate.searchResultsSet @ searchResultsSet = searchResults.searchResultsSet}" />
+			</div>
+		</div>
+	</div>
+	<div class="cmp-loader-v1 hide">
+        <div class="cmp-loader">
+            <div class="cmp-loader-image">
+                <svg id="Synchronize" xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 145.744 123.516">
+                    <g id="Synchronize_plain" transform="translate(0 0)">
+                        <path id="Path_2105" data-name="Path 2105" d="M138.823,78.653A61.844,61.844,0,0,0,27.32,46.98l5.531,10.3a51.521,51.521,0,0,1,95.612,21.377H115.974l10.536,19.541,6.343,11.957h0v.175l17.121-31.673Z" transform="translate(-4.229 -21.745)" fill="#08107b"/>
+                        <path id="Path_2106" data-name="Path 2106" d="M89.672,116A51.521,51.521,0,0,1,38.31,69.4H50.8L33.921,37.9h0l-.11-.175L16.8,69.4H27.95a61.844,61.844,0,0,0,111.942,31.061l-5.575-10.383A51.553,51.553,0,0,1,89.672,116Z" transform="translate(-16.8 -2.79)" fill="#08107b"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="cmp-loader-text">Loading
+                <div class="cmp-loader-text-dots">
+                    <div class="cmp-loader-text__dot1"></div>
+                    <div class="cmp-loader-text__dot2"></div>
+                    <div class="cmp-loader-text__dot3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

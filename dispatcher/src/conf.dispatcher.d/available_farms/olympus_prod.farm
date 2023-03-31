@@ -1,0 +1,110 @@
+/olympus_prod  {
+    /clientheaders
+    {
+      $include "../clientheaders/clientheaders.any"
+    }
+
+    /virtualhosts
+    {
+      "olympus-com-prd-aemcs.olympus.com"
+      "publish-*"
+    }
+
+    /renders
+    {
+      $include "../renders/default_renders.any"
+    }
+
+    /filter
+    {
+      $include "../filters/filters.any"
+    }
+
+    /cache
+    {
+      /docroot "${DOCROOT}"
+      /statfileslevel "5"
+      /allowAuthorized "0"
+      /serveStaleOnError "1"
+      /rules
+      {
+        $include "../cache/rules.any"
+      }
+      /invalidate
+      {
+        /0000
+        {
+          /glob "*"
+          /type "deny"
+        }
+        /0001
+        {
+          /glob "*.html"
+          /type "allow"
+        }
+        /0002
+        {
+          /glob "/etc/segmentation.segment.js"
+          /type "allow"
+        }
+        /0003
+        {
+          /glob "*/analytics.sitecatalyst.js"
+          /type "allow"
+        }
+        # to ensure that AEM forms HTMLs are not auto-invalidated due to invalidation of any other resource. It is supposed to be deleted only after its own activation.
+        /0004
+			  {
+				  /glob "/content/forms/**/*.html"
+				  /type "deny"
+			  }
+      }
+      /allowedClients
+      {
+          $include "../cache/default_invalidate.any"
+      }
+      /ignoreUrlParams
+      {
+      #list of paramaters to igonre caching
+         /0001 { /glob "*"         /type "allow" }
+         /0002 { /glob "olm"       /type "deny"  }
+         /0003 { /glob "errorMsg"  /type "deny"  }
+         /0004 { /glob "query"     /type "deny"  }
+         /0005 { /glob "sTags"     /type "deny"  }
+         /0006 { /glob "stags"     /type "deny"  }
+         /0007 { /glob "filters"   /type "deny"  }
+         /0008 { /glob "sort"      /type "deny"  }
+         /0009 { /glob "length"    /type "deny"  }
+         /0010 { /glob "page"      /type "deny"  }
+         /0011 { /glob "filtertags"     /type "deny"  }
+         /0012 { /glob "sortby"     /type "deny"  }
+         /0013 { /glob "list-*"     /type "deny"  }
+         /0014 { /glob "pagelist-*"     /type "deny"  }
+         /0015 { /glob "search_query"     /type "deny"  }
+         /0016 { /glob "externalMaterialGroup"     /type "deny"  }
+         /0017 { /glob "usageType"     /type "deny"  }
+         /0018 { /glob "levelTwoCategories"     /type "deny"  }
+         /0019 { /glob "allCategories"     /type "deny"  }
+	}
+  /headers
+    {
+      "link"
+    }
+        /enableTTL "0"
+    }
+
+    /statistics
+    {
+      /categories
+      {
+        /html
+        {
+          /glob "*.html"
+        }
+        /others
+        {
+          /glob "*"
+        }
+      }
+    }
+  }

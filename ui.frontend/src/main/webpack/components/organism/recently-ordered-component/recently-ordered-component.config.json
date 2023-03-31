@@ -1,0 +1,13 @@
+{
+    "componentName": "Recently Ordered Component",
+    "partialName": "recently-ordered-component",
+    "isOrganism": true,
+    "variations": [
+      {
+        "variationType": "Default",
+        "config": {
+        }
+      }
+    ]
+  }
+  

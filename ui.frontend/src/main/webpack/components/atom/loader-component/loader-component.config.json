@@ -1,0 +1,14 @@
+{
+    "componentName": "Loader Component",
+    "partialName": "loader-component",
+    "isAtom": true,
+    "variations": [
+      {
+        "variationType": "Default",
+        "config": {
+            "title": "Loading"
+        }
+      }
+    ]
+  }
+  

@@ -1,0 +1,24 @@
+{
+    "componentName": "Footer Component",
+    "partialName": "footer-component",
+    "isOrganism": true,
+    "variations": [
+      {
+        "variationType": "Default",
+        "config": {
+          "footer": {
+            "title": "Footer Component",
+            "card": {
+              "fruit": "Apple",
+              "size": "Large",
+              "color": "Red",
+              "dropdown": {
+                "Title": "This is a title"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+  

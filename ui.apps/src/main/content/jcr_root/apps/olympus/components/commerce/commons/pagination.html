@@ -1,0 +1,103 @@
+
+<template data-sly-template.searchResultsSet="${@ searchResultsSet}">
+    <div class="productcollection__pagination" data-sly-test.pager="${searchResultsSet.pager}" data-sly-test="${searchResultsSet.pager.pages.size > 1}">
+        <sly data-sly-list.page="${pager.pages}">
+            <!--/*First Page button & Previous page button inactive */-->
+            <sly data-sly-test="${pageList.first && pager.currentPage==1} ">
+                <a class="productcollection__pagination-arrow productcollection__pagination-arrow--prev productcollection__pagination-arrow--inactive" aria-label="${'Show previous' @ i18n}">
+                    <span class="productcollection__pagination-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10.261" height="13" viewBox="0 0 10.261 17.71"
+                             style="transform: rotate(180deg);">
+                            <g id="Icon_-_Carrot" data-name="Icon - Carrot" transform="translate(0 17.71) rotate(-90)">
+                                <path id="Path_3853" data-name="Path 3853"
+                                      d="M10.707,12.76,1.852,3.9,3.245,2.5,10.707,9.96,18.168,2.5,19.561,3.9Z"
+                                      transform="translate(-1.852 -2.499)" fill="#141414" />
+                            </g>
+                        </svg>
+                    </span>
+                </a>
+            </sly>
+
+            <!--/*First Page button & Previous page button Active */-->
+            <sly data-sly-test="${pageList.first && pager.currentPage!=1} ">
+                <a class="productcollection__pagination-arrow productcollection__pagination-arrow--prev" aria-label="${'Show previous' @ i18n}"
+                   href="${request.requestURI @ query=pager.previousPageParameters}"
+                   title="${'Show previous' @ i18n}">
+                    <span class="productcollection__pagination-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10.261" height="13" viewBox="0 0 10.261 17.71"
+                             style="transform: rotate(180deg);">
+                            <g id="Icon_-_Carrot" data-name="Icon - Carrot" transform="translate(0 17.71) rotate(-90)">
+                                <path id="Path_3853" data-name="Path 3853"
+                                      d="M10.707,12.76,1.852,3.9,3.245,2.5,10.707,9.96,18.168,2.5,19.561,3.9Z"
+                                      transform="translate(-1.852 -2.499)" fill="#141414" />
+                            </g>
+                        </svg>
+                    </span>
+                </a>
+            </sly>
+
+            <!--/* Ommitted pages: ... */-->
+            <a class="productcollection__pagination-button productcollection__pagination-button--inactive"
+               data-sly-test="${pager.morePagesAfter && pageList.last}">
+                <div class="productcollection__pagination-button-title">&hellip;</div>
+            </a>
+
+            <!--/*Page numbers iterated*/-->
+            <sly data-sly-test="${page.pageNumber == pager.currentPage} ">
+                <a class="productcollection__pagination-button productcollection__pagination-button--current">
+                    <div class="productcollection__pagination-button-title">
+                        ${page.pageNumber}
+                    </div>
+                </a>
+            </sly>
+
+            <sly data-sly-test="${page.pageNumber != pager.currentPage} ">
+                <a class="productcollection__pagination-button"
+                   href="${request.requestURI @ query=page.parameters}"
+                   title="${'Go to page {0}' @ i18n, format=[page.pageNumber]}">
+                    <div class="productcollection__pagination-button-title">
+                        ${page.pageNumber}
+                    </div>
+                </a>
+            </sly>
+
+            <!--/* Ommitted pages: ... */-->
+            <a class="productcollection__pagination-button productcollection__pagination-button--inactive"
+               data-sly-test="${pager.morePagesBefore && pageList.first}">
+                <div class="productcollection__pagination-button-title">&hellip;</div>
+            </a>
+
+            <!--/* Next page button & Last Page button Active */-->
+            <sly data-sly-test="${pageList.last && pager.currentPage!=page.pageNumber}">
+                <a class="productcollection__pagination-arrow productcollection__pagination-arrow--next" aria-label="${'Show next' @ i18n}"
+                   href="${request.requestURI @ query=pager.nextPageParameters}"
+                   title="${'Show next' @ i18n}">
+                    <span class="productcollection__pagination-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10.261" height="13" viewBox="0 0 10.261 17.71">
+                            <g id="Icon_-_Carrot" data-name="Icon - Carrot" transform="translate(0 17.71) rotate(-90)">
+                                <path id="Path_3853" data-name="Path 3853"
+                                      d="M10.707,12.76,1.852,3.9,3.245,2.5,10.707,9.96,18.168,2.5,19.561,3.9Z"
+                                      transform="translate(-1.852 -2.499)" fill="#141414" />
+                            </g>
+                        </svg>
+                    </span>
+                </a>
+            </sly>
+
+            <!--/* Next page button & Last Page button Inactive */-->
+            <sly data-sly-test="${pageList.last && pager.currentPage==page.pageNumber}">
+                <a class="productcollection__pagination-arrow productcollection__pagination-arrow--next productcollection__pagination-arrow--inactive" aria-label="${'Show next' @ i18n}">
+                    <span class="productcollection__pagination-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10.261" height="13" viewBox="0 0 10.261 17.71">
+                            <g id="Icon_-_Carrot" data-name="Icon - Carrot" transform="translate(0 17.71) rotate(-90)">
+                                <path id="Path_3853" data-name="Path 3853"
+                                      d="M10.707,12.76,1.852,3.9,3.245,2.5,10.707,9.96,18.168,2.5,19.561,3.9Z"
+                                      transform="translate(-1.852 -2.499)" fill="#141414" />
+                            </g>
+                        </svg>
+                    </span>
+                </a>
+            </sly>
+        </sly>
+    </div>
+</template>

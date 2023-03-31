@@ -1,0 +1,20 @@
+{
+	"jcr:primaryType": "nt:unstructured",
+	"buttonLabel": "Click Here",
+	"greetingLabel": "Hello",
+	"helpIcon": "/content/dam/olympus/icon/Question.svg",
+	"subHeading": "Sub heading cart",
+	"homeIcon": "/content/dam/olympus/icon/Arrow_OlyBlue.svg",
+	"closeIcon": "/content/dam/olympus/icon/Close (2).svg",
+	"cartIcon": "/content/dam/olympus/icon/Log Off.svg",
+	"cartTitle": "Your Cart",
+	"helpLinkPath": "/content/olympus/us/en/olympus/self-service-portal/error",
+  	"cartPagePath": "/content/olympus/us/en/olympus/self-service-portal/cart",
+  	"homeLinkPath" : "/content/olympus/us/en",
+	"cartIconInOverlay": "/content/dam/olympus/icon/Cart Drawer.svg",
+	"accountLabel": "Account",
+	"sling:resourceType": "olympus/components/blueheadernav",
+	"buttonLinkPath": "/content/olympus/us/en/olympus/self-service-portal/myolympus",
+	"notificationIcon": "/content/dam/olympus/icon/Notifications.svg",
+	"homeLabel": "MYOLYMPUS"
+}

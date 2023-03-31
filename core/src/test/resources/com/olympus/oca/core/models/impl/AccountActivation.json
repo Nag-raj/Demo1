@@ -1,0 +1,40 @@
+{
+  "jcr:primaryType": "nt:unstructured",
+  "jcr:createdBy": "admin",
+  "authorization": "I am authorized to make purchase and check order status for the account number listed above.",
+  "jcr:lastModifiedBy": "admin",
+  "termsofuseText": "I have read and understand the",
+  "informationIcon": "/content/dam/olympus/icon/Info.svg",
+  "confirmEmailTitle": "Confirm that the email provided is a personal work email",
+  "confirmEmailDesc": "The email provided will be used to login to the portal and must be verified.",
+  "subscribeLabel": "Yes, send me educational and product information from Olympus.",
+  "termsofuseLinkText": "Terms of Use",
+  "termsofuseLinkUrl": "/content/olympus-customer-portal/us/en/terms-of-use.html",
+  "privacyStatementText": "Data provided will be used in accordance with the ",
+  "privacyStatementLinkText": "Olympus Privacy Statement.",
+  "privacyStatementLinkUrl": "/content/olympus-customer-portal/us/en/terms-of-use.html",
+  "jobCategoryTitle": "Job Category",
+  "specialityTitle": "Speciality",
+  "activateAccountDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+  "jobCategoryMulti": {
+	  "jcr:primaryType": "nt:unstructured",
+	  "item0": {
+		"jcr:primaryType": "nt:unstructured",
+		"jobCategoryKey": "nurse",
+		"jobCategoryValue": "Nurse Manager"
+	  }
+	},
+	"specialityMulti": {
+	  "jcr:primaryType": "nt:unstructured",
+	  "item0": {
+		"jcr:primaryType": "nt:unstructured",
+		"specialityKey": "urology",
+		"specialityValue": "Urology"
+	  }
+	},
+  "jcr:created": "Tue Feb 21 2023 14:51:40 GMT+0530",
+  "activateAccount": "Activate Your Account",
+  "jcr:lastModified": "Tue Feb 21 2023 15:05:40 GMT+0530",
+  "personalInformation": "Personal Information",
+  "sling:resourceType": "olympus/components/olympusaccountactivation"
+}

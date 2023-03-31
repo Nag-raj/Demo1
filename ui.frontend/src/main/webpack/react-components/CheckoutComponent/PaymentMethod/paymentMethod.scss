@@ -1,0 +1,41 @@
+@import "../../../site/_mixins.scss";
+@import "../../../site/_variables.scss";
+@import "../../../site/base.scss";
+
+.payment-method {
+  margin-top: rem(32);
+  .css-1vovazs.Mui-focused {
+    color: $dark-gray !important;
+  }
+  .css-1vovazs {
+    color: $dark-gray !important;
+    margin-bottom: rem(10);
+  }
+  .MuiFormControl-root {
+    margin-top: rem(12);
+    .css-4mv3z {
+      padding-bottom: rem(0) !important;
+      color: $gray;
+    }
+    .css-4mv3z.Mui-checked {
+      color: $blue-v3 !important;
+    }
+    .css-9l3uo3 {
+      margin-top: rem(10) !important;
+    }
+  }
+  .payment-heading {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: rem(40);
+    border-bottom: 1px solid $border-gray;
+    h4 {
+      font: normal normal 700 $font-size-small2 Helvetica;
+    }
+    a {
+      cursor: pointer;
+    }
+  }
+}

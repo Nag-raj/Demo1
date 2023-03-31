@@ -1,0 +1,6 @@
+{
+  "resource.resolver.mapping": [
+    "/content/olympus-customer-portal/</", "/:/"
+  ],
+  "resource.resolver.map.location" : "/etc/map.publish"
+}
