@@ -1,0 +1,73 @@
+<ITransactionHeader>
+	<amount>-29.3800</amount>
+	<authorizationCode>return</authorizationCode>
+	<authorizationDate>2018-02-16T08:32:57</authorizationDate>
+	<authorizationTime>08:32:0057</authorizationTime>
+	<authorizedThroughCartridge>XiPayCartFDMSNorth.FDMSNorth.1</authorizedThroughCartridge>
+	<billingDate>1899-12-30T00:00:00</billingDate>
+	<captureDate>1899-12-30T00:00:00</captureDate>
+	<cardCVV2>123</cardCVV2>
+	<cardDataSource>E</cardDataSource>
+	<cardExpirationDate>01/20</cardExpirationDate>
+	<cardHolderAddress1>19500 State Hwy 249</cardHolderAddress1>
+	<cardHolderAddress2>Suite 300</cardHolderAddress2>
+	<cardHolderCity>Houston</cardHolderCity>
+	<cardHolderCountry>US</cardHolderCountry>
+	<cardHolderName1>Alexander</cardHolderName1>
+	<cardHolderName2>Perez</cardHolderName2>
+	<cardHolderName>Alexander Perez</cardHolderName>
+	<cardHolderState>Texas</cardHolderState>
+	<cardHolderZip>03108</cardHolderZip>
+	<cardNumber>-E803-1111-7YJRYYCGTZTV0G</cardNumber>
+	<cardPresent>0</cardPresent>
+	<cardType>VI</cardType>
+	<chargeAmount>0.0000</chargeAmount>
+	<creationDate>2018-02-16T08:32:57</creationDate>
+	<currencyKey>USD</currencyKey>
+	<lastModificationDate>2018-02-16T08:32:57</lastModificationDate>
+	<merchantID>FDMS_USD</merchantID>
+	<message>[Cart] Return/Credit Successful</message>
+	<modifiedStatus>1</modifiedStatus>
+	<orderDate>1899-12-30T00:00:00</orderDate>
+	<origin>XiPay</origin>
+	<packetOperation>1</packetOperation>
+	<settlementAmount>-29.3800</settlementAmount>
+	<settlementDate>1899-12-30T00:00:00</settlementDate>
+	<shippingCaptureDate>1899-12-30T00:00:00</shippingCaptureDate>
+	<statusCode>100</statusCode>
+	<statusTXN>Return/Credit</statusTXN>
+	<taxLevel1>0.0000</taxLevel1>
+	<taxLevel2>0.0000</taxLevel2>
+	<taxLevel3>0.0000</taxLevel3>
+	<taxLevel4>0.0000</taxLevel4>
+	<transactionID>110626297</transactionID>
+	<transactionType>Authorization</transactionType>
+	<XIID>42681</XIID>
+	<infoItems>
+		<InfoItem>
+			<key>HOST_AUTH</key>
+			<value>LrsRhbqzTTH/r3J/OkidBN3WHSc=</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+		<InfoItem>
+			<key>IN_TRANS_AUTHDATETIME</key>
+			<value>02162018083257</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+		<InfoItem>
+			<key>PM_AVS_CODES</key>
+			<value>A-B-D-I-M-P-Y-Z</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+		<InfoItem>
+			<key>PM_CVV_CODES</key>
+			<value>M-P-U-X</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+		<InfoItem>
+			<key>PM_CVV_INFOITEM</key>
+			<value>TR_CARD_CIDRESPCODE</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+	</infoItems>
+</ITransactionHeader>

@@ -1,0 +1,70 @@
+
+<ITransactionHeader>
+	<additionalInfo>105322970</additionalInfo>
+	<amount>31.99</amount>
+	<cardDataSource>E</cardDataSource>
+	<cardExpirationDate>0120</cardExpirationDate>
+	<cardHolderAddress1>19500 State Highway 249</cardHolderAddress1>
+	<cardHolderAddress2>Suite 300</cardHolderAddress2>
+	<cardHolderCity>Houston</cardHolderCity>
+	<cardHolderCountry>US</cardHolderCountry>
+	<cardHolderName1>Alexander</cardHolderName1>
+	<cardHolderName2>Perez</cardHolderName2>
+	<cardHolderName>Alexander Perez</cardHolderName>
+	<cardHolderState>TX</cardHolderState>
+	<cardHolderZip>77070</cardHolderZip>
+	<cardNumber>-E803-1111-D3P8T3B24Y1G6N</cardNumber>
+	<cardPresent>0</cardPresent>
+	<cardType>VI</cardType>
+	<currencyKey>USD</currencyKey>
+	<customerNumber>aperez@paymetric.com</customerNumber>
+	<merchantID>FDMS_USD</merchantID>
+	<modifiedStatus>0</modifiedStatus>
+	<PONumber>aperez@paymetric.com</PONumber>
+	<packetOperation>0</packetOperation>
+	<statusCode>0</statusCode>
+
+	<infoItems>
+		<InfoItem>
+			<key>PM_CRONJOB</key>
+			<value>FALSE</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+		<InfoItem>
+			<key>PM_FRAUD_ENABLED</key>
+			<value>FALSE</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+		<InfoItem>
+			<key>PM_FRAUD_RESULT</key>
+			<value>0</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+		<InfoItem>
+			<key>PM_AVS_MUST_PASS</key>
+			<value>true</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+		<InfoItem>
+			<key>PM_AVS_CODES</key>
+			<value>A-B-D-I-M-P-Y-Z</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+		<InfoItem>
+			<key>PM_CVV_MUST_PASS</key>
+			<value>true</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+		<InfoItem>
+			<key>PM_CVV_CODES</key>
+			<value>M-P-U-X</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+		<InfoItem>
+			<key>PM_FRAUD_ENABLED</key>
+			<value>false</value>
+			<____hashCodeCalc>false</____hashCodeCalc>
+		</InfoItem>
+	</infoItems>
+	<____hashCodeCalc>false</____hashCodeCalc>
+</ITransactionHeader>

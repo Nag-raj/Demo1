@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="purchaseEnabled" type="boolean"/>
+		<property name="searchEnabled" type="boolean"/>
+		<property name="otherVariants" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ProductData>"/>
+		<property name="baseProductName" type="String"/>
+		<property name="nonPurchasableDisplayStatus" type="String"/>
+		<property name="modelNumber" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.ocafacades.shipping.data.ShippingCarrierData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="selected" type="boolean"/>
+		<property name="accountReferenceNumber" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.ocafacades.shipping.data.ShippingCarrierListData">
+		<property name="shippingCarriers" type="java.util.List&lt;de.hybris.platform.ocafacades.shipping.data.ShippingCarrierData>"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.product.data.PurchaseOrderData">
+		<property name="purchaseOrderNumber" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.product.data.DeliveryOptionData">
+		<property name="code" type="String" />
+		<property name="name" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.product.data.DeliveryOptionListData">
+		<property name="deliveryOption" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.DeliveryOptionData>" />
+	</bean>
+
+	<!-- OEC-287 changes for adding new attributes to cart response -->
+	<bean class="de.hybris.platform.commercefacades.order.data.CartData"
+		  extends="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+		<property name="shipByGround" type="boolean"/>
+		<property name="heavyOrder" type="boolean"/>
+		<property name="heavyOrderQuestions" type="de.hybris.platform.commercefacades.order.data.HeavyOrderQuestionsCartData"/>
+		<property name="displayTotalUnitCount" type="String"/>
+		<property name="otherVariants" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.CartData>"/>
+		<property name="availablePaymentTypes" type="java.util.List&lt;de.hybris.platform.b2bacceleratorfacades.order.data.B2BPaymentTypeData>"/>
+	</bean>
+	<!-- END of OEC-287 Changes -->
+
+	<bean class="de.hybris.platform.ocafacades.order.data.RecentlyOrderedProductData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="quantity" type="Integer"/>
+		<property name="purchaseEnabled" type="Boolean"/>
+		<property name="modelNumber" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.ocafacades.order.data.RecentlyOrderedProductListData">
+		<property name="recentlyOrderedProducts" type="java.util.List&lt;de.hybris.platform.ocafacades.order.data.RecentlyOrderedProductData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryFiltersData">
+		<property name="status" type="String"/>
+		<property name="accountNumber" type="String"/>
+		<property name="addressId" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
+		<property name="entries" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.OrderEntryData>"/>
+		<property name="consignments" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.ConsignmentData>" />
+		<property name="erpOrderNumber" type="String"/>
+		<property name="totalEntries" type="Integer"/>
+		<property name="creationTime" type="String"/>
+		<property name="totalPrice" type="String"/>
+	</bean>
+
+	<!-- -->
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryFiltersListData">
+		<property name="accountList" type="java.util.Set&lt;de.hybris.platform.commercefacades.order.data.FilterAccountData>"/>
+		<property name="statusList" type="java.util.Set&lt;de.hybris.platform.commercefacades.order.data.FilterStatusData>"/>
+		<property name="addressList" type="java.util.Set&lt;de.hybris.platform.commercefacades.order.data.FilterAddressData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.FilterAccountData">
+		<property name="accountId" type="String"/>
+		<property name="nickname" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.FilterStatusData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.FilterAddressData">
+		<property name="addressId" type="String"/>
+		<property name="streetName" type="String"/>
+	</bean>
+	<!--	-->
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
+		<property name="units" type="java.util.List&lt;de.hybris.platform.b2bcommercefacades.company.data.B2BUnitData>"/>
+		<property name="accountPreferences" type="String"/>
+
+	</bean>
+
+	<bean class="de.hybris.platform.b2bcommercefacades.company.data.B2BUnitData">
+		<property name="defaultUnit" type="boolean"/>
+		<property name="nickName" type="String"/>
+	</bean>
+	<bean class="de.hybris.platform.commercefacades.catalog.data.CategoryHierarchyData">
+		<property name="level" type="Integer"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.ConsignmentEntryData">
+		<property name="otherVariants" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.ConsignmentEntryData>"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.HeavyOrderQuestionsCartData">
+		<property name="largeTruckEntry" type="Boolean"/>
+		<property name="liftAvailable" type="Boolean"/>
+		<property name="loadingDock" type="Boolean"/>
+		<property name="orderDeliveredInside" type="Boolean"	/>
+		<property name="name" type="String"/>
+		<property name="email" type="String"/>
+		<property name="phoneNumber" type="String"/>
+		<property name="truckSize" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.AccountPreferencesData">
+		<property name="accessType" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="otherVariants" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.OrderEntryData>"/>
+		<property name="contractPrice" type="String"/>
+		<property name="formattedContractPrice" type="String"/>
+		<property name="formattedListPrice" type="String"/>
+		<property name="modelNumber" type="String"/>
+		<property name="entryStatus" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+		<property name="listPriceSubTotal" type="Double"/>
+		<property name="contractSavings" type="Double"/>
+		<property name="formattedListPriceSubTotal" type="String"/>
+		<property name="formattedContractSavings" type="String"/>
+		<property name="createdDate" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.ConsignmentData">
+		<property name="statusMessage" type="String"/>
+		<property name="shippingDate" type="String"/>
+		<property name="consignmentStatus" type="String"/>
+		<property name="trackingUrl" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.b2bacceleratorfacades.order.data.B2BPaymentTypeData">
+		<property name="isActive" type="Boolean"/>
+	</bean>
+
+
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerActivationData">
+		<property name="customerId" type="String"/>
+		<property name="emailId" type="String"/>
+		<property name="name" type="String"/>
+		<property name="jobCategory" type="String"/>
+		<property name="speciality" type="String"/>
+		<property name="password" type="String"/>
+		<property name="contactID" type="String"/>
+		<property name="uid" type="String"/>
+		<property name="title" type="String"/>
+		<property name="accountsInfo" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CustomerAccountData>"/>
+		<property name="consentInfo" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CustomerConsentData>"/>
+
+	</bean>
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerAccountData">
+		<property name="accountId" type="String"/>
+		<property name="accountNickName" type="String"/>
+		<property name="maskedAccountId" type="String"/>
+		<property name="isDefault" type="Boolean"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerConsentData">
+		<property name="consentType" type="String"/>
+		<property name="consentGiven" type="Boolean"/>
+	</bean>
+
+
+	<bean class="de.hybris.platform.commercefacades.user.ping.data.PingCustomerCreationData">
+		<property name="email" type="String"/>
+		<property name="name" type="de.hybris.platform.commercefacades.user.ping.data.PingNameData"/>
+		<property name="population" type="de.hybris.platform.commercefacades.user.ping.data.PingPopulationData"/>
+		<property name="username" type="String"/>
+		<property name="password" type="de.hybris.platform.commercefacades.user.ping.data.PingPasswordData"/>
+		<property name="enabled" type="boolean"/>
+		<property name="mobilePhone" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.ping.data.PingNameData">
+		<property name="given" type="String"/>
+		<property name="family" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.ping.data.PingPopulationData">
+		<property name="id" type="String"/>
+
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.ping.data.PingPasswordData">
+		<property name="value" type="String"/>
+		<property name="forceChange" type="boolean"/>
+	</bean>
+
+
+
+	<bean class="de.hybris.platform.b2bacceleratorfacades.checkout.data.PlaceOrderData">
+		<property name="poNumber" type="String"/>
+		<property name="shippingCarrierCode" type="String"/>
+		<property name="deliveryOptionCode" type="String"/>
+		<property name="additionalAddressLine" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.SupportTeamContactListData">
+		<property name="contactList" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.SupportTeamContactDetailsData>"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.SupportTeamContactDetailsData">
+		<property name="department" type="String"/>
+		<property name="name" type="String"/>
+		<property name="role" type="String"/>
+		<property name="email" type="String"/>
+		<property name="phone" type="String"/>
+	</bean>
+
+</beans>

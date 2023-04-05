@@ -1,0 +1,56 @@
+<CreateSubscriptionResult>
+  <requestId>109322281</requestId>
+  <reasonCode>100</reasonCode>
+  <decision>ACCEPT</decision>
+  <signatureData>
+    <transactionSignature>109322281</transactionSignature>
+    <amount>0.0000</amount>
+    <merchantID>FDMS_USD</merchantID>
+    <currency>USD</currency>
+  </signatureData>
+  <subscriptionSignatureData/>
+  <authReplyData>
+    <ccAuthReplyAuthorizationCode>OK7290</ccAuthReplyAuthorizationCode>
+    <ccAuthReplyAuthorizedDateTime>2018-01-23T09:38:59.000</ccAuthReplyAuthorizedDateTime>
+    <cvnDecision>true</cvnDecision>
+    <ccAuthReplyAvsCode>Z</ccAuthReplyAvsCode>
+    <ccAuthReplyCvCode>P</ccAuthReplyCvCode>
+    <ccAuthReplyAmount>0.0</ccAuthReplyAmount>
+    <ccAuthReplyReasonCode>100</ccAuthReplyReasonCode>
+    <ccAuthReplyProcessorResponse>APPROVAL. AVS Check PASSED, CVV Check PASSED.</ccAuthReplyProcessorResponse>
+    <ccAuthReplyAvsCodeRaw>Z</ccAuthReplyAvsCodeRaw>
+  </authReplyData>
+  <orderInfoData>
+    <orderPageRequestToken>-E803-1111-7YJRYYCGTZTV0G</orderPageRequestToken>
+    <comments>APPROVAL. AVS Check PASSED, CVV Check PASSED.</comments>
+    <orderNumber>d203f147-a398-40fe-978c-7572d7e6</orderNumber>
+    <orderPageTransactionType>subscription</orderPageTransactionType>
+    <subscriptionTitle></subscriptionTitle>
+  </orderInfoData>
+  <subscriptionInfoData>
+    <subscriptionSignedValue>109322281</subscriptionSignedValue>
+    <subscriptionID>109322281</subscriptionID>
+  </subscriptionInfoData>
+  <paymentInfoData>
+    <cardAccountNumber>-E803-1111-7YJRYYCGTZTV0G</cardAccountNumber>
+    <cardStartYear>2020</cardStartYear>
+    <cardAccountHolderName>alex</cardAccountHolderName>
+    <cardExpirationMonth>1</cardExpirationMonth>
+    <cardStartMonth>1</cardStartMonth>
+    <cardExpirationYear>2020</cardExpirationYear>
+    <cardCvNumber>123</cardCvNumber>
+    <cardCardType>001</cardCardType>
+  </paymentInfoData>
+  <customerInfoData>
+    <billToPhoneNumber></billToPhoneNumber>
+    <billToPostalCode>77070</billToPostalCode>
+    <billToState>TX</billToState>
+    <billToCity>Houston</billToCity>
+    <billToEmail>aperez@paymetric.com</billToEmail>
+    <billToStreet1>19500 State Hwy 249</billToStreet1>
+    <billToStreet2>Suite 300</billToStreet2>
+    <billToLastName>Perez</billToLastName>
+    <billToCountry>US</billToCountry>
+    <billToFirstName>Alexander</billToFirstName>
+  </customerInfoData>
+</CreateSubscriptionResult>

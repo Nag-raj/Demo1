@@ -1,0 +1,87 @@
+$productCatalog = oca-usProductCatalog
+$productCatalogName = Olympus Commerce Product Catalog
+$catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default='Online'])[unique=true, default=$productCatalog:Online]
+$supercategories = supercategories(code, $catalogVersion)
+$baseProduct = baseProduct(code, $catalogVersion)
+$approved = approvalstatus(code)[default='approved']
+$lang = en
+
+
+INSERT_UPDATE SalesOrganization ; code[unique=true]
+                                ; 2002
+
+# Insert Products
+INSERT_UPDATE Product ; code[unique=true]             ;$supercategories          ;name[lang=$lang]                       ; variantType(code)[default='GenericVariantProduct']     ; unit(code)[default=pieces] ; $catalogVersion;$approved
+                      ;BaseProduct                    ;Dimension                 ;"BaseProduct";
+
+INSERT_UPDATE IntegrationObject; code[unique = true]; integrationType(code)
+                               ; OcaInboundGenericVariantProduct; INBOUND
+
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique = true]; code[unique = true]; type(code); root[default = false]; itemTypeMatch(code)
+                                   ; OcaInboundGenericVariantProduct	; CatalogVersion         	; CatalogVersion         	; 	; ALL_SUB_AND_SUPER_TYPES	;
+                                   ; OcaInboundGenericVariantProduct	; DistributionChainStatus	; DistributionChainStatus	; 	; ALL_SUBTYPES           	;
+                                   ; OcaInboundGenericVariantProduct	; ExternalMaterialGroup  	; ExternalMaterialGroup  	; 	; ALL_SUBTYPES           	;
+                                   ; OcaInboundGenericVariantProduct	; MaterialGroup          	; MaterialGroup          	; 	; ALL_SUBTYPES           	;
+                                   ; OcaInboundGenericVariantProduct	; MaterialType           	; MaterialType           	; 	; ALL_SUBTYPES           	;
+                                   ; OcaInboundGenericVariantProduct	; MaterialGroup4         	; MaterialGroup4         	; 	; ALL_SUBTYPES           	;
+                                   ; OcaInboundGenericVariantProduct	; Catalog                	; Catalog                	; 	; ALL_SUB_AND_SUPER_TYPES	;
+                                   ; OcaInboundGenericVariantProduct	; LoadingGroup           	; LoadingGroup           	; 	; ALL_SUBTYPES           	;
+                                   ; OcaInboundGenericVariantProduct	; SalesOrganization      	; SalesOrganization      	; 	; ALL_SUB_AND_SUPER_TYPES	;
+                                   ; OcaInboundGenericVariantProduct	; ArticleApprovalStatus  	; ArticleApprovalStatus  	; 	; ALL_SUBTYPES           	;
+                                   ; OcaInboundGenericVariantProduct	; Plant                  	; Plant                  	; 	; ALL_SUB_AND_SUPER_TYPES	;
+                                   ; OcaInboundGenericVariantProduct	; Category               	; Category               	; 	; ALL_SUB_AND_SUPER_TYPES	;
+                                   ; OcaInboundGenericVariantProduct	; ProductUsageType       	; ProductUsageType       	; 	; ALL_SUBTYPES           	;
+                                   ; OcaInboundGenericVariantProduct	; Unit                   	; Unit                   	; 	; ALL_SUB_AND_SUPER_TYPES	;
+                                   ; OcaInboundGenericVariantProduct	; GeneralItemCategory    	; GeneralItemCategory    	; 	; ALL_SUBTYPES           	;
+                                   ; OcaInboundGenericVariantProduct	; Product                	; Product                	; 	; ALL_SUB_AND_SUPER_TYPES	;
+                                   ; OcaInboundGenericVariantProduct	; GenericVariantProduct  	; GenericVariantProduct  	; true	; ALL_SUB_AND_SUPER_TYPES	;
+
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]; autoCreate[default = false]
+                                            ; OcaInboundGenericVariantProduct:CatalogVersion         	; version                	; CatalogVersion:version                       	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:CatalogVersion         	; active                 	; CatalogVersion:active                        	;                                                        	; 	;
+                                            ; OcaInboundGenericVariantProduct:CatalogVersion         	; catalog                	; CatalogVersion:catalog                       	; OcaInboundGenericVariantProduct:Catalog                	; true	;
+                                            ; OcaInboundGenericVariantProduct:DistributionChainStatus	; code                   	; DistributionChainStatus:code                 	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:ExternalMaterialGroup  	; code                   	; ExternalMaterialGroup:code                   	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:MaterialGroup          	; code                   	; MaterialGroup:code                           	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:MaterialType           	; code                   	; MaterialType:code                            	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:MaterialGroup4         	; code                   	; MaterialGroup4:code                          	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:Catalog                	; id                     	; Catalog:id                                   	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:LoadingGroup           	; code                   	; LoadingGroup:code                            	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:SalesOrganization      	; code                   	; SalesOrganization:code                       	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:ArticleApprovalStatus  	; code                   	; ArticleApprovalStatus:code                   	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:Plant                  	; code                   	; Plant:code                                   	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:Category               	; code                   	; Category:code                                	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:Category               	; catalogVersion         	; Category:catalogVersion                      	; OcaInboundGenericVariantProduct:CatalogVersion         	; true	;
+                                            ; OcaInboundGenericVariantProduct:ProductUsageType       	; code                   	; ProductUsageType:code                        	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:Unit                   	; name                   	; Unit:name                                    	;                                                        	; 	;
+                                            ; OcaInboundGenericVariantProduct:Unit                   	; code                   	; Unit:code                                    	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:GeneralItemCategory    	; code                   	; GeneralItemCategory:code                     	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:Product                	; name                   	; Product:name                                 	;                                                        	; 	;
+                                            ; OcaInboundGenericVariantProduct:Product                	; materialNumber         	; Product:materialNumber                       	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:Product                	; code                   	; Product:code                                 	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:Product                	; catalogVersion         	; Product:catalogVersion                       	; OcaInboundGenericVariantProduct:CatalogVersion         	; true	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; approvalStatus         	; GenericVariantProduct:approvalStatus         	; OcaInboundGenericVariantProduct:ArticleApprovalStatus  	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; materialNumber         	; GenericVariantProduct:materialNumber         	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; materialType           	; GenericVariantProduct:materialType           	; OcaInboundGenericVariantProduct:MaterialType           	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; materialGroup          	; GenericVariantProduct:materialGroup          	; OcaInboundGenericVariantProduct:MaterialGroup          	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; grossWeight            	; GenericVariantProduct:grossWeight            	;                                                        	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; generalItemCategory    	; GenericVariantProduct:generalItemCategory    	; OcaInboundGenericVariantProduct:GeneralItemCategory    	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; externalMaterialGroup  	; GenericVariantProduct:externalMaterialGroup  	; OcaInboundGenericVariantProduct:ExternalMaterialGroup  	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; distributionChainStatus	; GenericVariantProduct:distributionChainStatus	; OcaInboundGenericVariantProduct:DistributionChainStatus	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; name                   	; GenericVariantProduct:name                   	;                                                        	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; materialGroup4         	; GenericVariantProduct:materialGroup4         	; OcaInboundGenericVariantProduct:MaterialGroup4         	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; loadingGroup           	; GenericVariantProduct:loadingGroup           	; OcaInboundGenericVariantProduct:LoadingGroup           	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; supercategories        	; GenericVariantProduct:supercategories        	; OcaInboundGenericVariantProduct:Category               	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; plant                  	; GenericVariantProduct:plant                  	; OcaInboundGenericVariantProduct:Plant                  	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; baseProduct            	; GenericVariantProduct:baseProduct            	; OcaInboundGenericVariantProduct:Product                	; 	; true
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; code                   	; GenericVariantProduct:code                   	;                                                        	; true	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; usageType              	; GenericVariantProduct:usageType              	; OcaInboundGenericVariantProduct:ProductUsageType       	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; catalogVersion         	; GenericVariantProduct:catalogVersion         	; OcaInboundGenericVariantProduct:CatalogVersion         	; true	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; grossWeightUnit        	; GenericVariantProduct:grossWeightUnit        	; OcaInboundGenericVariantProduct:Unit                   	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; salesOrg               	; GenericVariantProduct:salesOrg               	; OcaInboundGenericVariantProduct:SalesOrganization      	; 	;
+                                            ; OcaInboundGenericVariantProduct:GenericVariantProduct  	; description            	; GenericVariantProduct:description            	;                                                        	; 	;
+
+
+
+INSERT_UPDATE InboundChannelConfiguration; integrationObject(code)[unique = true]; authenticationType(code);
+                                         ; OcaInboundGenericVariantProduct                        ; BASIC                   ;

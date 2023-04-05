@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+    <bean id="paymetricSystemSetup" class="de.hybris.platform.paymetric.setup.PaymetricSystemSetup">
+        <constructor-arg ref="defaultPaymetricService"/>
+    </bean>
+
+	<alias name="defaultPaymetricService" alias="acceleratorPaymentService"/> 
+    <bean    id="defaultPaymetricService" class="de.hybris.platform.paymetric.service.impl.DefaultPaymetricService" parent="defaultCyberSourceAcceleratorPaymentService" scope="tenant">
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+        <property name="sessionService" ref="sessionService"></property>
+    </bean>
+    
+	<alias name="paymetricPaymentService" alias="paymentService"/>
+    <bean name="paymetricPaymentService" class="de.hybris.platform.paymetric.service.impl.PaymetricPaymentService" parent="defaultPaymentService" scope="tenant">
+        <property name="cardPaymentService" ref="cardPaymentService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+        <property name="transactionCodeGenerator" ref="transactionCodeGenerator" />
+        <property name="paymentInfoCreator" ref="paymentInfoCreator" />
+		<property name="cartService" ref="cartService"/>
+    </bean>
+
+	<bean id="paymetricScheduleBatchJob" class="de.hybris.platform.paymetric.cronjobs.PaymetricScheduleBatchJob" parent="abstractJobPerformable" >
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<bean name="PaymetricCommandFactory" class="de.hybris.platform.payment.commands.factory.impl.DefaultCommandFactoryImpl" scope="tenant">
+		<property name="paymentProvider" value="paymetric"/>
+		<property name="commands">
+			<map>
+
+				<entry>
+					<key>
+						<value type="java.lang.Class">de.hybris.platform.payment.commands.IsApplicableCommand</value>
+					</key>
+					<bean class="de.hybris.platform.paymetric.commands.IsApplicableCommand" />
+				</entry>
+
+				<entry>
+					<key>
+						<value type="java.lang.Class">de.hybris.platform.payment.commands.SubscriptionAuthorizationCommand</value>
+					</key>
+					<bean class="de.hybris.platform.paymetric.commands.XiPaySubscriptionAuthorizationCommand">
+						<property name="customerSubscriptionModel" ref="creditCardPaymentSubscriptionDao"/>
+						<property name="cartService" ref="cartService"/>
+						<property name="sessionService" ref="sessionService" />
+						<property name="flexibleSearchService" ref="flexibleSearchService"/>
+						<property name="baseStoreService" ref="baseStoreService"/>
+						<property name="customerAccountDao" ref="customerAccountDao"/>
+					</bean>
+				</entry>
+
+				<entry>
+					<key>
+						<value type="java.lang.Class">de.hybris.platform.payment.commands.CaptureCommand</value>
+					</key>
+					<bean class="de.hybris.platform.paymetric.commands.XiPayCaptureCommand">
+						<property name="sessionService" ref="sessionService" />
+						<property name="cartService" ref="cartService"/>
+					</bean>
+				</entry>
+
+				<entry>
+					<key>
+						<value type="java.lang.Class">de.hybris.platform.payment.commands.VoidCommand</value>
+					</key>
+					<bean class="de.hybris.platform.paymetric.commands.XiPayVoidCommand">
+						<property name="sessionService" ref="sessionService" />
+					</bean>
+				</entry>
+
+                <entry>
+					<key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.StandaloneRefundCommand</value>
+					</key>
+					<bean class="de.hybris.platform.paymetric.commands.XiPayStandaloneRefundCommand">
+						<property name="cartService" ref="cartService"/>
+						<property name="sessionService" ref="sessionService" />
+					</bean>
+				</entry>
+
+                <entry>
+					<key>
+                        <value type="java.lang.Class">de.hybris.platform.paymetric.commands.XiPaySettleBatchCommand</value>
+					</key>
+					<bean class="de.hybris.platform.paymetric.commands.XiPaySettleBatchCommand">
+						<property name="sessionService" ref="sessionService" />
+					</bean>
+				</entry>
+
+                <entry>
+					<key>
+                        <value type="java.lang.Class">de.hybris.platform.paymetric.commands.XiPayGetBatchStatusCommand</value>
+					</key>
+					<bean class="de.hybris.platform.paymetric.commands.XiPayGetBatchStatusCommand">
+						<property name="sessionService" ref="sessionService" />
+					</bean>
+				</entry>
+
+                <entry>
+					<key>
+                        <value type="java.lang.Class">de.hybris.platform.paymetric.commands.XiPayGetTransactionCommand</value>
+					</key>
+					<bean class="de.hybris.platform.paymetric.commands.XiPayGetTransactionCommand">
+						<property name="sessionService" ref="sessionService" />
+					</bean>
+				</entry>
+
+			</map>
+		</property>
+	</bean>
+
+</beans>

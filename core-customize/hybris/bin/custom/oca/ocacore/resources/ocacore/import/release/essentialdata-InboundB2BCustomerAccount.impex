@@ -1,0 +1,60 @@
+
+#*******************************************
+#*** Inbound CRM Customer Account Invite ***
+#*******************************************
+
+INSERT_UPDATE IntegrationObject; code[unique = true]             ;
+                               ; InboundCRMCustomerAccountInvite ;
+
+INSERT_UPDATE IntegrationObjectItem ; integrationObject(code)[unique = true]            ; code[unique = true]                 ; type(code)                      ; root[default = false]
+                                    ; InboundCRMCustomerAccountInvite        ; CRMCustomerAccountInvite     ; CRMCustomerAccountInvite    ; true ;
+                                    ; InboundCRMCustomerAccountInvite        ; B2BUnit                      ; B2BUnit                     ;      ;
+                                    ; InboundCRMCustomerAccountInvite        ; Language                     ; Language                    ;      ;
+                                    ; InboundCRMCustomerAccountInvite        ; UserGroup                    ; UserGroup                   ;      ;
+                                    ; InboundCRMCustomerAccountInvite        ; Address                      ; Address                     ;      ;
+                                    ; InboundCRMCustomerAccountInvite        ; Title                        ; Title                       ;      ;
+                                    ; InboundCRMCustomerAccountInvite        ; InviteStatus                 ; InviteStatus                ;      ;
+                                    ; InboundCRMCustomerAccountInvite        ; Gender                       ; Gender                      ;      ;
+
+
+
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]                                       ; attributeName[unique = true]             ; attributeDescriptor(enclosingType(code), qualifier)                                           ; returnIntegrationObjectItem(integrationObject(code), code)                                  ;unique[default = false]           ; autoCreate[default = false]
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; defaultB2BUnit                    ; CRMCustomerAccountInvite:defaultB2BUnit                         ; InboundCRMCustomerAccountInvite:B2BUnit                        ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; sessionLanguage                   ; CRMCustomerAccountInvite:sessionLanguage                        ; InboundCRMCustomerAccountInvite:Language                       ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; customerID                        ; CRMCustomerAccountInvite:customerID                             ;                                                                ; true                   ;
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; contactID                         ; CRMCustomerAccountInvite:contactID                              ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; loginDisabled                     ; CRMCustomerAccountInvite:loginDisabled                          ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; email                             ; CRMCustomerAccountInvite:email                                  ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; sapIsReplicated                   ; CRMCustomerAccountInvite:sapIsReplicated                        ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; uid                               ; CRMCustomerAccountInvite:uid                                    ;                                                                ; true                   ;
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; groups                            ; CRMCustomerAccountInvite:groups                                 ; InboundCRMCustomerAccountInvite:UserGroup                      ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; addresses                         ; CRMCustomerAccountInvite:addresses                              ; InboundCRMCustomerAccountInvite:Address                        ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; name                              ; CRMCustomerAccountInvite:name                                   ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; title                             ; CRMCustomerAccountInvite:title                                  ; InboundCRMCustomerAccountInvite:Title                          ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:CRMCustomerAccountInvite              ; inviteStatus                      ; CRMCustomerAccountInvite:inviteStatus                           ; InboundCRMCustomerAccountInvite:InviteStatus                   ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:Language                              ; isocode                           ; Language:isocode                                                ;                                                                ; true                   ;
+                                            ; InboundCRMCustomerAccountInvite:Title                                 ; code                              ; Title:code                                                      ;                                                                ; true                   ;
+                                            ; InboundCRMCustomerAccountInvite:Address                               ; publicKey                         ; Address:publicKey                                               ;                                                                ; true                   ;
+                                            ; InboundCRMCustomerAccountInvite:Address                               ; title                             ; Address:title                                                   ; InboundCRMCustomerAccountInvite:Title                          ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:Address                               ; lastname                          ; Address:lastname                                                ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:Address                               ; phone1                            ; Address:phone1                                                  ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:Address                               ; contactAddress                    ; Address:contactAddress                                          ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:Address                               ; duplicate                         ; Address:duplicate                                               ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:Address                               ; fax                               ; Address:fax                                                     ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:Address                               ; dateOfBirth                       ; Address:dateOfBirth                                             ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:Address                               ; firstname                         ; Address:firstname                                               ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:Address                               ; cellphone                         ; Address:cellphone                                               ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:Address                               ; gender                            ; Address:gender                                                  ; InboundCRMCustomerAccountInvite:Gender                         ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:Address                               ; department                        ; Address:department                                              ;                                                                ;                        ;
+                                            ; InboundCRMCustomerAccountInvite:B2BUnit                               ; uid                               ; B2BUnit:uid                                                     ;                                                                ; true                   ;
+                                            ; InboundCRMCustomerAccountInvite:UserGroup                             ; uid                               ; UserGroup:uid                                                   ;                                                                ; true                   ;
+                                            ; InboundCRMCustomerAccountInvite:Gender                                ; code                              ; Gender:code                                                     ;                                                                ; true                   ;
+                                            ; InboundCRMCustomerAccountInvite:InviteStatus                          ; code                              ; InviteStatus:code                                               ;                                                                ; true                   ;
+
+
+#***********************************************
+#*** Inbound CRM Customer Account Invite ICC ***
+#***********************************************
+
+INSERT_UPDATE InboundChannelConfiguration; integrationObject(code)[unique = true]           ; authenticationType(code);
+                                         ; InboundCRMCustomerAccountInvite       ; BASIC               ;

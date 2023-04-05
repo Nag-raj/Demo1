@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <alias name="defaultFreightCostIntegrationService" alias="freightCostIntegrationService"/>
+    <bean id="defaultFreightCostIntegrationService"
+          class="com.olympus.oca.commerce.integrations.freight.service.impl.DefaultFreightCostIntegrationService">
+        <constructor-arg name="ocaOutboundService" ref="ocaOutboundService"/>
+    </bean>
+
+    <alias name="defaultContractPriceIntegrationService" alias="contractPriceIntegrationService"/>
+    <bean id="defaultContractPriceIntegrationService"
+          class="com.olympus.oca.commerce.integrations.contract.service.impl.DefaultContractPriceIntegrationService">
+        <constructor-arg name="ocaOutboundService" ref="ocaOutboundService"/>
+    </bean>
+
+    <alias name="defaultOcaOutboundService" alias="ocaOutboundService"/>
+    <bean id="defaultOcaOutboundService" class="com.olympus.oca.commerce.integrations.outbound.service.impl.DefaultOcaOutboundService">
+        <property name="outboundServiceFacade" ref="outboundServiceFacade"/>
+    </bean>
+
+    <alias name="defaultSalesTaxVertexIntegrationService" alias="salesTaxVertexIntegrationService"/>
+    <bean id="defaultSalesTaxVertexIntegrationService"
+          class="com.olympus.oca.commerce.integrations.vertex.service.impl.DefaultSalesTaxVertexIntegrationService">
+        <constructor-arg name="ocaOutboundService" ref="ocaOutboundService"/>
+        <constructor-arg name="vertexRequestConverter" ref="vertexRequestConverter"/>
+    </bean>
+
+    <bean id="pingIntegrationService"
+          class="com.olympus.oca.commerce.integrations.ping.service.impl.DefaultPingIntegrationService">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <bean id="orderIntegrationService"
+          class="com.olympus.oca.commerce.integrations.order.service.impl.DefaultSAPOrderIntegrationService">
+    </bean>
+
+    <bean id="ocaPaymentIntegrationService" class="com.olympus.oca.commerce.integrations.payment.service.impl.DefaultOcaPaymentIntegrationService">
+        <constructor-arg name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultOcaB2BPartnerContributor" alias="ocaB2BPartnerContributor"/>
+    <bean id="defaultOcaB2BPartnerContributor"
+          class="com.olympus.oca.commerce.integrations.outbound.orderexchange.impl.DefaultOcaB2BPartnerContributor"
+          parent="defaultSapB2BPartnerContributor">
+    </bean>
+
+    <bean id="ocaOutboundOrderPopulator" class="com.olympus.oca.commerce.integrations.order.populator.impl.DefaultOcaOutboundOrderPopulator">
+    </bean>
+
+    <alias name="defaultOcaOutboundOrderConverter" alias="outboundOrderConverter"/>
+    <bean id="defaultOcaOutboundOrderConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.sap.sapcpiadapter.model.SAPCpiOutboundOrderModel"/>
+        <property name="populators">
+            <list merge="false">
+                <ref bean="ocaOutboundOrderPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="vertexRequestPopulator" class="com.olympus.oca.commerce.integrations.vertex.service.populators.VertexRequestPopulator">
+    </bean>
+
+    <bean id="vertexRequestConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.olympus.oca.commerce.integrations.model.VertexRequestModel"/>
+        <property name="populators">
+            <list>
+                <ref bean="vertexRequestPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultSalesforceIntegrationService" alias="salesforceIntegrationService"/>
+    <bean id="defaultSalesforceIntegrationService" class="com.olympus.oca.commerce.integrations.salesforce.service.impl.DefaultSalesforceIntegrationService">
+        <property name="ocaOutboundService" ref="ocaOutboundService"/>
+    </bean>
+</beans>

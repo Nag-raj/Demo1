@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ITransactionHeader-array>
+  <ITransactionHeader>
+    <batchID>[y]2018-08-22T10:30:02.008</batchID>
+    <cardPresent>0</cardPresent>
+    <cardType>VI</cardType>
+    <currencyKey>USD</currencyKey>
+    <merchantID>PM_VMC</merchantID>
+    <modifiedStatus>0</modifiedStatus>
+    <packetOperation>0</packetOperation>
+    <statusCode>0</statusCode>
+    <____hashCodeCalc>false</____hashCodeCalc>
+  </ITransactionHeader>
+</ITransactionHeader-array>

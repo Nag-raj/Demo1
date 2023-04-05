@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<!-- ########################################################################################
+		# Extending the base CreditCardType to include additional Paymetric-supported card types
+		############################################################################################# -->
+		<enumtype code="CreditCardType" autocreate="false" generate="false">
+            <value code="discover"/>
+			<value code="alipay"/>
+            <value code="paypal"/>
+			<value code="echeck"/>
+            <value code="privatelabelcard"/>
+		</enumtype>
+
+	</enumtypes>
+
+	<itemtypes>
+		<!-- ########################################################################################
+		# Create a cron job to perform Paymetric's schedule batch operation to trigger settlement
+		############################################################################################# -->
+		<itemtype code="PaymetricScheduleBatchCronJob" extends="CronJob" jaloclass="de.hybris.platform.cronjob.jalo.PaymetricScheduleBatchCronJob" autocreate="true" generate="true">
+        </itemtype>
+
+		<!-- ########################################################################################
+		# Extending the base PaymentInfo model
+		############################################################################################# -->
+		<itemtype code="PaymentInfo" autocreate="false" generate="false">
+            <attributes>
+				<!-- ########################################################################################
+				# BEGIN - CIT/MIT data
+				############################################################################################# -->
+                <attribute qualifier="TR_TRANS_MSGTYPE" type="java.lang.String">
+                    <modifiers read="true" write="true" partof="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+               
+                <attribute qualifier="IN_TRANS_VISATRANSID" type="java.lang.String">
+                    <persistence type="property"/>
+                    <description>Network ID 1 is the reference information for the CIT-MIT transactions.</description>
+                </attribute>
+
+                <attribute qualifier="IN_TRANS_VISATRANSID2" type="java.lang.String">
+                    <persistence type="property"/>
+                    <description>Network ID 2 is the reference information for the CIT-MIT transactions.</description>
+                </attribute>
+
+                <attribute qualifier="IN_TRANS_BANKNETDATE" type="java.lang.String">
+                    <persistence type="property"/>
+                    <description>For MIT MC transactions, First Data requires that MasterCard MITs also supply the BankNET Date.</description>
+                </attribute>
+				<!-- ########################################################################################
+				# END - CIT/MIT data
+				############################################################################################# -->
+				
+				
+				<!-- ########################################################################################
+				# BEGIN - EC Data
+				############################################################################################# -->
+                <attribute qualifier="EC_ROUTING_NUMBER" type="java.lang.String">
+                    <modifiers read="true" write="true" partof="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+				
+				<attribute qualifier="EC_ACCOUNT_TYPE" type="java.lang.String">
+                    <modifiers read="true" write="true" partof="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+				
+				<attribute qualifier="EC_COMPANY_NAME" type="java.lang.String">
+                    <modifiers read="true" write="true" partof="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+				
+				<!-- ########################################################################################
+				# END - EC data
+				############################################################################################# -->
+            </attributes>
+        </itemtype>
+
+		<!-- ########################################################################################
+		# Extending the base PaymentTransactionEntry to include additional Paymetric transactional data
+		############################################################################################# -->
+		<itemtype code="PaymentTransactionEntry" autocreate="false" generate="false">
+            <attributes>
+
+				<!-- ########################################################################################
+				# BEGIN - Fraud response data
+				############################################################################################# -->
+                <attribute qualifier="TR_FRAUD_RESULTSTATUS" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>This field contains the overall results from the fraud call: (0=Approved, 1=Review, 2=Reject, -1=Fraud Service Unavailable, -2=Fraud Service was not able to perform its fraud check)</description>
+                </attribute>
+                <attribute qualifier="TR_FRAUD_SCORE" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>The total transaction fraud score.</description>
+                </attribute>
+				<attribute qualifier="DUPLICATE_ORDER" type="java.lang.Boolean">
+	               <description>Identifier for possible duplicate orders</description>
+	               <persistence type="property" />
+	               <defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+				<!-- ########################################################################################
+				# END - Fraud response data
+				############################################################################################# -->
+
+				<!-- ########################################################################################
+				# BEGIN - XiPay Response Code
+				############################################################################################# -->
+                <attribute qualifier="XiPayResponseCode" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>This field contains the XiPay gateway response code (status code)</description>
+                </attribute>
+				<!-- ########################################################################################
+				# END - XiPay Response Code
+				############################################################################################# -->
+
+				<!-- ########################################################################################
+				# BEGIN - Authorization response data for SAP order replication
+				############################################################################################# -->
+                <attribute qualifier="AUTRA" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>AUTRA - Authorization reference number, XiPay transaction id</description>
+                </attribute>
+                <attribute qualifier="AUTWR" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>AUTWR - Authorized amount</description>
+                </attribute>
+                <attribute qualifier="AUNUM" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>AUNUM - Authorization code</description>
+                </attribute>
+                <attribute qualifier="REACT" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>REACT - Authorization status code: A=authorized, B=communication error, C=declined</description>
+                </attribute>
+                <attribute qualifier="RCAVR" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>RCAVR - AVS check response code</description>
+                </attribute>
+                <attribute qualifier="RCAVA" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>RCAVA - AVS address response code</description>
+                </attribute>
+                <attribute qualifier="RCAVZ" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>RCAVZ - AVS Zip code response code</description>
+                </attribute>
+                <attribute qualifier="RCRSP" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>RCRSP - Authorization response code</description>
+                </attribute>
+                <attribute qualifier="RCCVV" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>RCCVV - CVV response code</description>
+                </attribute>
+                <attribute qualifier="RTEXT" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>RTEXT - Authorization response message</description>
+                </attribute>
+                <attribute qualifier="MERCH" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>MERCH - XiPay routing merchant id</description>
+                </attribute>
+                <attribute qualifier="CCINS" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>CCINS - Authorization card type</description>
+                </attribute>
+                <attribute qualifier="CCWAE" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>CCWAE - Authorization currency code</description>
+                </attribute>
+                <attribute qualifier="AUTH_DATE" type="java.lang.String">
+					<modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>Authoriztion Date of the transaction</description>
+                </attribute>
+                 <attribute qualifier="AUTH_TIME" type="java.lang.String">
+					<modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>Authoriztion Time of the transaction</description>
+                </attribute>
+				<!-- ########################################################################################
+				# END - Authorization response data for SAP order replication
+				############################################################################################# -->
+				
+				<!-- ########################################################################################
+				# BEGIN - Authorization response data for 3DS (Payer authentication) transaction
+				############################################################################################# -->
+				<attribute qualifier="TR_ECOMM_3DSVERSION" type="java.lang.String">
+					<modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>The 3DS version used during Payer Authentication</description>
+                </attribute>
+				<attribute qualifier="TR_ECOMM_IND" type="java.lang.String">
+					<modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>The raw ECI data from payer authentication, if you received any for the transaction.</description>
+                </attribute>
+				<attribute qualifier="TR_ECOMM_PARESSTATUS" type="java.lang.String">
+					<modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>Payer authentication response status received in response to the consumer's 3D secure authentication attempt.</description>
+                </attribute>
+				<attribute qualifier="TR_ECOMM_VBVCAVV" type="java.lang.String">
+					<modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>Cardholder authentication verification value (CAVV).</description>
+                </attribute>
+				<attribute qualifier="TR_ECOMM_VBVXID" type="java.lang.String">
+					<modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>Defines the Verified by Visa Transaction Id.</description>
+                </attribute>
+				<attribute qualifier="TR_ECOMM_XID" type="java.lang.String">
+					<modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>Transaction Id for 3DS2</description>
+                </attribute>
+				<!-- ########################################################################################
+				# END - Authorization response data for 3DS (Payer authentication) transaction
+				############################################################################################# -->
+				
+            </attributes>
+        </itemtype>
+
+	</itemtypes>
+
+</items>

@@ -1,0 +1,11 @@
+<ITransactionHeader>
+  <amount>31.99000000</amount>
+  <batchID>[y]105324012</batchID>
+  <cardPresent>0</cardPresent>
+  <modifiedStatus>0</modifiedStatus>
+  <packetOperation>0</packetOperation>
+  <settlementAmount>31.99000000</settlementAmount>
+  <statusCode>0</statusCode>
+  <transactionID>105324012</transactionID>
+  <____hashCodeCalc>false</____hashCodeCalc>
+</ITransactionHeader>

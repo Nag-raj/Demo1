@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<StandaloneRefundRequest>
+	<merchantTransactionCode>aperez@paymetric.com-cdb3a73e-a1d8-4d60-8020-fc4dce75c5ef-REFUND-2</merchantTransactionCode>
+	<subscriptionID>105322970</subscriptionID>
+	<cronJob>true</cronJob>
+	<billTo>
+		<city>Houston</city>
+		<country>JP</country>
+		<firstName>Alexander</firstName>
+		<lastName>Perez</lastName>
+		<phoneNumber>713-568-4471</phoneNumber>
+		<postalCode>03108</postalCode>
+		<state>Texas</state>
+		<street1>19500 State Hwy 249</street1>
+		<street2>Suite 300</street2>
+	</billTo>
+	<card>
+		<cardNumber>-E803-1111-7YJRYYCGTZTV0G</cardNumber>
+		<expirationMonth>01</expirationMonth>
+		<expirationYear>2020</expirationYear>
+		<cardHolderFullName>Alexander Perez</cardHolderFullName>
+		<issueNumber>0</issueNumber>
+		<issueMonth>01</issueMonth>
+		<issueYear>2020</issueYear>
+		<cardType>001</cardType>
+		<billingInfo>
+			<cardHolderName1>Alexander</cardHolderName1>
+			<cardHolderName2>Perez</cardHolderName2>
+			<cardHolderName>Alexander Perez</cardHolderName>
+			<cardHolderAddress1>19500 State Hwy 249</cardHolderAddress1>
+			<cardHolderAddress2>Suite 300</cardHolderAddress2>
+			<cardHolderCity>Houston</cardHolderCity>
+			<cardHolderCountry>US</cardHolderCountry>
+			<cardHolderState>TX</cardHolderState>
+			<cardHolderZip>03108</cardHolderZip>
+		</billingInfo>
+<!--		<cv2Number>123</cv2Number>-->
+	</card>
+	<currency>JPY</currency>
+	<totalAmount>-29.38</totalAmount>
+</StandaloneRefundRequest>

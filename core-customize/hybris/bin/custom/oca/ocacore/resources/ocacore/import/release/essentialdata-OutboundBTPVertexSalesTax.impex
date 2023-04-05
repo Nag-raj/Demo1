@@ -1,0 +1,65 @@
+INSERT_UPDATE IntegrationObject; code[unique = true];
+                               ; OutboundTax
+
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique = true]; code[unique = true]          ; type(code)                   ; root[default = false]
+                                   ; OutboundTax                 ; VertexRequest                                       ; VertexRequest                ; true
+                                   ; OutboundTax                 ; BTPOutboundVertexLogin                              ; BTPOutboundVertexLogin                        ;
+                                   ; OutboundTax              ; BTPOutboundQuotationVertexRequest                  ; BTPOutboundQuotationVertexRequest                 ;
+                                   ; OutboundTax              ; BTPOutboundSellerVertexRequest                     ; BTPOutboundSellerVertexRequest                    ;
+                                   ; OutboundTax              ; BTPOutboundPhysicalOriginVertexRequest             ; BTPOutboundPhysicalOriginVertexRequest            ;
+                                   ; OutboundTax              ; BTPOutboundAdministrativeOriginVertexRequest       ; BTPOutboundAdministrativeOriginVertexRequest      ;
+                                   ; OutboundTax              ; BTPOutboundCustomerVertexRequest                   ; BTPOutboundCustomerVertexRequest                  ;
+                                   ; OutboundTax              ; BTPOutboundDestinationVertexRequest                ; BTPOutboundDestinationVertexRequest               ;
+                                   ; OutboundTax              ; BTPOutboundAdministrativeDestinationVertexRequest  ; BTPOutboundAdministrativeDestinationVertexRequest ;
+                                   ; OutboundTax              ; BTPOutboundVertexRequestLineItem                   ; BTPOutboundVertexRequestLineItem                  ;
+
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]
+                                            ; OutboundTax:VertexRequest                                          ; login                       ; VertexRequest:login                                                                ; OutboundTax:BTPOutboundVertexLogin                                         ;
+                                            ; OutboundTax:BTPOutboundVertexLogin                                 ; userName                    ; BTPOutboundVertexLogin:userName                                                    ;                                                           ;true
+                                            ; OutboundTax:BTPOutboundVertexLogin                                 ; password                    ; BTPOutboundVertexLogin:password                                                    ;                                                           ;
+                                            ; OutboundTax:VertexRequest                                          ; quotationRequest            ; VertexRequest:quotationRequest                                                     ; OutboundTax:BTPOutboundQuotationVertexRequest                              ;true
+
+                                            ; OutboundTax:BTPOutboundQuotationVertexRequest                ; seller                                   ; BTPOutboundQuotationVertexRequest:seller                                     ; OutboundTax:BTPOutboundSellerVertexRequest                       ;true
+                                            ; OutboundTax:BTPOutboundQuotationVertexRequest                ; customer                                 ; BTPOutboundQuotationVertexRequest:customer                                   ; OutboundTax:BTPOutboundCustomerVertexRequest                     ;
+                                            ; OutboundTax:BTPOutboundQuotationVertexRequest                ; lineItems                                ; BTPOutboundQuotationVertexRequest:lineItems                                  ; OutboundTax:BTPOutboundVertexRequestLineItem                     ;
+
+                                            ; OutboundTax:BTPOutboundSellerVertexRequest                   ; company                                   ; BTPOutboundSellerVertexRequest:company                                       ;                                                                       ;true
+                                            ; OutboundTax:BTPOutboundSellerVertexRequest                   ; physicalOrigin                            ; BTPOutboundSellerVertexRequest:physicalOrigin                                ; OutboundTax:BTPOutboundPhysicalOriginVertexRequest               ;
+                                            ; OutboundTax:BTPOutboundSellerVertexRequest                   ; administrativeOrigin                      ; BTPOutboundSellerVertexRequest:administrativeOrigin                          ; OutboundTax:BTPOutboundAdministrativeOriginVertexRequest         ;
+
+                                            ; OutboundTax:BTPOutboundPhysicalOriginVertexRequest           ; city                                    ;  BTPOutboundPhysicalOriginVertexRequest:city                                 ;                                                                       ;true
+                                            ; OutboundTax:BTPOutboundPhysicalOriginVertexRequest           ; state                                   ;  BTPOutboundPhysicalOriginVertexRequest:state                                ;                                                                       ;
+                                            ; OutboundTax:BTPOutboundPhysicalOriginVertexRequest           ; postalCode                              ; BTPOutboundPhysicalOriginVertexRequest:postalCode                            ;                                                                       ;
+
+
+                                            ; OutboundTax:BTPOutboundAdministrativeOriginVertexRequest      ; city                                     ; BTPOutboundAdministrativeOriginVertexRequest:city                          ;                                                                       ;true
+                                            ; OutboundTax:BTPOutboundAdministrativeOriginVertexRequest      ; state                                    ; BTPOutboundAdministrativeOriginVertexRequest:state                         ;                                                                       ;
+                                            ; OutboundTax:BTPOutboundAdministrativeOriginVertexRequest      ; postalCode                               ; BTPOutboundAdministrativeOriginVertexRequest:postalCode                    ;                                                                       ;
+                                            ; OutboundTax:BTPOutboundAdministrativeOriginVertexRequest      ; country                                  ; BTPOutboundAdministrativeOriginVertexRequest:country                       ;                                                                       ;
+
+                                            ; OutboundTax:BTPOutboundCustomerVertexRequest                  ; customerCode                              ; BTPOutboundCustomerVertexRequest:customerCode                              ;                                                                       ;true
+                                            ; OutboundTax:BTPOutboundCustomerVertexRequest                  ; destination                               ; BTPOutboundCustomerVertexRequest:destination                               ; OutboundTax:BTPOutboundDestinationVertexRequest                  ;
+                                            ; OutboundTax:BTPOutboundCustomerVertexRequest                  ; administrativeDestination                 ; BTPOutboundCustomerVertexRequest:administrativeDestination                 ; OutboundTax:BTPOutboundAdministrativeDestinationVertexRequest    ;
+
+                                            ; OutboundTax:BTPOutboundDestinationVertexRequest              ; city                                       ; BTPOutboundDestinationVertexRequest:city                                    ;                                                                       ;true
+                                            ; OutboundTax:BTPOutboundDestinationVertexRequest              ; mainDivision                               ; BTPOutboundDestinationVertexRequest:mainDivision                            ;                                                                       ;
+                                            ; OutboundTax:BTPOutboundDestinationVertexRequest              ; postalCode                                 ; BTPOutboundDestinationVertexRequest:postalCode                              ;                                                                       ;
+                                            ; OutboundTax:BTPOutboundDestinationVertexRequest              ; country                                    ; BTPOutboundDestinationVertexRequest:country                                 ;                                                                       ;
+
+                                            ; OutboundTax:BTPOutboundAdministrativeDestinationVertexRequest      ; city                                    ; BTPOutboundAdministrativeDestinationVertexRequest:city                    ;                                                                       ;true
+                                            ; OutboundTax:BTPOutboundAdministrativeDestinationVertexRequest      ; mainDivision                            ; BTPOutboundAdministrativeDestinationVertexRequest:mainDivision            ;                                                                       ;
+                                            ; OutboundTax:BTPOutboundAdministrativeDestinationVertexRequest      ; postalCode                              ; BTPOutboundAdministrativeDestinationVertexRequest:postalCode              ;                                                                       ;
+                                            ; OutboundTax:BTPOutboundAdministrativeDestinationVertexRequest      ; country                                 ; BTPOutboundAdministrativeDestinationVertexRequest:country                 ;                                                                       ;
+
+
+                                            ; OutboundTax:BTPOutboundVertexRequestLineItem                       ; materialCode                                ; BTPOutboundVertexRequestLineItem:materialCode                          ;                                                                       ;true
+                                            ; OutboundTax:BTPOutboundVertexRequestLineItem                       ; product                                      ; BTPOutboundVertexRequestLineItem:product                              ;                                                                       ;
+                                            ; OutboundTax:BTPOutboundVertexRequestLineItem                       ; quantity                                     ; BTPOutboundVertexRequestLineItem:quantity                             ;                                                                       ;
+                                            ; OutboundTax:BTPOutboundVertexRequestLineItem                       ; unitOfMeasure                                ; BTPOutboundVertexRequestLineItem:unitOfMeasure                       ;                                                                       ;
+                                            ; OutboundTax:BTPOutboundVertexRequestLineItem                       ; extendedPrice                                ; BTPOutboundVertexRequestLineItem:extendedPrice                       ;                                                                       ;
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+#### Sales representative. Limited to a list of customers their support only. ####
+INSERT_UPDATE UserGroup; UID[unique = true]  ; groups(uid)[mode = append]; description                                                                                                 ; name
+                       ; ocacommercesalesrep ; ocacommercecustomercare   ; Sales representative. Limited to a list of customers their support only. Extends oca-commerce-customer-care ; Sales representative
+
+INSERT_UPDATE SearchRestriction; code[unique = true]     ; name[lang = en]               ; query                                                                                                                                                ; principal(UID)      ; restrictedType(code); active; generate
+                               ; ocaemployee_restriction ; Restrict employees visibility ; EXISTS ({{ SELECT {pk} FROM {PrincipalGroupRelation} WHERE {source}={item:pk} AND {target} IN ( ?session.user.groups ) }} ) AND ( {item:active} = 1) ; ocacommercesalesrep ; B2BCustomer         ; true  ; true
+

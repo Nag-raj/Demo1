@@ -1,0 +1,121 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE xml>
+
+<htmlSection class="merchant_paycontent" xmlns="Paymetric:XiIntercept:MerchantHtmlPacketModel">
+<!-- 	
+	<xiProperties error-class="xiInputError">
+		<errorTooltip class="errorTooltip" show-effect="fadeIn"
+			show-duration="5000" hide-effect="fadeOut" hide-duration="5000" />
+	</xiProperties>
+	
+	 -->
+	<cardDropdownSection>
+		<!-- <tag name='div' class='PaymentDetailHeader'>Enter your Payment Information</tag> -->
+		
+		<tag name="div">
+			<label for="cardType" text="Card Type" /> 
+			<ddlCardType id="cd" default-text="Select Card">
+				<items>
+				
+				<item for="american express" text="Amex">
+				
+                   <validateFor> 
+                          <validate for="cvv" minlength="4" maxlength="4" maxlength-msg="Amex cvv must be 4 digits" minlength-msg="Amex cvv must be 4 digits"/> 
+                   </validateFor> 
+                 </item>
+                 <item for="mastercard" text="Master-Card" >
+                        <validateFor> 
+                               <validate for="cvv" minlength="3" maxlength="3" maxlength-msg="Master Card cvv must be 3 digits" minlength-msg="Master Card cvv must be 3 digits"/> 
+                        </validateFor> 
+                 </item>
+                 <item for="visa" text="Visa">
+                        <validateFor> 
+                               <validate for="cvv" minlength="3" maxlength="3" maxlength-msg="Visa cvv must be 3 digits" minlength-msg="Visa cvv must be 3 digits"/> 
+                        </validateFor> 
+                 </item>
+                 <item for="maestro" text="Maestro">
+                        <validateFor> 
+                               <validate for="cvv" minlength="3" maxlength="3" maxlength-msg="Maestro cvv must be 3 digits" minlength-msg="Maestro cvv must be 3 digits"/> 
+                        </validateFor> 
+                 </item>
+                 
+                  <item for="jcb" text="JCB">
+                        <validateFor> 
+                               <validate for="cvv" minlength="3" maxlength="3" maxlength-msg="Maestro cvv must be 3 digits" minlength-msg="JCB cvv must be 3 digits"/> 
+                        </validateFor> 
+                 </item>
+
+				</items>
+			</ddlCardType>
+			<validationMsg for='cardType' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			
+			<label for='cardNumber' text='Card Number'  />
+			<tboxCardNumber tokenize='true'  required-msg="Please Enter Your Card Number." number="true" number-msg="Please Enter Numbers only."/>
+			<validationMsg for='cardNumber' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			<label for='cardholderName' text='Name on Card' />
+			<tboxCardHolderName required-msg="Please Enter Name on Card."/>
+			<validationMsg for='cardholderName' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			<label for='startMonth' text='Start Date' />
+			<ddlStartMonth default-text="month" display-format="MMM"
+				class='merchant_combos' required='false' />
+			
+			<ddlStartYear default-text="year" class='merchant_combos'
+				years-to-display='10' required='false' start-date='true' />
+			<validationMsg for='startYear' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			<label for='expMonth' text='Exp Date' />
+			<ddlExpMonth default-text="month" class='merchant_combos'
+				required='false' />
+			<ddlExpYear default-text="year" class='merchant_combos'
+				years-to-display='10' required='false' exp-date='true' />
+			<validationMsg for='expYear' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			<label for="cvv" text="Card CVV" />
+			<tboxCvv digits-only="true" digits-only-msg="Only digits are allowed in CVV field." required-msg="Please Enter CVV."/>
+			<validationMsg for='cvv' class='valmsg' />
+			<htmlCvvHelp name='div' raise-click='1'></htmlCvvHelp>
+
+		</tag>
+	</cardDropdownSection>
+	
+	
+
+</htmlSection>
+
+
+<!-- 
+You can set a pattern per card type.  Here is an example
+
+<ddlCardType id="cd">
+        <items>
+          <item for="american express">
+            <validateFor>
+              <validateCardNumber pattern-msg="Bad card number" pattern="^3[47][0-9]{13}$" />
+            </validateFor>
+          </item>
+          <item for="mastercard"/>
+          <item for="visa">
+            <validateFor>
+              <validateCardNumber pattern-msg="Bad card number" pattern="^4[0-9]{12}(?:[0-9]{3})?$" />
+            </validateFor>
+          </item>
+          <item for="maestro"/>
+          <customItem for="myCard" text="My Card"/>
+          <customItem for="myCard2" text="My Card 2"/>
+        </items>
+</ddlCardType>
+
+ -->

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/acceleratorservices"/>
+	<classpathentry kind="lib" path="/acceleratorservices/classes"/>
+	<classpathentry kind="src" output="classes" path="testsrc"/>
+	<classpathentry kind="lib" path="lib/XiInterceptSDK-v3.10.1.14.jar" sourcepath="/XiInterceptSDK-v3.6.1.8/src"/>
+	<classpathentry kind="src" output="classes" path="src"/>
+	<classpathentry kind="lib" path="/acceleratorservices/resources"/>
+	<classpathentry kind="lib" path="resources"/>
+	<classpathentry kind="lib" path="/acceleratorservices/src"/>
+	<classpathentry kind="lib" path="/payment/bin"/>
+	<classpathentry exported="true" kind="src" path="/acceleratorcms"/>
+	<classpathentry exported="true" kind="src" path="/payment"/>
+	<classpathentry kind="lib" path="/acceleratorservices/gensrc"/>
+	<classpathentry kind="src" path="gensrc"/>
+	<classpathentry kind="src" path="web/src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/platform"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/displaytag-1.2.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/basecommerce"/>
+	<classpathentry kind="lib" path="lib/XiPayWSLib-1.25.jar" sourcepath="/XiPayWSLib/src"/>
+	<classpathentry kind="lib" path="/acceleratorservices/lib"/>
+	<classpathentry exported="true" kind="src" path="/commerceservices"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/jstl-impl-1.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="eclipsebin"/>
+</classpath>

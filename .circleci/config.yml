@@ -1,0 +1,51 @@
+version: 2.1
+orbs:
+  python: circleci/python@1.5.0
+jobs:
+  sonar-scan:
+    docker:
+      - image: motnag/sapimage_2211
+    steps:
+      - checkout
+      - run:
+          name: Sonar scan 
+          command: |
+            cp -rf core-customize/hybris/bin/custom /opt/hybris/bin/
+            cp -rf core-customize/hybris/config/localdev.properties /opt/hybris/config/local.properties
+            cp -rf core-customize/hybris/config/localextensions.xml /opt/hybris/config
+            chmod -R 777 /opt/hybris/bin/platform
+            cd /opt/hybris/bin/platform
+            ./setantenv.sh
+            ant clean all 
+      - run:
+          name: Run Sonarscanner
+          command: |
+            cd /opt/hybris/bin/platform
+            export SONAR_SCANNER_OPTS="-Xmx2048m"
+            ant junit-coverage
+            ant sonarcheck 
+  build:
+    docker:
+      - image: cimg/python:3.10.2
+    steps:
+      - checkout
+      - run:
+          name: Building SAP code
+           
+          command: |
+            python3 -m pip install requests
+            BUILD_NUMBER="${CIRCLE_BUILD_NUM}"
+            BUILD_NAME=$(echo R1_`date --date='+05 hour 30 minutes' '+%Y%m%d'`.${BUILD_NUMBER})
+            echo $BUILD_NAME
+            BUILD_CODE=$(python3.8 V2_build.py build develop $BUILD_NAME)
+          no_output_timeout: 45m	          
+      
+workflows:
+  build:
+    jobs:
+      - sonar-scan
+      - build:
+          requires:
+            - sonar-scan
+      
+

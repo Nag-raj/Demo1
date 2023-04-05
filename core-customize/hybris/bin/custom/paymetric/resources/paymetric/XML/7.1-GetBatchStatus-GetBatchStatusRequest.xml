@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<GetBatchStatusRequest>
+  <merchantTransactionCode>[y]2018-08-14T13:04:07.254</merchantTransactionCode>
+  <strBatchID>[y]2018-08-14T13:04:07.254</strBatchID>
+</GetBatchStatusRequest>

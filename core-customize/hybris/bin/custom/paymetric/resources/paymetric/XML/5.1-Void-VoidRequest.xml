@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<VoidRequest>
+	<merchantTransactionCode>aperez@paymetric.com-1e19e564-9033-4896-8ca8-00311b29c21a-CANCEL-2</merchantTransactionCode>
+	<requestId>105322970</requestId>
+	<requestToken>{&quot;AUTRA&quot;:&quot;111769438&quot;,&quot;AUTWR&quot;:&quot;6453.6400&quot;,&quot;AUNUM&quot;:&quot;OK6349&quot;,&quot;REACT&quot;:&quot;A&quot;,&quot;RTEXT&quot;:&quot;APPROVED&quot;,&quot;RCAVR&quot;:&quot;Z&quot;,&quot;RCAVA&quot;:&quot;&quot;,&quot;RCAVZ&quot;:&quot;&quot;,&quot;RCRSP&quot;:&quot;00&quot;,&quot;RCCVV&quot;:&quot;X&quot;,&quot;MERCH&quot;:&quot;FDMS_USD&quot;,&quot;CCINS&quot;:&quot;VI&quot;,&quot;CCWAE&quot;:&quot;USD&quot;}</requestToken>
+	<paymentProvider>paymetric</paymentProvider>
+</VoidRequest>

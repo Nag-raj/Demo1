@@ -1,0 +1,109 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE xml>
+<htmlSection class="merchant_paycontent"
+	xmlns="Paymetric:XiIntercept:MerchantHtmlPacketModel">
+	
+	<xiProperties error-class="xiInputError">
+		<errorTooltip class="errorTooltip" show-effect="fadeIn"
+			show-duration="5000" hide-effect="fadeOut" hide-duration="5000" />
+	</xiProperties>
+	
+	<paymentOptionRadioSection>
+		<tag name='div' class='PaymentDetailHeader'>Select a payment option</tag>
+		<label text="echeck" for="echeck" />
+		<radPaymentOption for="echeck" />
+		<label text="credit card" for="card" />
+		<radPaymentOption for="card" />
+	</paymentOptionRadioSection>
+
+	<cardDropdownSection>
+		<tag name='div' class='PaymentDetailHeader'>Enter your credit card information</tag>
+		
+		<tag name="div">
+			<label for="cardType" text="card type" />
+			<ddlCardType id="cd">
+				<items>
+					<item for="american express" />
+					<item for="mastercard" />
+					<item for="visa" />
+					<item for="maestro" />
+				</items>
+			</ddlCardType>
+		</tag>
+		
+		<tag name='div'>
+			<label for='cardNumber' text='card number' />
+			<tboxCardNumber tokenize='true' />
+			<validationMsg for='cardNumber' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			<label for='cardholderName' text='name on card' />
+			<tboxCardHolderName />
+			<validationMsg for='cardholderName' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			<label for='startMonth' text='start date' />
+			<ddlStartMonth default-text="month" display-format="MMM"
+				class='merchant_combos' required='false' />
+			<ddlStartYear default-text="year" class='merchant_combos'
+				years-to-display='10' required='false' start-date='true' />
+			<validationMsg for='startYear' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			<label for='expMonth' text='exp date' />
+			<ddlExpMonth default-text="month" class='merchant_combos'
+				required='false' />
+			<ddlExpYear default-text="year" class='merchant_combos'
+				years-to-display='10' required='false' exp-date='true' />
+			<validationMsg for='expYear' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			<label for="cvv" text="card cvv" />
+			<tboxCvv />
+			<validationMsg for='cvv' class='valmsg' />
+			<htmlCvvHelp name='div' raise-click='1'></htmlCvvHelp>
+
+		</tag>
+	</cardDropdownSection>
+
+	<echeckRadioSection>
+		<tag name='div' class='PaymentDetailHeader'>Enter your bank information</tag>
+		
+		<tag name='div'>
+			<validationMsg for='accountType' class='valmsg-ac-type' />
+			<label for="checking" />
+			<radAccountType for="checking" />
+			<label for="savings" />
+			<radAccountType for="savings" />
+		</tag>
+		
+		<tag name='div'>
+			<label for="accountNumber" text="account number" />
+			<tboxAccountNumber tokenize="true" error-msg-style="imageTooltip" />
+			<validationMsg for='accountNumber' error-class='valmsg-img' />
+		</tag>
+		
+		<tag name='div'>
+			<label for="routingNumber" text="routing number" />
+			<tboxRoutingNumber error-msg-style="imageTooltip" />
+			<validationMsg for='routingNumber' error-class='valmsg-img' />
+		</tag>
+		
+		<tag name='div'>
+			<label for="nameOnAccount" text="name on account" />
+			<tboxNameOnAccount error-msg-style="imageTooltip" />
+			<validationMsg for='nameOnAccount' error-class='valmsg-img' />
+		</tag>
+		
+		<tag name='div'>
+			<label for="bankName" text="bank name" />
+			<tboxBankName error-msg-style="imageTooltip" />
+			<validationMsg for='bankName' error-class='valmsg-img' />
+		</tag>
+	</echeckRadioSection>
+
+</htmlSection>

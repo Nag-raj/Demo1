@@ -1,0 +1,9 @@
+#### Access to Customer Data via Backoffice ####
+INSERT_UPDATE UserGroup; UID[unique = true]      ; groups(uid)[mode = append]; description                            ; name
+                       ; ocacommercecustomercare ; employeegroup             ; Access to Customer Data via Backoffice ; Customer Access Group
+
+$START_USERRIGHTS       ; ; ; ; ; ; ; ; ; ;
+Type      ; UID                     ; MemberOfGroups ; Password ; Target   ; read ; change ; create ; remove ; change_perm ;
+UserGroup ; ocacommercecustomercare ;                ;          ;          ;      ;        ;        ;        ;             ;
+          ;                         ;                ;          ; Customer ; +    ; +      ; +      ; +      ; +           ;
+$END_USERRIGHTS         ; ; ; ; ;

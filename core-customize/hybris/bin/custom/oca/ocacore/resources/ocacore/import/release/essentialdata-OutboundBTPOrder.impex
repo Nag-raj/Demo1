@@ -1,0 +1,15 @@
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]; autoCreate[default = false]
+                                            ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder         	; shippingCarrierCode               ; SAPCpiOutboundOrder:shippingCarrierCode                   ;                                               ; 	;
+                                            ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder         	; deliveryOptionCode                ; SAPCpiOutboundOrder:deliveryOptionCode                    ;                                               ; 	;
+                                            ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder         	; additionalAddressLine             ; SAPCpiOutboundOrder:additionalAddressLine                 ;                                               ; 	;
+
+                                            ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder         	; sapCpiHeavyOrderQuestions	        ; SAPCpiOutboundOrder:sapCpiHeavyOrderQuestions	            ; 												; 	;
+
+                                            ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder         	; sapCpiOutboundCardPayments	; SAPCpiOutboundOrder:sapCpiOutboundCardPayments	; OutboundOMMOrderOMSOrder:SAPCpiOutboundCardPayment			; 	;
+                                            ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder          ; sapCpiOutboundOrderItems  ; SAPCpiOutboundOrder:sapCpiOutboundOrderItems  ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItem 			;   ;
+
+                                            ; OutboundOMMOrderOMSOrder:SAPCpiOutboundCardPayment 			; tokenizedCCNumber         ; SAPCpiOutboundCardPayment:tokenizedCCNumber       		;                                           ; 	;
+                                            ; OutboundOMMOrderOMSOrder:SAPCpiOutboundCardPayment 			; transactionId             ; SAPCpiOutboundCardPayment:transactionId           		;                                           ; true	;
+
+                                            ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItem 			; lineItemPrice             ; SAPCpiOutboundOrderItem:lineItemPrice           		;                                           ; 	;
+                                            ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItem 			; freightPrice              ; SAPCpiOutboundOrderItem:freightPrice           		;                                           ; 	;

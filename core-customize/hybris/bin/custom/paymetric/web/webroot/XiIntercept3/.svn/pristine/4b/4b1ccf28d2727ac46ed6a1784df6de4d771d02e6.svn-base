@@ -1,0 +1,36 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE xml>
+<AliPayPostPacketModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Paymetric:XiIntercept:Alipay">
+<!--  <RedirectUri>http://localhost:8080/XiIntercept3_0_Java_18/xisecureresponse.jsp</RedirectUri>  --> 
+  <RedirectUri>http://localhost:8080/XiIntercept3/XIeCommerce3AliPayRS.jsp</RedirectUri>
+  <Amount>1600</Amount>
+  <TaxAmount>100</TaxAmount>
+  <ShippingAmount>100</ShippingAmount>
+  <CurrencyCode>840</CurrencyCode>
+  <OrderNumber>ABC123</OrderNumber>
+  <OrderDescription>Microcontroller</OrderDescription>
+  <TransactionMode>S</TransactionMode>
+  <Items>
+    <Item>
+      <Item_Name>Item 1</Item_Name>
+      <Item_Desc>Item 1 Desc</Item_Desc>
+      <Item_Price>500</Item_Price>
+      <Item_Quantity>1</Item_Quantity>
+      <Item_SKU>XYZ789</Item_SKU>
+    </Item>
+    <Item>
+      <Item_Name>Item 2</Item_Name>
+      <Item_Desc>Item 2 Desc</Item_Desc>
+      <Item_Price>250</Item_Price>
+      <Item_Quantity>2</Item_Quantity>
+      <Item_SKU>XYZ789</Item_SKU>
+    </Item>
+    <Item>
+      <Item_Name>Item 3</Item_Name>
+      <Item_Desc>Item 3 Desc</Item_Desc>
+      <Item_Price>500</Item_Price>
+      <Item_Quantity>1</Item_Quantity>
+      <Item_SKU>XYZ789</Item_SKU>
+    </Item>
+  </Items>
+</AliPayPostPacketModel>

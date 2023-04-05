@@ -1,0 +1,10 @@
+<CaptureRequest>
+  <merchantTransactionCode>aperez@paymetric.com-cdb3a73e-a1d8-4d60-8020-fc4dce75c5ef-CAPTURE-2</merchantTransactionCode>
+  <requestId>105322970</requestId>
+  <requestToken>{"CCINS":"MC","MERCH":"RF_JPY_RT_VMA","AUTRA":"164675680","CCWAE":"JPY"}</requestToken>
+  <currency>USD</currency>
+  <totalAmount>31.99000000</totalAmount>
+  <paymentProvider>paymetric</paymentProvider>
+  <scheduleEnabled>false</scheduleEnabled>
+  <currentDateHour>2018-02-16.14</currentDateHour>
+</CaptureRequest>

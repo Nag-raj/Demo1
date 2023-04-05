@@ -1,0 +1,10 @@
+<CaptureResult>
+  <merchantTransactionCode>[y]110511976</merchantTransactionCode>
+  <requestId>110511976</requestId>
+  <requestToken>110511976</requestToken>
+  <reconciliationId>[y]110511976</reconciliationId>
+  <transactionStatus>ACCEPTED</transactionStatus>
+  <transactionStatusDetails>SUCCESFULL</transactionStatusDetails>
+  <totalAmount>126.1100</totalAmount>
+  <requestTime>2018-02-14T20:14:01.000</requestTime>
+</CaptureResult>

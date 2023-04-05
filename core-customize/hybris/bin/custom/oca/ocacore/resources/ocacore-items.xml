@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+    <collectiontypes>
+        <collectiontype code="plants" elementtype="Plant" autocreate="true" generate="true"
+                        type="list"/>
+        <collectiontype code="b2bNickNames" elementtype="B2BUnitNickName" autocreate="true" generate="true"
+                        type="list"/>
+        <collectiontype code="consentList" elementtype="B2BCustomerConsent" autocreate="true" generate="true"
+                        type="list"/>
+        <collectiontype code="partnerFunctionCodes" elementtype="PartnerFunctionCode" autocreate="true" generate="true"
+                        type="list"/>
+    </collectiontypes>
+
+
+    <enumtypes>
+
+        <enumtype code="ProductUsageType" autocreate="true" generate="true" dynamic="true">
+            <value code="REUSABLE"/>
+            <value code="DISPOSABLE"/>
+        </enumtype>
+
+        <enumtype code="ConsignmentStatus" autocreate="false" generate="true" dynamic="true">
+            <value code="BACK_ORDERED"/>
+            <value code="INVOICED"/>
+            <value code="BEING_PROCESSED"/>
+        </enumtype>
+
+        <enumtype code="ExternalMaterialGroup" autocreate="true" generate="true" dynamic="true">
+            <value code="ENERGY"/>
+            <value code="ET"/>
+            <value code="G_AND_R_EC"/>
+            <value code="G_AND_R_MIT"/>
+            <value code="G_AND_R_MP"/>
+            <value code="MSD"/>
+            <value code="RET_RET"/>
+            <value code="RE"/>
+            <value code="SURGENDO_AVI"/>
+            <value code="SURGENDO_ENT"/>
+            <value code="SURGENDO_SE"/>
+            <value code="SURGENDO_URO_GYN"/>
+            <value code="ENG"/>
+            <value code="ENT"/>
+
+            <value code="MP"/>
+            <value code="RSP"/>
+            <value code="RSP_CPL"/>
+            <value code="SE"/>
+            <value code="URO"/>
+            <value code="VM"/>
+
+
+        </enumtype>
+
+        <enumtype code="NonPurchasableDisplayStatus" autocreate="true" generate="true" dynamic="true">
+            <value code="CONTACT_SALES_REP"/>
+            <value code="TEMP_UNAVAILABLE"/>
+        </enumtype>
+
+        <enumtype code="AccessType" autocreate="true" generate="true" dynamic="true">
+            <value code="PLACE_ORDER_AND_CHECK_ORDERSTATUS"/>
+            <value code="CHECK_ORDERSTATUS"/>
+        </enumtype>
+
+        <enumtype code="InviteStatus" autocreate="true" generate="true" dynamic="true">
+            <value code="PROCESSED_BY_SAP_COMMERCE"/>
+            <value code="SEND_INVITE"/>
+            <value code="PROCESSED_BY_CRM"/>
+            <value code="PROCESSED_BY_CUSTOMER"/>
+        </enumtype>
+        
+        <enumtype code="EntryStatus" autocreate="true" generate="true" dynamic="true">
+            <value code="PARTIALLY_SHIPPPED" />
+            <value code="SHIPPED" />
+            <value code="BEING_PROCESSED"/>
+            <value code="CANCELLED"/>
+        </enumtype>
+
+        <enumtype code="PaymentTerm" autocreate="true" generate="true" dynamic="true">
+            <value code="NT01"/>
+            <value code="NA"/>
+        </enumtype>
+
+        <enumtype code="PartnerFunctionCode" autocreate="true" generate="true" dynamic="true">
+            <value code="SHIP_TO"/>
+            <value code="BILL_TO"/>
+            <value code="PAYER"/>
+            <value code="THIRD_PARTY_CARRIER"/>
+            <value code="CONTACT_PERSON"/>
+            <value code="SOLD_TO"/>
+            <value code="EMPLOYEE_RESPONSIBLE"/>
+        </enumtype>
+
+        <enumtype code="ConsentType" autocreate="true" generate="true" dynamic="true">
+            <value code="PURCHASE_AND_CHECK_ORDERSTATUS"/>
+            <value code="TERMS_OF_USE"/>
+        </enumtype>
+
+        <enumtype code="OrderStatus" autocreate="false" generate="false" dynamic="true">
+            <value code="PROCESSING"/>
+        </enumtype>
+
+        <enumtype code="ShippingMethodType" autocreate="true" generate="true" dynamic="true">
+            <value code="SHIP_BY_OLYMPUS"/>
+            <value code="THIRD_PARTY"/>
+        </enumtype>
+
+        <enumtype code="OrderSource" autocreate="true" generate="true" dynamic="true">
+            <value code="INTERNAL"/>
+            <value code="EXTERNAL"/>
+        </enumtype>
+
+    </enumtypes>
+
+    <relations>
+
+        <relation code="CRMCustomer2Groups" autocreate="true" localized="false">
+            <sourceElement qualifier="crmUser" type="CRMCustomerAccountInvite" cardinality="one" ordered="false">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="groups" type="PrincipalGroup" collectiontype="list" cardinality="many"
+                           ordered="false">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
+
+    </relations>
+
+    <itemtypes>
+
+        <!-- Add your item definitions here -->
+        <itemtype code="Product" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="usageType" type="ProductUsageType">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="externalMaterialGroup" type="ExternalMaterialGroup">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="modelNumber" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="salesOrg" type="SalesOrganization">
+                    <modifiers/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="materialGroup" type="java.lang.String">
+                    <modifiers/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="materialGroup4" type="java.lang.String">
+                    <modifiers/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="materialType" type="java.lang.String">
+                    <modifiers/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="generalItemCategory" type="java.lang.String">
+                    <modifiers/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="plant" type="plants">
+                    <modifiers read="true" write="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="distributionChainStatus" type="java.lang.String">
+                    <modifiers/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="grossWeight" type="java.lang.Double">
+                    <modifiers/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="grossWeightUnit" type="Unit">
+                    <modifiers/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="loadingGroup" type="java.lang.String">
+                    <modifiers/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="searchEnabled" type="boolean">
+                    <defaultvalue>false</defaultvalue>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="purchaseEnabled" type="boolean">
+                    <defaultvalue>false</defaultvalue>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="nonPurchasableDisplayStatus" type="NonPurchasableDisplayStatus">
+                    <modifiers/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="SalesOrganization" autocreate="true" generate="true">
+            <deployment table="SalesOrganization" typecode="11001"/>
+            <attributes>
+                <attribute qualifier="code" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+        <itemtype code="Plant" autocreate="true" generate="true">
+            <deployment table="Plant" typecode="11002"/>
+            <attributes>
+                <attribute qualifier="code" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="DeliveryOption" autocreate="true" generate="true">
+            <deployment table="DeliveryOption" typecode="11003"/>
+            <attributes>
+                <attribute qualifier="code" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="name" type="localized:java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="shippingCarrier" type="ShippingCarrier">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="ShippingCarrier" autocreate="true" generate="true">
+            <deployment table="ShippingCarrier" typecode="11004"/>
+            <attributes>
+                <attribute qualifier="code" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="name" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="ShippingAccount" extends="GenericItem" autocreate="true" generate="true">
+            <deployment table="ShippingAccount" typecode="11018"/>
+
+            <attributes>
+                <attribute qualifier="uid" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="accountReferenceNumber" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="shippingCarrierCode" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="B2BUnit" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="paymentTerm" type="PaymentTerm">
+                    <modifiers read="true" write="true" search="true"
+                               optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="B2BCustomer" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="accountPreferences" type="AccountPreferences">
+                    <modifiers read="true" write="true" search="true"
+                               optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+
+                <attribute qualifier="activationStatus" type="boolean">
+                    <modifiers read="true" write="true" search="true" optional="false"/>
+                    <defaultvalue>false</defaultvalue>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="pingUserId" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true"
+                               optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="contactNo" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true"
+                               optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="AccountPreferences" autocreate="true" generate="true">
+            <deployment table="AccountPreferences" typecode="11007"/>
+            <attributes>
+                <attribute qualifier="accessType" type="AccessType">
+                    <modifiers read="true" write="true" search="true"
+                               optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute autocreate="true" qualifier="consentList" type="consentList">
+                    <modifiers read="true" write="true" search="true" optional="true" partof="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute autocreate="true" qualifier="b2BUnitNickNames" type="b2bNickNames">
+                    <modifiers read="true" write="true" search="true" optional="true" partof="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="specialty" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true"
+                               optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="jobCategory" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true"
+                               optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="B2BUnitNickName" autocreate="true" generate="true">
+            <deployment table="B2BUnitNickName" typecode="11014"/>
+            <attributes>
+                <attribute qualifier="b2bUnitId" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="nickName" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="AbstractOrder" autocreate="false" generate="false">
+            <description>Extending AbstractOrder type with additional attributes.</description>
+            <attributes>
+                <attribute qualifier="selectedShippingMethod" type="ShippingMethodType">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="thirdPartyShippingAccount" type="ShippingAccount">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="erpOrderNumber" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="totalEntries" type="java.lang.Integer">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="heavyOrderQuestions" type="HeavyOrderQuestions">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="deliverySalesTax" type="java.lang.Double">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="deliveryOption" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="additionalAddressLine" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="contractPriceFetchedAt" type="java.util.Date">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="orderSource" type="OrderSource">
+                    <modifiers read="true" write="true" search="true" optional="false"/>
+                    <defaultvalue>em().getEnumerationValue("OrderSource", "EXTERNAL")</defaultvalue>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="HeavyOrderQuestions" autocreate="true" generate="true">
+            <deployment table="HeavyOrderQuestions" typecode="11006"/>
+            <attributes>
+                <attribute qualifier="largeTruckEntry" type="boolean">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="truckSize" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="liftAvailable" type="boolean">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="loadingDock" type="boolean">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="orderDeliveredInside" type="boolean">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="name" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="email" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="phoneNumber" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="AbstractOrderEntry" autocreate="false" generate="false">
+            <description>Extending AbstractOrderEntry type with additional attributes.</description>
+            <attributes>
+                <attribute qualifier="contractPriceFetchedAt" type="java.util.Date">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="contractPrice" type="java.lang.Double">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="listPrice" type="java.lang.Double">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="freightPrice" type="java.lang.Double">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="salesTax" type="java.lang.Double">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="entryStatus" type="EntryStatus">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                </attribute>
+               <attribute qualifier="backordered" type="boolean">
+                    <modifiers read="true" write="true" search="true" optional="true" />
+                    <persistence type="property" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="Consignment" extends="GenericItem" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="deliveryHold" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="CRMCustomerAccountInvite" autocreate="true" generate="true">
+            <deployment table="CRMCustomerAccountInvite" typecode="11013"/>
+            <attributes>
+                <attribute qualifier="defaultB2BUnit" type="B2BUnit">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="sessionLanguage" type="Language">
+                    <modifiers read="true" write="true" initial="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="customerID" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="contactID" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="loginDisabled" type="boolean">
+                    <modifiers read="true" write="true" search="true" optional="false"/>
+                    <defaultvalue>true</defaultvalue>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="email" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="sapIsReplicated" type="boolean">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <defaultvalue>false</defaultvalue>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="uid" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="name" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="title" type="Title">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="inviteStatus" type="InviteStatus">
+                    <modifiers read="true" write="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute autocreate="true" qualifier="addresses" type="AddressCollection">
+                    <modifiers read="true" write="true" search="false" optional="true" partof="false"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="inviteCount" type="java.lang.Integer">
+                    <modifiers read="true" write="true"/>
+                    <defaultvalue>0</defaultvalue>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="lastInviteTimeStamp" type="java.util.Date">
+                    <modifiers read="true" write="true"/>
+                    <persistence type="property"/>
+                </attribute>
+
+            </attributes>
+        </itemtype>
+
+        <itemtype code="CustomerAccountInviteProcess" extends="StoreFrontCustomerProcess"
+                  autocreate="true" generate="true">
+            <attributes>
+                <attribute qualifier="customerAccount" type="CRMCustomerAccountInvite">
+                    <persistence type="property"/>
+                    <description>CRMCustomerAccount</description>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="CRMCustomerAccountInviteCronJob" autocreate="true" generate="true" extends="CronJob"
+                  jaloclass="de.hybris.platform.cronjob.jalo.CRMCustomerAccountInviteCronJob">
+            <attributes>
+                <attribute qualifier="baseStore"
+                           type="BaseStore">
+                    <modifiers read="true" write="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+
+        <itemtype code="B2BUnit" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="partnerFunctionType" type="partnerFunctionCodes">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="B2BCustomerConsent" autocreate="true" generate="true">
+            <deployment table="B2BCustomerConsent" typecode="11017"/>
+            <attributes>
+                <attribute qualifier="consentGiven" type="boolean">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="consentType" type="ConsentType">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="Address" autocreate="false" generate="false">
+            <description>Extending Address type with additional attributes.</description>
+            <attributes>
+                <attribute qualifier="parentPartnerId" type="java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+    </itemtypes>
+</items>

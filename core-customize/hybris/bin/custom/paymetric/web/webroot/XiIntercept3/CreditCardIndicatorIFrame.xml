@@ -1,0 +1,48 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE xml>
+<htmlSection class="merchant_paycontent" xmlns="Paymetric:XiIntercept:MerchantHtmlPacketModel">
+	
+	<xiProperties error-class="xiInputError">
+		<errorTooltip class="errorTooltip" show-effect="fadeIn"
+			show-duration="5000" hide-effect="fadeOut" hide-duration="5000" />
+	</xiProperties>
+
+  <cardIndicatorSection>
+    <tag name="div">
+      <label for="cardholderName" text="Name on card"/>
+      <tboxCardHolderName class="xi-long-text"/>
+      <validationMsg for="cardholderName" class="valmsg"/>
+    </tag>
+    <tag name="div">
+      <label for="cardNumber" text="Card Number"/>
+      <tboxCardNumber tokenize="true" class="xi-long-text" mask-number="true"/>
+      <validationMsg for="cardNumber" class="valmsg"/>
+    </tag>
+    <tag name='div'>
+      <label for="cvv" text="Card CVV"/>
+	  <tboxCvv class="cvv" error-msg-style="imageTooltip" required="false"
+                   number="true" number-msg="CVV must be numeric."
+                   digits-only="true" digits-only-msg="CVV entry must be a whole number."
+                   minlength="3" minlength-msg="CVV must be 3 digits."
+                   maxlength="4" maxlength-msg="CVV must be 4 digits."/>
+      <validationMsg for='cvv' class='valmsg'/>
+    </tag>
+    <tag name="div">
+      <label for="expDate" text="Expiration date"/>
+      <ddlExpMonth default-text="month" class="date_combos" required="false" />
+      <ddlExpYear default-text="year" class="date_combos" years-to-display="10" required="false" exp-date="true"/>
+      <validationMsg for="expYear" class="valmsg"/>
+    </tag>
+	<tag name="div">
+	 <cardTypeIndicator class="cardIndicator">
+	   <items>
+	  <item for="visa" class="viIndicator" ></item>
+	  <item for="mastercard" class="mcIndicator" bin-range-expression="^5" ></item>
+	  <item for="american express" class="axIndicator" ></item>
+	  <item for="discover" class="diIndicator" ></item>
+	   </items>
+	 </cardTypeIndicator>
+	</tag>
+	</cardIndicatorSection>
+
+</htmlSection>

@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<context:component-scan base-package="com.olympus.oca" />
+
+
+
+    <bean parent="fieldSetLevelMapping" id="productWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.product.ProductWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="purchasable,stock,name,baseProduct,availableForPickup,code,url,price,purchaseEnabled,otherVariants,baseProductName,nonPurchasableDisplayStatus,description,modelNumber"/>
+                <entry key="DEFAULT"
+                       value="summary,averageRating,purchasable,stock(DEFAULT),description,variantMatrix(DEFAULT),name,baseOptions(DEFAULT),baseProduct,availableForPickup,variantOptions(DEFAULT),code,url,price(DEFAULT),numberOfReviews,manufacturer,categories(BASIC,name),priceRange,multidimensional,configuratorType,configurable,tags,purchaseEnabled,otherVariants(BASIC,description),baseProductName,nonPurchasableDisplayStatus,modelNumber"/>
+                <entry key="FULL"
+                       value="summary,productReferences(FULL),classifications(FULL),averageRating,purchasable,volumePrices(FULL),variantType,stock(FULL),description,variantMatrix(FULL),name,baseOptions(FULL),baseProduct,availableForPickup,variantOptions(FULL),reviews(FULL),code,url,price(FULL),numberOfReviews,manufacturer,volumePricesFlag,futureStocks(FULL),images(FULL),categories(FULL),potentialPromotions(FULL),priceRange,multidimensional,configuratorType,configurable,tags,purchaseEnabled,otherVariants(BASIC,description),baseProductName,nonPurchasableDisplayStatus,modelNumber"/>
+            </map>
+        </property>
+    </bean>
+	
+	 
+    <bean parent="fieldSetLevelMapping" id="purchaseOrderWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.product.PurchaseOrderWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="purchaseOrderNumber"/>
+                <entry key="DEFAULT"
+                       value="purchaseOrderNumber"/>
+                <entry key="FULL"
+                       value="purchaseOrderNumber"/>
+            </map>
+        </property>
+    </bean>
+
+    <alias name="defaultCommerceWebServicesFilterChainListV2" alias="commerceWebServicesFilterChainListV2" />
+    <util:list id="defaultCommerceWebServicesFilterChainListV2">
+        <!-- filter that catches and resolves exceptions thrown from other filters -->
+        <ref bean="exceptionTranslationFilter" />
+
+        <!-- generic platform filters -->
+        <ref bean="corsFilter"/>
+        <ref bean="log4jFilter" />
+        <ref bean="restSessionFilterV2" />
+
+        <!-- occ v2 WebAppMediaFilter -->
+        <ref bean="polyglotPersistenceCallbackFilter"/>
+        <ref bean="commerceWebServicesV2WebAppMediaFilter" />
+
+        <!-- commerceWebservices filters -->
+        <ref bean="baseSiteMatchingFilter" />
+
+        <!-- Security -->
+        <ref bean="springSecurityFilterChain" />
+        <ref bean="userMatchingFilter" />
+
+        <!-- Anonymous Consents -->
+        <ref bean="commerceWebServicesConsentFilterV2"/>
+
+        <!-- Matching filters -->
+        <ref bean="commerceWebServicesEurope1AttributesFilterV2" />
+        <ref bean="commerceWebServicesSessionLanguageFilterV2" />
+        <ref bean="commerceWebServicesSessionCurrencyFilterV2" />
+        <ref bean="cartMatchingFilter" />
+        <ref bean="ocaCartMatchingFilter" />
+
+        <!-- Guest Role -->
+        <ref bean="guestRoleFilterV2" />
+
+    </util:list>
+
+    <alias alias="ocaCartMatchingFilter" name="defaultOcaCartMatchingFilter" />
+    <bean id="defaultOcaCartMatchingFilter" class="de.hybris.platform.commercewebservices.core.v2.filter.CartMatchingFilter">
+        <property name="regexp" value="^/[^/]+/(?:users|orgUsers)/[^/]+/+[^/]+/carts/([^/]+)" />
+        <property name="cartLoaderStrategy" ref="cartLoaderStrategy" />
+        <property name="cartRefreshedByDefault" value="${commercewebservices.cart.refreshed.by.default}" />
+    </bean>
+
+    <!-- Changes for OEC-287 -->
+    <bean parent="fieldSetLevelMapping" id="cartWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.CartWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="code,guid,heavyOrder,heavyOrderQuestions,shipByGround,otherVariants,availablePaymentTypes"/>
+                <entry key="DEFAULT"
+                       value="BASIC,totalItems,totalPrice,totalPriceWithTax,entries(DEFAULT),heavyOrder,heavyOrderQuestions,shipByGround,deliveryCost,deliveryAddress(FULL),otherVariants,listPriceSubTotal,contractSavings,formattedListPriceSubTotal,formattedContractSavings,availablePaymentTypes(FULL)"/>
+                <entry key="FULL"
+                       value="totalUnitCount,store,appliedOrderPromotions(FULL),net,calculated,appliedVouchers(FULL),productDiscounts(FULL),totalDiscounts(FULL),subTotal(FULL),orderDiscounts(FULL),entries(FULL),totalPrice(FULL),site,deliveryMode(FULL),code,guid,paymentInfo(FULL),totalItems,totalPriceWithTax(FULL),deliveryItemsQuantity,totalTax(FULL),user(FULL),deliveryAddress(FULL),deliveryCost(FULL),name,description,savedBy,saveTime,expirationTime,heavyOrder,heavyOrderQuestions,
+                       shipByGround,otherVariants,availablePaymentTypes(FULL)"/>
+            </map>
+        </property>
+    </bean>
+    <bean parent="fieldSetLevelMapping" id="orderHistoryWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.order.OrderHistoryWsDTO" />
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="total,guid,status,statusDisplay,code,placed,purchaseOrderNumber,costCenter(DEFAULT),entries(DEFAULT),erpOrderNumber,totalEntries,creationTime,totalPrice,consignments(DEFAULT)" />
+				<entry key="DEFAULT"
+				       value="total(DEFAULT),guid,status,statusDisplay,code,placed,purchaseOrderNumber,costCenter(DEFAULT),entries(entryNumber,quantity,totalPrice,product,entryStatus,otherVariants(entryNumber,product,quantity,totalPrice,entryStatus)),erpOrderNumber,totalEntries,creationTime,totalPrice,consignments(FULL)" />
+				<entry key="FULL"
+				       value="total(FULL),guid,status,statusDisplay,code,placed,purchaseOrderNumber,costCenter(DEFAULT),entries(DEFAULT),erpOrderNumber,totalEntries,creationTime,totalPrice,consignments(FULL)" />
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldSetLevelMapping">
+		<property name="dtoClass"
+				  value="de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO" />
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC"
+					   value="name,uid,currency,displayUid,firstName,lastName,units,accountPreferences" />
+				<entry key="DEFAULT"
+					   value="name,uid,currency,displayUid,firstName,lastName,units,accountPreferences" />
+				<entry key="FULL"
+					   value="name,uid,currency,displayUid,firstName,lastName,units,accountPreferences" />
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldSetLevelMapping">
+		<property name="dtoClass"
+				  value="de.hybris.platform.b2bwebservicescommons.dto.company.B2BUnitWsDTO" />
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC"
+					   value="active,uid,name,parentOrgUnit,defaultUnit,nickName" />
+				<entry key="DEFAULT"
+					   value="active,uid,name,addresses(DEFAULT),approvers(DEFAULT),managers(DEFAULT),administrators(DEFAULT),customers(DEFAULT), approvalProcess(DEFAULT), parentOrgUnit, costCenters(DEFAULT),defaultUnit,nickName" />
+				<entry key="FULL"
+					   value="active,uid,name,addresses(FULL),approvers(FULL),managers(FULL),administrators(FULL),customers(FULL), approvalProcess(FULL), parentOrgUnit, costCenters(DEFAULT),defaultUnit,nickName" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="defaultOcaB2BUnitValidator"
+	alias="ocaB2BUnitValidator" />
+	<bean id="defaultOcaB2BUnitValidator"
+		class="com.olympus.oca.commerce.validators.OcaB2bUnitValidator" />
+
+	<alias name="defaultOcaQuestionsValidator" alias="ocaQuestionsValidator" />
+	<bean id="defaultOcaQuestionsValidator" class="com.olympus.oca.commerce.validators.OcaQuestionsValidator" />
+
+	<alias name="defaultOcaAccessTypeValidator" alias="ocaAccessTypeValidator" />
+	<bean id="defaultOcaAccessTypeValidator" class="com.olympus.oca.commerce.validators.OcaAccessTypeValidator" />
+
+	<alias name="defaultOcaAccountInviteValidator" alias="ocaAccountInviteValidator" />
+	<bean id="defaultOcaAccountInviteValidator" class="com.olympus.oca.commerce.validators.OcaAccountInviteValidator" >
+	<property name="configurationService" ref="configurationService"/>
+	<property name="ocaB2BCustomerFacade" ref="ocaB2BCustomerFacade"/>
+	</bean>
+
+	<alias name="ocaAccountVerificationValidator" alias="ocaAccountVerificationValidator" />
+	<bean id="ocaAccountVerificationValidator" class="com.olympus.oca.commerce.validators.OcaAccountVerificationValidator" >
+		<property name="ocaB2BCustomerFacade" ref="ocaB2BCustomerFacade"/>
+	</bean>
+
+	<alias name="OcaB2BPlaceOrderCartValidator" alias="b2BPlaceOrderCartValidator" />
+    <bean id="OcaB2BPlaceOrderCartValidator" class="com.olympus.oca.commerce.validators.OcaB2BPlaceOrderCartValidator" />
+
+	<alias name="defaultOcaPlaceOrderValidator" alias="ocaPlaceOrderValidator" />
+	<bean id="defaultOcaPlaceOrderValidator" class="com.olympus.oca.commerce.validators.OcaPlaceOrderParamsValidator" />
+
+	<alias name="defaultOcaCartAddressValidator" alias="b2BCartAddressValidator" />
+	<bean id="defaultOcaCartAddressValidator" class="com.olympus.oca.commerce.validators.OcaB2BCartAddressValidator" />
+
+	<alias name="defaultOcaCreateCustomerValidator" alias="ocaCreateCustomerValidator" />
+	<bean id="defaultOcaCreateCustomerValidator" class="com.olympus.oca.commerce.validators.OcaCreateCustomerValidator" >
+		<property name="b2bUnitService" ref="b2bUnitService"/>
+	</bean>
+
+	<bean parent="fieldSetLevelMapping"
+		id="facetWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"
+			value="de.hybris.platform.commercewebservicescommons.dto.search.facetdata.FacetWsDTO" />
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC"
+					value="multiSelect,category,values,visible,priority,name,code,topValues" />
+				<entry key="DEFAULT"
+					value="multiSelect,category,values(DEFAULT),visible,priority,name,code,topValues(DEFAULT)" />
+				<entry key="FULL"
+					value="multiSelect,category,values(FULL),visible,priority,name,code,topValues(FULL)" />
+			</map>
+		</property>
+	</bean>
+	<bean parent="fieldSetLevelMapping" id="categoryHierarchyWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"
+				  value="de.hybris.platform.commercewebservicescommons.dto.catalog.CategoryHierarchyWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC"
+					   value="id,name,url,level"/>
+				<entry key="DEFAULT"
+					   value="id,name,url,subcategories(DEFAULT),level"/>
+				<entry key="FULL"
+					   value="id,lastModified,name,url,subcategories(FULL),level"/>
+			</map>
+		</property>
+	</bean>
+	
+	<bean parent="fieldSetLevelMapping" id="orderEntryWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.OrderEntryWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="entryNumber,quantity,deliveryPointOfService,configurationInfos,statusSummaryList,entries(DEFAULT),otherVariants(entryNumber,product,quantity,totalPrice),contractPrice,formattedContractPrice,formattedListPrice"/>
+                <entry key="DEFAULT" value="BASIC,totalPrice,product(DEFAULT),cancellableQuantity,cancelledItemsPrice(DEFAULT),returnableQuantity,returnedItemsPrice(DEFAULT),entries(DEFAULT),otherVariants(entryNumber,product,quantity,totalPrice,formattedContractPrice,formattedListPrice),contractPrice,formattedContractPrice,formattedListPrice"/>
+                <entry key="FULL"
+                       value="product(FULL),deliveryPointOfService(FULL),entryNumber,updateable,deliveryMode(FULL),quantity,basePrice(FULL),totalPrice(FULL),configurationInfos(FULL),statusSummaryList,cancellableQuantity,cancelledItemsPrice(FULL),returnableQuantity,returnedItemsPrice(FULL),entries(DEFAULT),otherVariants(entryNumber,product,quantity,totalPrice,formattedListPrice),contractPrice,formattedContractPrice,formattedListPrice"/>
+            </map>
+        </property>
+    </bean>
+	
+	<bean parent="fieldSetLevelMapping" id="consignmentEntryWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.ConsignmentEntryWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="orderEntry,shippedQuantity,quantity,otherVariants(DEFAULT)"/>
+                <entry key="DEFAULT" value="orderEntry(DEFAULT),shippedQuantity,quantity,otherVariants(DEFAULT)"/>
+                <entry key="FULL" value="orderEntry(FULL),shippedQuantity,quantity,otherVariants(DEFAULT)"/>
+            </map>
+        </property>
+    </bean>
+
+	<bean parent="fieldSetLevelMapping" id="priceWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"  value="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="value,currencyIso,formattedValue"/>
+				<entry key="DEFAULT"  value="currencyIso,priceType,value,maxQuantity,minQuantity,formattedValue"/>
+				<entry key="FULL" value="currencyIso,priceType,value,maxQuantity,minQuantity,formattedValue"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldSetLevelMapping">
+		<property name="dtoClass"
+				  value="de.hybris.platform.commercewebservicescommons.dto.order.ConsignmentWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="statusMessage,shippingDate,consignmentStatus,trackingUrl"/>
+				<entry key="DEFAULT"
+					   value="statusMessage,shippingDate,consignmentStatus,trackingUrl"/>
+				<entry key="FULL"
+					   value="statusMessage,shippingDate,consignmentStatus,trackingUrl"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldSetLevelMapping" id="addressWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"
+				  value="de.hybris.platform.commercewebservicescommons.dto.user.AddressWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="id"/>
+				<entry key="DEFAULT" value="BASIC,firstName,lastName,email,titleCode,phone,cellphone,line1,line2,postalCode,country,region,district,town,defaultAddress,shippingAddress,companyName"/>
+				<entry key="FULL" value="DEFAULT,country(FULL),region(FULL),title,visibleInAddressBook,formattedAddress"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldSetLevelMapping">
+		<property name="dtoClass"
+				  value="de.hybris.platform.b2bwebservicescommons.dto.order.B2BPaymentTypeWsDTO" />
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC"
+					   value="code" />
+				<entry key="DEFAULT"
+					   value="code,displayName" />
+				<entry key="FULL"
+					   value="code,displayName,isActive" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean parent="fieldSetLevelMapping">
+		<property name="dtoClass"
+				  value="de.hybris.platform.commercewebservicescommons.dto.payment.AccessTokenWsDTO" />
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC"
+					   value="accessToken" />
+				<entry key="DEFAULT"
+					   value="merchantGuid,accessToken" />
+				<entry key="FULL"
+					   value="merchantGuid,accessToken,signature" />
+			</map>
+		</property>
+	</bean>
+	
+
+
+	<bean parent="fieldSetLevelMapping">
+		<property name="dtoClass"
+				  value="com.olympus.oca.commerce.dto.user.CustomerActivationWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="customerId"/>
+				<entry key="DEFAULT"
+					   value="customerId,name,emailId,uid,contactID,title,accountsInfo(accountId,maskedAccountId,isDefault),consentInfo(consentType,consentGiven)"/>
+				<entry key="FULL"
+					   value="customerId,name,emailId,uid,contactID,title,accountsInfo(accountId,maskedAccountId,isDefault),consentInfo(consentType,consentGiven)"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldSetLevelMapping" id="orderWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="code,guid"/>
+                <entry key="DEFAULT"
+                       value="BASIC,totalItems,totalPrice,totalPriceWithTax,entries(DEFAULT),deliveryCost,deliveryAddress(FULL),paymentType(DEFAULT),paymentInfo(DEFAULT),purchaseOrderNumber,createdDate,status"/>
+                <entry key="FULL"
+                       value="BASIC,totalItems,totalPrice,totalPriceWithTax,entries(DEFAULT),deliveryCost,deliveryAddress(FULL),paymentType(DEFAULT),paymentInfo(FULL),purchaseOrderNumber,createdDate,status"/>
+            </map>
+        </property>
+    </bean>
+
+	<bean parent="fieldSetLevelMapping" id="customerCreationResponseWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"
+				  value="de.hybris.platform.commercewebservicescommons.dto.user.CustomerCreationResponseWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="email"/>
+				<entry key="DEFAULT"
+					   value="BASIC,name,uid"/>
+					   <entry key="FULL"
+					   value="BASIC,name,uid"/>
+					   	</map>
+		</property>
+	</bean>
+
+
+
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE xml>
+<htmlSection class="merchant_paycontent" xmlns="Paymetric:XiIntercept:MerchantHtmlPacketModel">
+  <xiProperties error-class="xiInputError">
+  <errorTooltip class="errorTooltip" show-effect="fadeIn" show-duration="5000" hide-effect="fadeOut" hide-duration="5000" />
+  </xiProperties>
+  <paymentOptionDropdownSection>
+	<tag name="div" class="billing-content">
+		<tag name="div" class="payoption-header"></tag>
+		<tag name="div" class="payoption-info">
+			<tag>
+				<label for="paymentOptionType" text="Payment type"/>
+				<ddlPaymentOption>
+					<items>
+						<item for="echeck"/>
+					</items>
+				</ddlPaymentOption>
+			</tag>
+		</tag>
+	</tag>
+  </paymentOptionDropdownSection>
+	
+  <echeckDropdownSection>
+	<tag name="div" class="billing-content">
+		<tag name="div" class="echeck-header"></tag>
+		<tag name="div" class="billing-info">
+	
+			<tag name="div">
+				<label for="accountNumber" text="Account Number*" class="custom-form-control custom-form-border" />
+				<tboxAccountNumber pattern="^[0-9]{4,17}$" pattern-msg="Please enter a valid account number" required-msg="Please enter a valid account number" tokenize="true"/>
+				<validationMsg for="accountNumber" class="valmsg"/>
+			</tag>
+		</tag>
+	</tag>
+  </echeckDropdownSection>
+</htmlSection>

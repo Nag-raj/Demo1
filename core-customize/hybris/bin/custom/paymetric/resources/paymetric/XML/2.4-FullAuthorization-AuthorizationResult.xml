@@ -1,0 +1,16 @@
+<AuthorizationResult>
+  <merchantTransactionCode>{&quot;AUTRA&quot;:&quot;105324012&quot;,&quot;AUTWR&quot;:&quot;31.9900&quot;,&quot;AUNUM&quot;:&quot;OK0210&quot;,&quot;REACT&quot;:&quot;A&quot;,&quot;RCAVR&quot;:&quot;Y&quot;,&quot;RCAVA&quot;:&quot;&quot;,&quot;RCAVZ&quot;:&quot;&quot;,&quot;RCRSP&quot;:&quot;00&quot;,&quot;RCCVV&quot;:&quot;X&quot;,&quot;RTEXT&quot;:&quot;APPROVAL&quot;}</merchantTransactionCode>
+  <requestId>105322970</requestId>
+  <requestToken>{&quot;AUTRA&quot;:&quot;105324012&quot;,&quot;AUTWR&quot;:&quot;31.9900&quot;,&quot;AUNUM&quot;:&quot;OK0210&quot;,&quot;REACT&quot;:&quot;A&quot;,&quot;RCAVR&quot;:&quot;Y&quot;,&quot;RCAVA&quot;:&quot;&quot;,&quot;RCAVZ&quot;:&quot;&quot;,&quot;RCRSP&quot;:&quot;00&quot;,&quot;RCCVV&quot;:&quot;X&quot;,&quot;RTEXT&quot;:&quot;APPROVAL&quot;}</requestToken>
+  <reconciliationId>105324012</reconciliationId>
+  <transactionStatus>ACCEPTED</transactionStatus>
+  <transactionStatusDetails>SUCCESFULL</transactionStatusDetails>
+  <currency>USD</currency>
+  <totalAmount>31.9900</totalAmount>
+  <avsStatus>MATCHED</avsStatus>
+  <cvnStatus>MATCHED</cvnStatus>
+  <accountBalance>0</accountBalance>
+  <authorizationCode>OK0210</authorizationCode>
+  <authorizationTime>2017-11-13 14:15:04.0 UTC</authorizationTime>
+  <paymentProvider>paymetric</paymentProvider>
+</AuthorizationResult>

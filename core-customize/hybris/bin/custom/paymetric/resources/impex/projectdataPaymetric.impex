@@ -1,0 +1,19 @@
+# Define the cron job and the job that it wraps
+INSERT_UPDATE PaymetricScheduleBatchCronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+;paymetricScheduleBatchCronJob;paymetricScheduleBatchJob;false;en
+
+# Define the trigger that periodically (every day at 1 am) invokes the cron job
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+;paymetricScheduleBatchCronJob;0 0 1 * * ?
+
+# Please refer to the URL below to generate the proper cron expression to define the schedule
+# https://www.freeformatter.com/cron-expression-generator-quartz.html
+
+# every minute
+# 0 * * ? * *
+
+#every hour
+# 0 0 * ? * * 
+
+#every day at 1 am
+# 0 0 1 * * ?

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<GetTransactionRequest>
+  <merchantTransactionCode>127966395</merchantTransactionCode>
+  <strTransactionID>127966395</strTransactionID>
+</GetTransactionRequest>

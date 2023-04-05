@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<process xmlns="http://www.hybris.de/xsd/processdefinition" start="submitOrderToSap" name="order-process" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel">
+
+	<action id="submitOrderToSap" bean="submitOrderToSapAction">
+		<transition name="OK" to="sendOrderCompletedNotification"/>
+		<transition name="NOK" to="error"/>
+	</action>
+
+	<action id="sendOrderCompletedNotification" bean="sendOrderCompletedNotificationAction">
+		<transition name="OK" to="success"/>
+	</action>
+
+	<end id="error" state="ERROR">All went wrong.</end>
+	<end id="failed" state="FAILED">Order not placed.</end>
+	<end id="success" state="SUCCEEDED">Order placed.</end>
+
+</process>

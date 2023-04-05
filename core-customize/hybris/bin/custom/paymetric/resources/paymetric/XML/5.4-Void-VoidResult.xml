@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<VoidResult>
+  <merchantTransactionCode>{&quot;AUTRA&quot;:&quot;105324012&quot;,&quot;AUTWR&quot;:&quot;31.9900&quot;,&quot;AUNUM&quot;:&quot;OK0210&quot;,&quot;REACT&quot;:&quot;A&quot;,&quot;RCAVR&quot;:&quot;Y&quot;,&quot;RCAVA&quot;:&quot;&quot;,&quot;RCAVZ&quot;:&quot;&quot;,&quot;RCRSP&quot;:&quot;00&quot;,&quot;RCCVV&quot;:&quot;X&quot;,&quot;RTEXT&quot;:&quot;APPROVAL&quot;}</merchantTransactionCode>
+  <requestId>105322970</requestId>
+  <requestToken>{&quot;AUTRA&quot;:&quot;105324012&quot;,&quot;AUTWR&quot;:&quot;31.9900&quot;,&quot;AUNUM&quot;:&quot;OK0210&quot;,&quot;REACT&quot;:&quot;A&quot;,&quot;RCAVR&quot;:&quot;Y&quot;,&quot;RCAVA&quot;:&quot;&quot;,&quot;RCAVZ&quot;:&quot;&quot;,&quot;RCRSP&quot;:&quot;00&quot;,&quot;RCCVV&quot;:&quot;X&quot;,&quot;RTEXT&quot;:&quot;APPROVAL&quot;}</requestToken>
+  <reconciliationId>105324012</reconciliationId>
+  <transactionStatus>ACCEPTED</transactionStatus>
+  <transactionStatusDetails>SUCCESFULL</transactionStatusDetails>
+  <currency>USD</currency>
+  <amount>31.9900</amount>
+  <requestTime>2018-02-14T20:14:01.000</requestTime>
+</VoidResult>

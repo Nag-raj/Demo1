@@ -1,0 +1,46 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE xml>
+<htmlSection class="merchant_paycontent" xmlns="Paymetric:XiIntercept:MerchantHtmlPacketModel">
+	
+	<xiProperties error-class="xiInputError">
+		<errorTooltip class="errorTooltip" show-effect="fadeIn"
+			show-duration="5000" hide-effect="fadeOut" hide-duration="5000" />
+	</xiProperties>
+
+	<echeckRadioSection>
+		<tag name='div' class='PaymentDetailHeader'>Enter your bank information</tag>
+		
+		<tag name='div'>
+			<validationMsg for='accountType' class='valmsg-ac-type' />
+			<label for="checking" />
+			<radAccountType for="checking" />
+			<label for="savings" />
+			<radAccountType for="savings" />
+		</tag>
+		
+		<tag name='div'>
+			<label for="accountNumber" text="account number" />
+			<tboxAccountNumber tokenize="true" error-msg-style="imageTooltip" />
+			<validationMsg for='accountNumber' error-class='valmsg-img' />
+		</tag>
+		
+		<tag name='div'>
+			<label for="routingNumber" text="routing number" />
+			<tboxRoutingNumber error-msg-style="imageTooltip" />
+			<validationMsg for='routingNumber' error-class='valmsg-img' />
+		</tag>
+		
+		<tag name='div'>
+			<label for="nameOnAccount" text="name on account" />
+			<tboxNameOnAccount error-msg-style="imageTooltip" />
+			<validationMsg for='nameOnAccount' error-class='valmsg-img' />
+		</tag>
+		
+		<tag name='div'>
+			<label for="bankName" text="bank name" />
+			<tboxBankName error-msg-style="imageTooltip" />
+			<validationMsg for='bankName' error-class='valmsg-img' />
+		</tag>
+	</echeckRadioSection>
+
+</htmlSection>

@@ -1,0 +1,33 @@
+<htmlSection class="merchant_paycontent" xmlns="Paymetric:XiIntercept:MerchantHtmlPacketModel">
+	
+    <xiProperties error-class="xiInputError">
+        <errorTooltip class="errorTooltip" show-effect="fadeIn" show-duration="5000" hide-effect="fadeOut" hide-duration="5000"/>
+    </xiProperties>
+
+    <cardIndicatorSection>
+        
+        <tag name="div" class="rf-default-fieldset">
+            <tboxCardNumber tokenize="true" class="xi-long-text"
+            	required-msg="クレジットカード番号を入力してください" 
+            	number="true" number-msg="半角数字のみ入力可能" 
+            	maxlength="19" maxlength-msg="有効なクレジットカード番号を入力してください"
+                placeholder="c"
+            />
+            <label for="cardNumber" text="クレジットカード番号"/> 
+            <validationMsg for="cardNumber" class="valmsg"/>
+        </tag>
+        
+        <tag name="div">
+            <cardTypeIndicator class="cardIndicator">
+                <items>
+                    <item for="mastercard" class="mcIndicator"></item>
+                    <item for="visa" class="viIndicator"></item>
+                    <item for="jcb" class="jcIndicator"></item>
+                    <item for="american express" class="axIndicator"></item>
+                </items>
+            </cardTypeIndicator>
+        </tag>
+
+	</cardIndicatorSection>
+
+</htmlSection>

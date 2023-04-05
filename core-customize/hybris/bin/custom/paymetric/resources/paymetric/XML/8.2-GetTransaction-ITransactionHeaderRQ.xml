@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ITransactionHeader-array>
+  <ITransactionHeader>
+    <cardPresent>0</cardPresent>
+    <cardType>VI</cardType>
+    <currencyKey>USD</currencyKey>
+    <merchantID>PM_VMC</merchantID>
+    <modifiedStatus>0</modifiedStatus>
+    <packetOperation>0</packetOperation>
+    <statusCode>0</statusCode>
+    <transactionID>120771510</transactionID>
+    <____hashCodeCalc>false</____hashCodeCalc>
+  </ITransactionHeader>
+</ITransactionHeader-array>

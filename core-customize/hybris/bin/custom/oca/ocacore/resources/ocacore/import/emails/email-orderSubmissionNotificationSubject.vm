@@ -1,0 +1,2 @@
+	## messageSource=classpath:/ocacore/messages/email-orderSubmissionNotification_$lang.properties
+${ctx.messages.emailSubject}

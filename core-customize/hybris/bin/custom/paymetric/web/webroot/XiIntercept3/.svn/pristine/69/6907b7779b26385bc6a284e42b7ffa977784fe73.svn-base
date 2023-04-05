@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE xml>
+<htmlSection class="merchant_paycontent" xmlns="Paymetric:XiIntercept:MerchantHtmlPacketModel">
+  <xiProperties error-class="xiInputError">
+    <errorTooltip class="errorTooltip" show-effect="fadeIn" show-duration="5000" hide-effect="fadeOut" hide-duration="5000" />
+  </xiProperties>
+  <cardDropdownSection>
+    <tag name="div">
+      <label for="cardType" text="Card Type*"/>
+      <ddlCardType id="cd">
+        <items>
+          <item for="visa"/>
+          <item for="american express"/>
+          <item for="mastercard"/>
+          <item for="discover" />
+        </items>
+      </ddlCardType>             
+	</tag>
+    <tag name='div'>
+      <label for='cardNumber' text="Card Number*" />
+      <tboxCardNumber tokenize='true' class="custom-form-control custom-form-border" luhn-check-msg="Please enter a valid card number" required-msg="Please enter a valid card number" />
+      <validationMsg for='cardNumber' class='valmsg'/>
+    </tag>
+  </cardDropdownSection>
+</htmlSection>

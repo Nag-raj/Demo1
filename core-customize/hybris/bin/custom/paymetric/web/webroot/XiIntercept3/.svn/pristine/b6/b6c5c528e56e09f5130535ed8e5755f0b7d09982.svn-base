@@ -1,0 +1,115 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE xml>
+<htmlSection class="merchant_paycontent" xmlns="Paymetric:XiIntercept:MerchantHtmlPacketModel">
+	
+	<xiProperties error-class="xiInputError">
+		<errorTooltip class="errorTooltip" show-effect="fadeIn"
+			show-duration="5000" hide-effect="fadeOut" hide-duration="5000" />
+	</xiProperties>
+
+	<cardDropdownSection>
+		<tag name='div' class='PaymentDetailHeader'>Enter your credit card information</tag>
+		
+		<tag name="div">
+			<label for="cardType" text="Card Type" />
+			<ddlCardType id="cd">
+				<items>
+					<item for="american express" />
+					<item for="mastercard" />
+					<item for="visa" />
+					<item for="maestro" />
+				</items>
+			</ddlCardType>
+		</tag>
+		
+		<tag name='div'>
+			<label for='cardNumber' text='Card Number' />
+			<tboxCardNumber tokenize='true' />
+			<validationMsg for='cardNumber' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			<label for='cardholderName' text='Name On Card' />
+			<tboxCardHolderName />
+			<validationMsg for='cardholderName' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			<label for='startMonth' text='Start Date' />
+			<ddlStartMonth default-text="month" display-format="MMM"
+				class='merchant_combos' required='false' />
+			<ddlStartYear default-text="year" class='merchant_combos'
+				years-to-display='10' required='false' start-date='true' />
+			<validationMsg for='startYear' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			<label for='expMonth' text='Exp Date' />
+			<ddlExpMonth default-text="month" class='merchant_combos'
+				required='false' />
+			<ddlExpYear default-text="year" class='merchant_combos'
+				years-to-display='10' required='false' exp-date='true' />
+			<validationMsg for='expYear' class='valmsg' />
+		</tag>
+		
+		<tag name='div'>
+			<label for="cvv" text="Card Cvv" />
+			<tboxCvv />
+			<validationMsg for='cvv' class='valmsg' />
+			<htmlCvvHelp name='div' raise-click='1'></htmlCvvHelp>
+
+		</tag>
+	</cardDropdownSection>
+ 
+  <tag name="div" class="address-header"></tag> 
+  <tag name="div" class="address-info">
+    <additionalHtmlSection class="address-content">
+     
+     <tag name='div' class='PaymentDetailHeader'>Enter your Billing Address</tag>
+     	
+     <tag name="div">
+        <label for="firstname" text="First Name"/>
+        <textBox name="firstname" class="xi-long-text" required-msg="Please enter the first name"/>
+        <validationMsg for="firstname" class="valmsg"/>
+      </tag>
+      <tag name="div">
+        <label for="lastname" text="Last Name"/>
+        <textBox name="lastname" class="xi-long-text" required-msg="Please enter the last name"/>
+        <validationMsg for="lastname" class="valmsg"/>
+      </tag>
+      <tag name="div">
+        <label for="address1" text="Address Line 1"/>
+        <textBox name="address1" class="xi-long-text" required-msg="Please enter an address"/>
+        <validationMsg for="address1" class="valmsg"/>
+      </tag>
+      <tag name="div">
+        <label for="address2" text="Address Line 2"/>
+        <textBox name="address2" class="xi-long-text" required="false"/>
+        
+      </tag>
+      <tag name="div">
+        <label for="city"/>
+        <textBox name="city" class="xi-long-text" required-msg="Please enter the city"/>
+        <validationMsg for="city" class="valmsg"/>
+      </tag>
+      <tag name="div">
+        <label for="state"/>
+        <!-- <ddlUsStateDropdown/> -->
+        <textBox name="state" class="xi-long-text" required-msg="Please enter the State"/>
+        <validationMsg for="state" class="valmsg"/>
+      </tag>
+      <tag name="div">
+        <label for="country" text="Country"/>
+        <textBox name="country" class="xi-long-text" required-msg="Please enter the country"/>
+        <validationMsg for="country" class="valmsg"/>
+      </tag>
+      <tag name="div">
+        <label for="postalCode"/>
+        <textBox name="postalCode" class="xi-medium-text" pattern="^\d{5}(-\d{4})?$" required-msg="Please enter the postal code" pattern-msg="Please enter a valid postal code"/>
+        <validationMsg for="postalCode" class="valmsg"/>
+      </tag>
+    </additionalHtmlSection>
+  </tag> 
+
+
+</htmlSection>

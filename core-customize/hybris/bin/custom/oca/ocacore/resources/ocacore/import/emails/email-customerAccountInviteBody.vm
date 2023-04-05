@@ -1,0 +1,68 @@
+## messageSource=/ocacore/messages/email-customerAccountInvite_$lang.properties
+<div class="header" >
+
+<img src="https://publish-p96561-e923928.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--6215bdf7-a377-4499-b3e0-925e8f794a81/olympus-logo.png?quality=85&width=1600&preferwebp=true" width="130" height="25" style="padding-bottom:10px ; padding-left:22px;"/> 
+
+<div class="underline" style=" width: 600px; height: 8px; 
+background: transparent linear-gradient(90deg, #436ED2 0%, #436ED2 2%, #08107B 100%) 0% 0% no-repeat padding-box; opacity: 1; margin-bottom: 25px">
+</div>
+</div>
+
+#if ($ctx.invitecount==1)
+<div class="content" style="text-align: left; font: normal normal normal 16px/21px Helvetica; letter-spacing: 0.64px; color: #141414; width: 543px; padding-left:22px;" >
+${ctx.messages.firstInvitationEmail} ${ctx.messages.commonMessageContent}<ul> ${ctx.messages.commonBulletContent}</ul>
+<a href=${ctx.encodedUrl}> ${ctx.messages.registerToday}</b></a>
+${ctx.messages.olmpusTeam}
+</div>
+#end
+
+
+#if ($ctx.invitecount==2)
+<div class="content" style="text-align: left; font: normal normal normal 16px/21px Helvetica; letter-spacing: 0.64px; color: #141414; width: 543px; padding-left:22px;" >
+${ctx.messages.secondInvitationEmail} <ul>${ctx.messages.commonBulletContent}</ul>
+<a href=${ctx.encodedUrl}> ${ctx.messages.registerToday}</b></a>
+${ctx.messages.olmpusTeam}<br>
+</div>
+#end
+
+
+#if ($ctx.invitecount==3)
+<div class="content" style="text-align: left; font: normal normal normal 16px/21px Helvetica; letter-spacing: 0.64px; color: #141414; width: 543px; padding-left:22px;" >
+
+<ul>${ctx.messages.getMessage('hi', ${ctx.displayName})}</b>,</ul>
+${ctx.messages.thirdInvitationEmail}
+
+<ul> <a href=${ctx.encodedUrl}> ${ctx.messages.portalLink}</b> </ul> <br>
+</div>
+#end
+
+
+
+
+
+<div class="bottom" style="width: 600px;
+height: 68px; background: #FFFFFF 0% 0% no-repeat padding-box; border-top: 1px solid #cbd1d7 ;
+opacity: 1; margin-top: 25px; display: flex; align-items: center;">
+
+
+<img src="https://publish-p96561-e923928.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--6215bdf7-a377-4499-b3e0-925e8f794a81/olympus-logo.png?quality=85&width=1600&preferwebp=true" width="130" height="25" style="padding:22px;"/> 
+
+<div class="social-icons" style="margin-left:auto; padding: 22px;">
+
+
+<a href="www.facebook.com"><img src="https://publish-p96561-e923928.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--e36839f4-1d65-40ba-ac8e-3a2d16a5e2cd/facbebook.png?quality=85&width=1600&preferwebp=true" width="25"
+height="24" style="padding-right:22px; "/></a>
+  
+<a href="www.instagram.com"><img src="https://publish-p96561-e923928.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--12ed951b-f59c-4942-8279-05a8d8ca4960/instagram.png?quality=85&width=1600&preferwebp=true" width="22" height="22" style="padding-right:22px;" /> </a>
+ 
+<a href="www.twitter.com"><img src="https://publish-p96561-e923928.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--ce009b16-a73b-4ddf-a349-5c3a192d6448/twitter.png?quality=85&width=1600&preferwebp=true
+" width="26" height="21" style="padding-right:22px;" /> </a>
+ 
+<a href="www.youtube.com"><img src="https://publish-p96561-e923928.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--1999454e-0568-4baf-b13d-f094094056ab/youtube.png?quality=85&width=1600&preferwebp=true
+" width="77" height="17"  /> </a>
+
+
+
+
+</div>
+</div>

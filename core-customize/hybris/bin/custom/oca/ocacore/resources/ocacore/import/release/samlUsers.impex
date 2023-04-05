@@ -1,0 +1,5 @@
+
+INSERT_UPDATE SamlUserGroup		;samlUserGroup[unique=true]				;userType(code)		;userGroups(uid)
+                                   ;oca-commerce-customer-care			;Employee		    ;ocacommercecustomercare 
+                                   ;oca-commerce-salesrep			    ;Employee           ;ocacommercesalesrep 
+                                  

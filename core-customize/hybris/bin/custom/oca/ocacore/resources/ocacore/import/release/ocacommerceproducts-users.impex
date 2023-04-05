@@ -1,0 +1,7 @@
+#### Access to PIM ####
+INSERT_UPDATE UserGroup; UID[unique = true]  ; groups(uid)[mode = append]; description   ; name
+                       ; ocacommerceproducts ; productmanagergroup       ; Access to PIM ; Access to PIM
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique = true]; version[unique = true]; writePrincipals(uid);
+                            ; oca-usProductCatalog      ; Staged                ; ocacommerceproducts ;
+                            ; ocaGlobalProductCatalog   ; Staged                ; ocacommerceproducts ;

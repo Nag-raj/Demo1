@@ -1,0 +1,532 @@
+<%--
+    Document   : index3DS.jsp
+    Author     : Alexander Perez
+    Company    : Paymetric
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.paymetric.sdk.XIConfig"%>
+
+<%
+String strTax = "8.25";
+String strTotal = "4.00";
+String strCurrency = "702";
+String strAction = XIConfig.getParameter(request, "SAP");
+String strMethod = "";
+String strSite = "";
+String strStore = (XIConfig.getParameter(request, "store") != null ? XIConfig.getParameter(request, "store") : "");
+String strURL = String.format("XiInterceptIFrameRQ.jsp?Tax=%s&Amount=%s&Currency=%s&store=%s", strTax, strTotal, strCurrency, strStore);
+
+XIConfig.isConfigured.set(false);
+if(!strAction.isEmpty())
+{
+	if(strAction.indexOf("_GET_") != -1)
+		strMethod = "GET";
+	else strMethod = "POST";
+	strAction = "SAPEVENT:" + strAction;
+}
+
+try
+{
+	strSite = request.getScheme() + "://" + request.getServerName();
+	if (request.getServerPort() != 80)
+	{
+		strSite = strSite + ":" + request.getServerPort();
+	}
+	strSite = strSite + request.getRequestURI();
+	strSite = strSite.substring(0, strSite.lastIndexOf("/") + 1);
+	strURL = strSite + strURL;
+
+    request.setAttribute("site", strSite);
+    request.setAttribute("requestURL", strURL);
+}
+catch (Exception ex)
+{
+	ex.printStackTrace();
+}
+
+%>
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta charset="ISO-8859-1" />
+		<title>XiIntercept v3 - Hosted IFrame Implementation with 3DSecure Support Example</title>
+		<link type="text/css" href="${site}IFrameStyleSheet.css" rel="stylesheet" />
+		<link type="text/css" href="${site}XIeCommerce3.css" rel="stylesheet" />
+		<script type="text/javascript" src="${site}xml2json.js"></script>
+		<script type="text/javascript" src="${site}XIeCommerce3.js"></script>
+		<script type="text/javascript">
+        window.addEventListener("message", windowListener);
+
+        function windowListener(event)
+        {
+            var strWhere = "windowListener()";
+            var strData = event.data.toString();
+            var xmlRS = "";
+
+            try
+            {
+            	//console.log(strWhere + ": " + strData);
+            	if(strData.indexOf("{") != -1)
+            	{
+            		jsonRS = JSON.parse(strData);
+            		if(jsonRS.operation == 'resize')
+            		{
+                   		if(jsonRS.data.height)
+                		{
+                            var iFrame = document.getElementById("xiFrameHosted");
+               	    	    iFrame.style.height = (jsonRS.data.height + 20) + 'px';
+               	    	    iFrame.style.width = (jsonRS.data.width + 20) + 'px';
+               	    	    //console.log("iFrame.style.height=" + iFrame.style.height + ", iFrame.style.width=" + iFrame.style.width);
+                		}
+            		}
+            	}
+        		else
+        		{
+                    xmlRS = strData.split("~");
+                    if (xmlRS.length > 1)
+                    {
+                        XiInterceptResponse(xmlRS[1], xmlRS[0]);
+                    }
+        		}
+            }
+            catch(err)
+            {
+
+            }
+        }
+
+        function setField(key, iNo, value)
+        {
+            var strWhere = "setField()";
+
+
+            try
+            {
+                if (value != null && value.length > 0)
+                {
+					document.getElementById(key + iNo).value = value;
+					document.getElementById(key + iNo).size = value.length + 1;
+                }
+                else
+                {
+                	document.getElementById(key + iNo).value = "";
+                }
+            }
+            catch(err)
+            {
+
+            }
+        }
+
+        function onLoadIFrame()
+        {
+            var iFrame = document.getElementById("xiFrameHosted");
+
+            console.log("onLoadIFrame() - BEGIN");
+            try
+            {
+    			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // The statement below will trigger an exception when a 3DS redirect occurs
+                // This will use a different styling class to resize based on content rendered
+				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                var doc = iFrame.contentWindow.document;
+                iFrame.className = "xiFrameFormat";
+ 	    	    iFrame.style.height = (doc.body.scrollHeight + 5) + 'px';
+ 	    	    iFrame.style.width = (doc.body.scrollWidth + 5) + 'px';
+            }
+            catch (ex)
+            {
+                iFrame.className = "hostedIframe";
+            }
+            console.log("onLoadIFrame() - END");
+        }
+
+	    function refreshIFrame()
+	    {
+            var iFrame = document.getElementById("xiFrameHosted");
+
+            document.getElementById("xiResponse").style.display = "none";
+            document.getElementById("xiRequest").style.display = "block";
+
+            iFrame.contentWindow.location.href = "<%= strURL %>";
+            iFrame.className = "xiFrameFormat";
+	    }
+
+		function handleXiInterceptResponse(id)
+		{
+			var strAction = '<%= strAction %>';
+			var strValue = null;
+			var iFields = 0;
+			var iField = 0;
+			var fields = null;
+			var field = null;
+			var lookup = null;
+			var auth = null;
+			var iNo = "";
+
+
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			// If multiple IFrames, look for the iframe number 
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			if(id.lastIndexOf("-") != -1)
+			{
+				iNo = id.substring(id.lastIndexOf("-"));
+			}
+
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			// Get The PaymetricResponse Fields
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			fields = gv_jsonObj.PaymetricResponse.Fields.FormField;
+			iFields = fields.length;
+			for(iField = 0; iField < iFields; iField++)
+			{
+				field = fields[iField];
+				
+				// Get Credit Card Data Response Fields
+				if(field.Name == "Card Number")
+					setField("ccNumber", iNo, field.Value);
+				else if(field.Name == "Card Holder Name")
+					setField("ccName", iNo, field.Value);
+				else if(field.Name == "Card Type")
+					setField("ccType", iNo, field.Value);
+				else if(field.Name == "Card Security Code")
+					setField("cvv", iNo, field.Value);
+				else if(field.Name == "Expiration Month")
+					setField("ccMonth", iNo, pad(field.Value, 2));
+				else if(field.Name == "Expiration Year")
+					setField("ccYear", iNo, pad(field.Value, 4));
+			}
+
+			// Get 3D-Secure Response Fields
+			if(typeof gv_jsonObj.PaymetricResponse.CardinalResponse != 'undefined')
+			{
+				// Get 3D-Secure Response Fields: CMPI_LOOKUP
+				if(typeof gv_jsonObj.PaymetricResponse.CardinalResponse.cmpi_lookup != 'undefined')
+				{
+					lookup = gv_jsonObj.PaymetricResponse.CardinalResponse.cmpi_lookup;
+					setField("lookup.ACSUrl", iNo, lookup.ACSUrl);
+					setField("lookup.CardBin", iNo, lookup.CardBin);
+					setField("lookup.CardBrand", iNo, lookup.CardBrand);
+					setField("lookup.EciFlag", iNo, lookup.EciFlag);
+					setField("lookup.Enrolled", iNo, lookup.Enrolled);
+					setField("lookup.ErrorDesc", iNo, lookup.ErrorDesc);
+					setField("lookup.ErrorNo", iNo, lookup.ErrorNo);
+					setField("lookup.OrderId", iNo, lookup.OrderId);
+					setField("lookup.Payload", iNo, lookup.Payload);
+					setField("lookup.RawACSUrl", iNo, lookup.RawACSUrl);
+					setField("lookup.StepUpUrl", iNo, lookup.StepUpUrl);
+					setField("lookup.ThreeDSVersion", iNo, lookup.ThreeDSVersion);
+					setField("lookup.TransactionId", iNo, lookup.TransactionId);
+					setField("lookup.UCAFIndicator", iNo, lookup.UCAFIndicator);
+				}
+
+				// Get 3D-Secure Response Fields: CMPI_AUTHENTICATE
+				if(typeof gv_jsonObj.PaymetricResponse.CardinalResponse.cmpi_authenticate != 'undefined')
+				{
+					auth = gv_jsonObj.PaymetricResponse.CardinalResponse.cmpi_authenticate;
+					setField("auth.Amount", iNo, auth.Amount);
+					setField("auth.CardBin", iNo, auth.CardBin);
+					setField("auth.CardBrand", iNo, auth.CardBrand);
+					setField("auth.Cavv", iNo, auth.Cavv);
+					setField("auth.CavvAlgorithm", iNo, auth.CavvAlgorithm);
+					setField("auth.CurrencyCode", iNo, auth.CurrencyCode);
+					setField("auth.EciFlag", iNo, auth.EciFlag);
+					setField("auth.ErrorDesc", iNo, auth.ErrorDesc);
+					setField("auth.ErrorNo", iNo, auth.ErrorNo);
+					setField("auth.PAResStatus", iNo, auth.PAResStatus);
+					setField("auth.SignatureVerification", iNo, auth.SignatureVerification);
+					setField("auth.ThreeDSVersion", iNo, auth.ThreeDSVersion);
+					setField("auth.TransactionId", iNo, auth.TransactionId);
+					setField("auth.UCAFIndicator", iNo, auth.UCAFIndicator);
+					setField("auth.Xid", iNo, auth.Xid);
+				}
+			}
+			
+            if(strAction.length != 0)
+            {
+    	     	document.getElementById("xiForm").submit();
+    	     	return;
+            }
+            
+            document.getElementById("xiRequest").style.display = "none";
+            document.getElementById("xiResponse").style.display = "block";
+        }
+		</script>
+    </head>
+    <body>
+        <h1>Payment Details</h1>
+    	<table border="1" style="background-color: azure;">
+    		<tr style="background-color: bisque;" align="center" valign="middle">
+    			<td>3DS v1.0.2</td>
+    			<td>3DS v2.1.0</td>
+    			<td>3DS v2.2.0</td>
+    		</tr>
+    		<tr>
+    			<td>4000000000000002</td>
+    			<td>4000000000001109</td>
+    			<td>4000000000002370</td>
+    		</tr>
+    		<tr>
+    			<td>5424180279791732</td>
+    			<td>5200000000001104</td>
+    			<td>5200000000002490</td>
+    		</tr>
+    		<tr>
+    			<td>340000000003961</td>
+    			<td>340000000001106</td>
+    			<td>340000000002237</td>
+    		</tr>
+    	</table>
+		<br/>
+	    <form id="xiForm" action="<%= strAction %>" method="<%= strMethod %>">
+	    	<div id="xiRequest" style="display: block">
+   			    <iframe id="xiFrameHosted" class="xiFrameFormat" 
+   			    	src="${requestURL}">
+   			    	</iframe>
+<!--    			    	onload="setTimeout(function(){ onLoadIFrame(); }, 1000);"  -->
+	   			<br/>
+	           	<button onclick="submitHostedIFrame();" type="button">Submit</button>
+	    	</div>
+
+	    	<div id="xiResponse" style="display: none">
+			    <table border="1" style="background-color:floralwhite;">
+			        <tr>
+			            <td style="background-color:#99CCFF;" align="center" valign="middle" colspan="2">XiIntercept RESPONSE</td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">Card Holder Name:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="ccName" type="text" name="ccName" size="40" value="John Doe" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">Credit Card Type:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="ccType" type="text" name="ccType" size="20" value="American Express" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">Card Number:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="ccNumber" name="ccNumber" size="30" type="text" value="345946632272264" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">Card Expiration Date:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="ccMonth" name="ccMonth" type="text" value="12" />
+							&nbsp;&nbsp;
+			                <input id="ccYear" name="ccYear" type="text" value="2099" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">Security Code (CVV):&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="cvv" name="cvv" type="text" size="4" value="9999" />
+			            </td>
+			        </tr>
+
+			        <tr>
+			            <td style="background-color:#99CCFF;" align="center" valign="middle" colspan="2">CMPI_LOOKUP RESPONSE</td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">ACSUrl:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			            	<textarea rows="4" cols="120" id="lookup.ACSUrl" name="lookup.ACSUrl"></textarea>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">CardBin:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="lookup.CardBin" name="lookup.CardBin" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">CardBrand:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="lookup.CardBrand" name="lookup.CardBrand" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">EciFlag:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="lookup.EciFlag" name="lookup.EciFlag" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">Enrolled:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="lookup.Enrolled" name="lookup.Enrolled" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">ErrorDesc:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="lookup.ErrorDesc" name="lookup.ErrorDesc" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">ErrorNo:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="lookup.ErrorNo" name="lookup.ErrorNo" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">OrderId:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="lookup.OrderId" name="lookup.OrderId" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">Payload:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <textarea rows="4" cols="120" id="lookup.Payload" name="lookup.Payload"></textarea>
+			            </td>
+			        </tr>
+			        
+			        <tr>
+			            <td align="right" valign="middle">RawACSUrl:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="lookup.RawACSUrl" name="lookup.RawACSUrl" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">StepUpUrl:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="lookup.StepUpUrl" name="lookup.StepUpUrl" type="text" />
+			            </td>
+			        </tr>
+			        
+			        <tr>
+			            <td align="right" valign="middle">ThreeDSVersion:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="lookup.ThreeDSVersion" name="lookup.ThreeDSVersion" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">TransactionId:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="lookup.TransactionId" name="lookup.TransactionId" type="text" />
+			            </td>
+			        </tr>
+
+			        <tr>
+			            <td align="right" valign="middle">UCAFIndicator:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="lookup.UCAFIndicator" name="lookup.UCAFIndicator" type="text" />
+			            </td>
+			        </tr>
+
+			        <tr>
+			            <td style="background-color:#99CCFF;" align="center" valign="middle" colspan="2">CMPI_AUTHENTICATE RESPONSE</td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">Amount:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.Amount" name="auth.Amount" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">CardBin:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.CardBin" name="auth.CardBin" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">CardBrand:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.CardBrand" name="auth.CardBrand" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">Cavv:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.Cavv" name="auth.Cavv" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">CavvAlgorithm:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.CavvAlgorithm" name="auth.CavvAlgorithm" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">CurrencyCode:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.CurrencyCode" name="auth.CurrencyCode" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">EciFlag:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.EciFlag" name="auth.EciFlag" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">ErrorDesc:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.ErrorDesc" name="auth.ErrorDesc" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">ErrorNo:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.ErrorNo" name="auth.ErrorNo" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">PAResStatus:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.PAResStatus" name="auth.PAResStatus" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">SignatureVerification:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.SignatureVerification" name="auth.SignatureVerification" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">ThreeDSVersion:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.ThreeDSVersion" name="auth.ThreeDSVersion" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">TransactionId:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.TransactionId" name="auth.TransactionId" type="text" />
+			            </td>
+			        </tr>
+
+			        <tr>
+			            <td align="right" valign="middle">UCAFIndicator:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.UCAFIndicator" name="auth.UCAFIndicator" type="text" />
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="right" valign="middle">Xid:&nbsp;&nbsp;</td>
+			            <td valign="middle">
+			                <input id="auth.Xid" name="auth.Xid" type="text" />
+			            </td>
+			        </tr>
+
+			        <tr>
+			            <td>&nbsp;&nbsp;</td>
+			            <td>&nbsp;&nbsp;</td>
+			        </tr>
+			        <tr>
+			        	<td colspan="2">
+				           	<button onclick="refreshIFrame();" type="button">Refresh</button>
+			        	</td>
+			        </tr>
+			    </table>
+	    	</div>
+	    </form>
+	</body>
+</html>

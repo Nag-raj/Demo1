@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="ocacore_buildcallbacks" xmlns:jacoco="antlib:org.jacoco.ant">
+
+    <macrodef name="ocacore_after_build">
+        <sequential>
+            <impexGenerate extname="ocacore"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="ocacore_clean_classpath_file">
+        <sequential>
+            <copy failonerror="true" file="${ext.ocacore.path}/.classpath" overwrite="true" tofile="${ext.ocacore.path}/.classpath.edit">
+                <filterchain>
+                    <linecontainsregexp negate="true">
+                        <regexp pattern="^(\t\t\t\t|)$"/>
+                        <!-- added by script -->
+                    </linecontainsregexp>
+                </filterchain>
+            </copy>
+            <move failonerror="true" file="${ext.ocacore.path}/.classpath.edit" overwrite="true" tofile="${ext.ocacore.path}/.classpath"/>
+        </sequential>
+
+    </macrodef>
+
+    <macrodef name="ocacore_after_clean">
+        <sequential>
+            <echo level="info" message="Generating .classpath file for ocacore"/>
+            <create_extension_classpath_file extname="ocacore"/>
+            <ocacore_clean_classpath_file/>
+            <delete failonerror="false" file="${ext.ocacore.path}/resources-lang/touch_impexgen"/>
+        </sequential>
+    </macrodef>
+
+
+    <!-- exclude impex files from localization -->
+
+    <patternset id="ocacore.localization.pattern">
+
+        <patternset refid="localization.defaultpattern"/>
+
+        <exclude name="**/*.impex"/>
+
+    </patternset>
+
+    <target name="sonar-report" description="executes junit coverage and sonarcheck jobs in one go">
+        <antcall target="junit-coverage"/>
+        <antcall target="sonarcheck"/>
+    </target>
+
+    <target name="junit-coverage" description="Generates unit test report">
+        <antcall target="junit-generate-reports"/>
+        <antcall target="junit-generate-summary-report"/>
+    </target>
+
+    <!-- SONAR Test Coverage -->
+
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath>
+            <fileset dir="${ext.ocacore.path}/lib">
+                <include name="**/*.jar"/>
+            </fileset>
+        </classpath>
+    </taskdef>
+
+    <target name="junit-generate-reports" description="Generate unit test reports">
+        <!-- Create temp dir for this target -->
+        <delete dir="${HYBRIS_LOG_DIR}/junit-coverage-ut" failonerror="false"/>
+        <mkdir dir="${HYBRIS_LOG_DIR}/junit-coverage-ut/raw"/>
+        <!-- Clear report folders -->
+        <delete dir="${HYBRIS_LOG_DIR}/junit" failonerror="false"/>
+        <delete dir="${HYBRIS_TEMP_DIR}/junit" failonerror="false"/>
+
+        <jacoco:agent property="JACOCO_AGENT_JVM_PROPERTY" destfile="${HYBRIS_LOG_DIR}/junit-coverage-ut/jacoco-ut.exec"
+                      append="true"/>
+
+        <!-- Run unittests without hybris start -->
+        <ant dir="${platformhome}" target="unittests" inheritrefs="false">
+<!--            <property name="testclasses.suppress.junit.tenant" value="true"/>-->
+            <property name="standalone.javaoptions" value="${standalone.javaoptions} ${JACOCO_AGENT_JVM_PROPERTY}"/>
+        </ant>
+
+        <!-- Copy test raw results to temp dir-->
+        <copy todir="${HYBRIS_LOG_DIR}/junit-coverage-ut/raw">
+            <fileset dir="${HYBRIS_TEMP_DIR}/junit"/>
+        </copy>
+
+        <!-- Copy test raw results to temp dir-->
+        <copy todir="${HYBRIS_LOG_DIR}/junit-coverage-ut/raw">
+            <fileset dir="${HYBRIS_TEMP_DIR}/junit"/>
+        </copy>
+
+        <!-- Generate JUNIT report -->
+        <junitreport todir="${HYBRIS_LOG_DIR}/junit-coverage-ut">
+            <fileset dir="${HYBRIS_LOG_DIR}/junit-coverage-ut/raw">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${HYBRIS_LOG_DIR}/junit-coverage-ut"/>
+        </junitreport>
+
+        <!--Generate JaCoCo coverage-->
+        <generateCoverageReport name="ut" processFolder="${HYBRIS_LOG_DIR}/junit-coverage-ut" processFile="jacoco-ut.exec"/>
+
+        <echo message="==========================================================="/>
+        <echo message="UNIT TEST REPORT DATA: ${HYBRIS_LOG_DIR}/junit-coverage-ut/index.html"/>
+        <echo message="JACOCO COVERAGE REPORT: ${HYBRIS_LOG_DIR}/junit-coverage-ut/jacoco-report/index.html"/>
+        <echo message="==========================================================="/>
+
+    </target>
+
+
+    <target name="junit-generate-summary-report" description="Generate unittest test summary report">
+
+        <!-- Create temp dir for this target -->
+        <delete dir="${HYBRIS_LOG_DIR}/junit-coverage" failonerror="false"/>
+        <mkdir dir="${HYBRIS_LOG_DIR}/junit-coverage"/>
+
+        <!-- Generate summary report -->
+        <junitreport todir="${HYBRIS_LOG_DIR}/junit-coverage">
+            <fileset dir="${HYBRIS_LOG_DIR}/junit-coverage-ut/raw">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${HYBRIS_LOG_DIR}/junit-coverage"/>
+        </junitreport>
+
+        <copy todir="${HYBRIS_LOG_DIR}/junit-coverage">
+            <fileset dir="${HYBRIS_LOG_DIR}/junit-coverage-ut">
+                <include name="jacoco-ut.exec"/>
+            </fileset>
+        </copy>
+
+        <echo message="Generating JaCoCo coverage"/>
+
+        <!--Generate JaCoCo coverage-->
+        <jacoco:merge destfile="${HYBRIS_LOG_DIR}/junit-coverage/merged.exec">
+            <fileset dir="${HYBRIS_LOG_DIR}/junit-coverage" includes="*.exec"/>
+        </jacoco:merge>
+
+        <generateCoverageReport name="junit-coverage" processFolder="${HYBRIS_LOG_DIR}/junit-coverage" processFile="merged.exec"/>
+
+        <echo message="==========================================================="/>
+        <echo message="SUMMARY JUNIT REPORT: ${HYBRIS_LOG_DIR}/junit-coverage/index.html"/>
+        <echo message="SUMMARY JACOCO REPORT: ${HYBRIS_LOG_DIR}/junit-coverage/jacoco-report/index.html"/>
+        <echo message="==========================================================="/>
+    </target>
+
+    <macrodef name="generateCoverageReport">
+        <attribute name="processFolder"/>
+        <attribute name="processFile"/>
+        <attribute name="name"/>
+
+        <sequential>
+            <mkdir dir="${HYBRIS_LOG_DIR}/junit-coverage"/>
+            <touch file="${HYBRIS_LOG_DIR}/junit-coverage/report.xml"/>
+
+            <jacoco:report>
+                <executiondata>
+                    <file file="@{processFolder}/@{processFile}"/>
+                </executiondata>
+
+                <structure name="@{name}">
+                    <classfiles>
+                        <fileset dir="${HYBRIS_BIN_DIR}/custom">
+                            <include name="**/*.class"/>
+                            <exclude name="**/*Test.class"/>
+                            <exclude name="**/test/**"/>
+                            <exclude name="**/eclipsebin/**"/>
+                            <exclude name="**/testsrc/**"/>
+
+                            <exclude name="**/jalo/**"/>
+                            <exclude name="**/data/**"/>
+                            <exclude name="**/constants/**"/>
+                            <exclude name="**/de/hybris/**"/>
+                            <exclude name="**/gensrc/**"/>
+                            <exclude name="**/Generated*.class"/>
+                        </fileset>
+                    </classfiles>
+                    <sourcefiles encoding="UTF-8">
+                        <fileset dir="${HYBRIS_BIN_DIR}/custom">
+                            <include name="**/*.java"/>
+                            <exclude name="**/de/hybris/**"/>
+                        </fileset>
+                    </sourcefiles>
+                </structure>
+
+                <xml destfile="${HYBRIS_LOG_DIR}/junit-coverage/report.xml"/>
+            </jacoco:report>
+        </sequential>
+    </macrodef>
+
+
+</project>

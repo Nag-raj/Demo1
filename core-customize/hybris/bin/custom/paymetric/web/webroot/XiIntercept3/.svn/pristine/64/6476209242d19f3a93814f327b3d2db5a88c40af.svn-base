@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.paymetric.sdk.XIConfig"%>
+<%@ page import="com.paymetric.sdk.XiSecureWSC"%>
+<%@ page import="java.net.URLEncoder"%>
+
+<%
+
+try
+{
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Load the XiIntercept configuration file
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	XIConfig xiConfig = new XIConfig();
+	xiConfig.Config(request, "XiIntercept.properties");
+	System.out.println("XiIntercept Configuration:\n" + xiConfig.toString());
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Create a new Session ID
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	String wscURL = xiConfig.getProperty("XI.semafone.connector", "http://localhost:9080/XiSecureWSC/XiSecure.svc");
+	boolean logging = xiConfig.getProperty("XI.semafone.logging", "false").equalsIgnoreCase("true");
+	XiSecureWSC xiWSC = new XiSecureWSC(wscURL, logging);
+	String sessionId = xiWSC.createSessionID();
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Setup inputs to the Semafone Paymetric Tokenization Page
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	String semafoneURL = xiConfig.getProperty("XI.semafone.url", "");
+	String params = "tenantId=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.tenantId", ""), "UTF-8");
+	params += "&clientId=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.clientId", ""), "UTF-8");
+	params += "&accountId=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.accountId", ""), "UTF-8");
+	params += "&principle=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.principle", ""), "UTF-8");
+	params += "&licenseCode=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.licenseCode", ""), "UTF-8");
+	params += "&clientReference=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.clientReference", ""), "UTF-8");
+	params += "&semafoneMode=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.semafoneMode", "MANUAL_CR"), "UTF-8");
+	params += "&gatewayId=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.gatewayId", "PaymetricWeb"), "UTF-8");
+	params += "&transactionType=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.transactionType", "GetTokenPanSecurityCode"), "UTF-8");
+	params += "&responseType=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.responseType", "Web"), "UTF-8");
+	params += "&templateId=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.templateId", "1004"), "UTF-8");
+	params += "&terminalID=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.terminalID", ""), "UTF-8");
+	params += "&digest=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.digest", ""), "UTF-8");
+	params += "&sessionID=" + URLEncoder.encode(sessionId, "UTF-8");
+	params += "&responseURL=" + URLEncoder.encode(xiConfig.getProperty("XI.semafone.responseURL", "getNestleTokenizationFragment.html"), "UTF-8");
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Redirect to the Semafone Fragment page
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	String redirectURL = semafoneURL + "?" + params;
+    request.setAttribute("redirectURL", redirectURL);
+    request.setAttribute("site", xiConfig.getSiteURL(request));
+
+}
+catch(Exception ex)
+{
+	ex.printStackTrace();
+}
+
+%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<title>XI for DTMF - Implementation Request</title>
+		<script type="text/javascript">
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// Process Semafone Response Message
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    	window.addEventListener("message", semafoneResponse);
+
+	    function semafoneResponse(event)
+		{
+            var theData = null;
+            var json = {};
+
+	        try
+	        {
+	            if(typeof event.data === 'string')
+	            {
+					theData = String(event.data);	// Cast to string and create a blank object
+					json = JSON.parse(theData);		// Try to parse the string as a JSON object
+					if (json.isSubmitted)
+					{
+						document.getElementById('semafoneResponse').value = theData;
+						document.getElementById('semafoneForm').submit();
+					}
+					else if (json.pageHeight)
+					{
+				     	document.getElementById('xiFrame').style.height = json.pageHeight + 'px';
+					}
+	            }
+	        }
+	        catch(e)
+	        {
+	            return false;
+	        }
+	
+	        return true;
+	    }
+
+		</script>
+	</head>
+
+	<body>
+		<iframe id="xiFrame" style="width:600px; height:430px;" src="${redirectURL}"></iframe>
+	    <form id="semafoneForm" action="${site}SemafoneRS.jsp" method="POST">
+	    	<input id="sessionMode" name="sessionMode" value="LIVE" type="hidden"/>
+	    	<input id="semafoneResponse" name="semafoneResponse" value="" type="hidden"/>
+	     </form>
+	</body>
+</html>

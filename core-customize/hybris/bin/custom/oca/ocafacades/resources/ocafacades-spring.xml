@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config/>
+
+	<bean id="ocaProductPopulator" class="com.olympus.oca.commerce.facades.product.converters.populator.OcaProductPopulator"/>
+
+	<bean id="ocaProductConverter" parent="cwsProductConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="ocaProductPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="ocaProductFacade" alias="cwsProductFacade"/>
+	<bean id="ocaProductFacade" parent="defaultProductFacade">
+		<property name="productConfiguredPopulator" ref="cwsProductVariantConfiguredPopulator"/>
+		<property name="productConverter" ref="ocaProductConverter"/>
+	</bean>
+
+	<bean id="ocaSearchResultProductPopulator" class="com.olympus.oca.commerce.facades.search.converters.populator.OcaSearchResultProductPopulator">
+		<property name="searchResultProductConverter" ref="commerceSearchResultProductConverter"/>
+	</bean>
+
+	<alias name="ocaCommerceSearchResultProductConverter" alias="commerceSearchResultProductConverter"/>
+	<bean id="ocaCommerceSearchResultProductConverter" parent="defaultCommerceSearchResultProductConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="ocaSearchResultProductPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+
+	<alias alias="simpleSuggestionFacade" name="defaultSimpleSuggestionFacade"/>
+	<bean id="defaultSimpleSuggestionFacade" class="com.olympus.oca.commerce.facades.suggestion.impl.DefaultSimpleSuggestionFacade">
+		<property name="simpleSuggestionService" ref="simpleSuggestionService"/>
+		<property name="userService" ref="userService"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="productService" ref="productService"/>
+		<property name="productConverter" ref="carouselProductConverter"/>
+		<property name="cartService" ref="cartService"/>
+	</bean>
+
+
+	<bean id="carouselProductConverter" parent="defaultProductConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="productPricePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- accelerator Image Format Mappings -->
+	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping"/>
+	<bean id="acceleratorImageFormatMapping" parent="defaultImageFormatMapping">
+		<property name="mapping">
+			<map>
+				<entry key="superZoom" value="1200Wx1200H"/>
+				<entry key="zoom" value="515Wx515H"/>
+				<entry key="store" value="365Wx246H"/>
+				<entry key="product" value="300Wx300H"/>
+				<entry key="thumbnail" value="96Wx96H"/>
+				<entry key="cartIcon" value="65Wx65H"/>
+				<entry key="styleSwatch" value="30Wx30H"/>
+			</map>
+		</property>
+	</bean>
+
+	<alias name="acceleratorProductPrimaryImagePopulator" alias="productPrimaryImagePopulator" />
+	<bean id="acceleratorProductPrimaryImagePopulator" parent="defaultProductPrimaryImagePopulator">
+		<property name="imageFormats">
+			<list>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+				<value>cartIcon</value>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="acceleratorProductGalleryImagesPopulator" alias="productGalleryImagesPopulator" />
+	<bean id="acceleratorProductGalleryImagesPopulator" parent="defaultProductGalleryImagesPopulator">
+		<property name="imageFormats">
+			<list>
+				<value>superZoom</value>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="customerEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.CustomerEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="customerConverter" ref="customerConverter"/>
+	</bean>
+
+	<bean id="forgottenPasswordEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.ForgottenPasswordEmailContext" parent="customerEmailContext" scope="prototype">
+		<property name="customerConverter" ref="customerConverter"/>
+	</bean>
+
+	<bean id="orderNotificationEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.OrderNotificationEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter"/>
+	</bean>
+
+	<bean id="quoteNotificationEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.QuoteNotificationEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="quoteService" ref="quoteService"/>
+		<property name="quoteConverter" ref="quoteConverter"/>
+	</bean>
+
+	<bean id="deliverySentEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.DeliverySentEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter" ref="consignmentConverter"/>
+	</bean>
+
+	<bean id="readyForPickupEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.ReadyForPickupEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter" ref="consignmentConverter"/>
+	</bean>
+
+	<bean id="orderCancelledEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.OrderCancelledEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter"/>
+	</bean>
+
+	<bean id="orderRefundEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.OrderRefundEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter"/>
+	</bean>
+	<bean id="consignmentCollectionReminderEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.ConsignmentCollectionReminderEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter" ref="consignmentConverter"/>
+		<property name="formatFactory" ref="formatFactory"/>
+		<property name="customerServiceUncollectedConsignmentStrategy" ref="customerServiceUncollectedConsignmentStrategy" />
+		<property name="orderConverter" ref="orderConverter"/>
+	</bean>
+
+	<bean id="orderPartiallyModifiedEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.OrderPartiallyModifiedEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter"/>
+		<property name="orderEntryConverter" ref="orderEntryConverter"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+	</bean>
+
+	<bean id="orderPartiallyCanceledEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.OrderPartiallyCanceledEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="orderPartiallyRefundedEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.OrderPartiallyRefundedEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="notPickedUpConsignmentCanceledEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.NotPickedUpConsignmentCanceledEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter" ref="consignmentConverter"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+	</bean>
+
+	<alias name="yacceleratorSearchPagePointOfServiceDistancePopulator" alias="searchPagePointOfServiceDistancePopulator" />
+	<bean id="yacceleratorSearchPagePointOfServiceDistancePopulator" class="com.olympus.oca.commerce.facades.storefinder.populators.SearchPagePointOfServiceDistancePopulator">
+		<property name="pointOfServiceDistanceConverter" ref="pointOfServiceDistanceConverter"/>
+	</bean>
+
+	<bean id="ocaCategoryFacade" class="com.olympus.oca.commerce.facades.category.impl.DefaultOcaCategoryFacade">
+		<property name="catalogFacade" ref="catalogFacade"/>
+	</bean>
+
+	<bean id="DeliveryOptionPopulator" class="com.olympus.oca.commerce.facades.populators.DeliveryOptionPopulator"></bean>
+
+	<alias name="deliveryOptionConverter" alias="deliveryOptionConverter" />
+	<bean id="deliveryOptionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.DeliveryOptionData" />
+		<property name="populators">
+			<list>
+				<ref bean="DeliveryOptionPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultOcaCartFacade" alias="cartFacade"/>
+	<bean id="defaultOcaCartFacade" class="com.olympus.oca.commerce.facades.cart.impl.DefaultOcaCartFacade" parent="defaultCartFacade">
+		<property name="ocaCartService" ref="cartService"/>
+		<property name="shippingCarrierConverter" ref="shippingCarrierConverter"/>
+		<property name="deliveryOptionConverter" ref="deliveryOptionConverter" />
+		<property name="b2bUnitService" ref="b2bUnitService"/>
+		<property name="configurationService" ref="configurationService" />
+		<property name="questionnaireReverseConverter" ref="questionnaireReverseConverter"/>
+	</bean>
+
+	<alias name="defaultOcaShippingCarrierConverter" alias="shippingCarrierConverter"/>
+	<bean id="defaultOcaShippingCarrierConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.ocafacades.shipping.data.ShippingCarrierData"/>
+		<property name="populators">
+			<list>
+				<ref bean="shippingCarrierPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultOcaShippingCarrierPopulator" alias="shippingCarrierPopulator"/>
+	<bean id="defaultOcaShippingCarrierPopulator" class="com.olympus.oca.commerce.facades.populators.OcaShippingCarrierPopulator">
+	</bean>
+
+	<!-- OEC-287 changes for adding new attributes to cart response -->
+	<bean id="ocaCartPopulator" class="com.olympus.oca.commerce.facades.order.converters.populator.OcaCartPopulator">
+		<property name="modelService" ref="modelService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<bean id="ocaGroupOrderEntryPopulator" class="com.olympus.oca.commerce.facades.order.converters.populator.OcaGroupOrderEntryPopulator"/>
+
+	<!---->
+	<bean id="defaultExtendedCartConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.order.data.CartData"/>
+		<property name="populators">
+			<list>
+				<ref bean="extendedCartPopulator"/>
+				<ref bean="orderAppliedVouchersPopulator"/>
+				<ref bean="pickupOrderEntryGroupPopulator"/>
+				<ref bean="deliveryOrderEntryGroupPopulator"/>
+				<ref bean="ocaCartPopulator"/>
+				<ref bean="ocaGroupOrderEntryPopulator"/>
+				<ref bean="ocaOrderSavingsPopulator"/>
+			</list>
+		</property>
+	</bean>
+	<!-- END of OEC-287 Changes -->
+	<alias name="ocaOrderFacade" alias="orderFacade"/>
+	<bean id="ocaOrderFacade" class="com.olympus.oca.commerce.facades.order.impl.DefaultOcaOrderFacade" parent="defaultOrderFacade">
+		<property name="recentlyOrderedProductConverter" ref="recentlyOrderedProductConverter"/>
+		<property name="orderService" ref="orderService"/>
+		<property name="b2bUnitService" ref="b2bUnitService" />
+		<property name="ocaOrderHistoryConverter" ref="ocaOrderHistoryConverter"/>
+		<property name="orderEntryConverter" ref="orderEntryConverter" />
+		<property name="consignmentEntryConverter" ref="consignmentEntryConverter"/>
+		<property name="enumerationService" ref="enumerationService"/>
+	</bean>
+
+	<alias name="defaultOcaRecentlyOrderedProductConverter" alias="recentlyOrderedProductConverter"/>
+	<bean id="defaultOcaRecentlyOrderedProductConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.ocafacades.order.data.RecentlyOrderedProductData"/>
+		<property name="populators">
+			<list>
+				<ref bean="recentlyOrderedProductPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultOcaRecentlyOrderedProductPopulator" alias="recentlyOrderedProductPopulator"/>
+	<bean id="defaultOcaRecentlyOrderedProductPopulator" class="com.olympus.oca.commerce.facades.populators.OcaRecentlyOrderedProductPopulator">
+	</bean>
+
+
+
+	<bean id="OcaOrderHistoryPopulator" class="com.olympus.oca.commerce.facades.populators.OcaOrderHistoryPopulator">
+	</bean>
+
+	<alias name="ocaOrderHistoryConverter" alias="ocaOrderHistoryConverter" />
+	<bean id="ocaOrderHistoryConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.order.data.OrderHistoryData" />
+		<property name="populators">
+			<list>
+				<ref bean="OcaOrderHistoryPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="defaultProductConverter"/>
+		<property name="add" ref="ocaProductPopulator"/>
+	</bean>
+
+	<bean id="ocaB2BCustomerPopulator" class="com.olympus.oca.commerce.facades.b2bcustomer.converters.populator.OcaB2BCustomerPopulator"/>
+
+	<alias name="defaultOcaB2BCustomerAccountInvitePopulator" alias="customerAccountInvitePopulator"/>
+	<bean id="defaultOcaB2BCustomerAccountInvitePopulator" class="com.olympus.oca.commerce.facades.b2bcustomer.converters.populator.OcaB2BCustomerAccountInvitePopulator">
+		<property name="enumerationService" ref="enumerationService"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="customerConverter"/>
+		<property name="add" ref="ocaB2BCustomerPopulator"/>
+	</bean>
+
+	<alias name="ocaB2BUnitFacade" alias="b2bUnitFacade" />
+	<bean id="ocaB2BUnitFacade" class="com.olympus.oca.commerce.facades.company.impl.DefaultOcaB2BUnitFacade" parent="defaultB2BUnitFacade">
+		<property name="userService" ref="userService"/>
+		<property name="ocaB2BCustomerService" ref="ocaB2BCustomerService"/>
+		<property name="ocaB2BUnitService" ref="ocaB2BUnitService"/>
+		<property name="addressConverter" ref="addressConverter"/>
+	</bean>
+
+	<alias name="defaultOcaB2BCustomerFacade" alias="ocaB2BCustomerFacade" />
+	<bean id="defaultOcaB2BCustomerFacade" class="com.olympus.oca.commerce.facades.company.impl.DefaultOcaB2BCustomerFacade">
+		<property name="pingIntegrationService" ref="pingIntegrationService"/>
+		<property name="ocaB2BCustomerService" ref="ocaB2BCustomerService"/>
+		<property name="customerActivationDataConverter" ref="customerActivationDataConverter"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="ocaB2BCustomerReverseConverter" ref="ocaB2BCustomerReverseConverter" />
+		<property name="customerConverter" ref="customerConverter"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="cartConverter" />
+		<property name="remove" ref="groupOrderEntryPopulator" />
+	</bean>
+
+	<alias name="defaultOcaCustomerActivationDataConverter" alias="customerActivationDataConverter"/>
+	<bean id="defaultOcaCustomerActivationDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.CustomerActivationData"/>
+		<property name="populators">
+			<list>
+				<ref bean="customerAccountInvitePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="extendedCartConverter" />
+		<property name="remove" ref="groupOrderEntryPopulator" />
+	</bean>
+	<bean id="questionnaireReversePopulator" class="com.olympus.oca.commerce.facades.populators.QuestionnaireReversePopulator"/>
+
+	<alias name="defaultQuestionnaireReverseConverter" alias="questionnaireReverseConverter"/>
+	<bean id="defaultQuestionnaireReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.olympus.oca.commerce.core.model.HeavyOrderQuestionsModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="questionnaireReversePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultCommerceSearchResponseFacetsPopulator" alias="commerceSearchResponseFacetsPopulator" />
+	<bean id="defaultCommerceSearchResponseFacetsPopulator" class="com.olympus.oca.commerce.facades.populators.OcaSearchResponseFacetsPopulator" />
+
+	<bean id="ocaSearchResponseCategoryFacetPopulator" class="com.olympus.oca.commerce.facades.populators.OcaSearchResponseCategoryFacetPopulator">
+		<property name="commerceCategoryService" ref="commerceCategoryService" />
+		<property name="categoryService" ref="categoryService"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSolrSearchResponseConverter"/>
+		<property name="add" ref="ocaSearchResponseCategoryFacetPopulator"/>
+	</bean>
+
+
+	<bean id="ocaOrderEntryPricePopulator"
+		  class="com.olympus.oca.commerce.facades.order.converters.populator.OcaOrderEntryPricePopulator">
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="defaultOrderEntryConverter" />
+		<property name="add" ref="ocaOrderEntryPricePopulator" />
+	</bean>
+
+	<bean id="ocaOrderSavingsPopulator"
+		  class="com.olympus.oca.commerce.facades.order.converters.populator.OcaOrderSavingsPopulator" parent="baseOrderPopulator">
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="defaultOrderConverter" />
+		<property name="add" ref="ocaOrderSavingsPopulator" />
+	</bean>
+
+	<alias name="ocaCatalogVersionPopulator" alias="catalogVersionPopulator" />
+	<bean id="ocaCatalogVersionPopulator" class="com.olympus.oca.commerce.facades.populators.OcaCatalogVersionPopulator" parent="defaultCatalogVersionPopulator">
+	</bean>
+	<bean id="ocaB2BUnitPopulator" class="com.olympus.oca.commerce.facades.populators.OcaB2BUnitPopulator">
+		<property name="addressConverter" ref="addressConverter"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="b2bUnitConverter" />
+		<property name="add" ref="ocaB2BUnitPopulator" />
+	</bean>
+
+	<alias name="ocaCheckoutFacade" alias="b2bCheckoutFacade"/>
+	<bean id="ocaCheckoutFacade" class="com.olympus.oca.commerce.facades.order.impl.DefaultOcaCheckoutFacade" parent="defaultB2BCheckoutFacade">
+		<property name="ocaDeliveryService" ref="ocaDeliveryService"/>
+		<property name="configurationService" ref="configurationService"/>
+		<property name="deliveryModeService" ref="deliveryModeService"/>
+		<property name="paymentFacade" ref="paymentFacade"/>
+		<property name="ocaPaymetricCreditCardParamsConverter" ref="ocaPaymetricCreditCardParamsConverter"/>
+	</bean>
+
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderConverter"/>
+		<property name="remove" ref="orderCancelPopulator"/>
+	</bean>
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderConverter"/>
+		<property name="remove" ref="orderReturnPopulator"/>
+	</bean>
+
+	<bean id="ocaOrderPopulator" class="com.olympus.oca.commerce.facades.order.converters.populator.OcaOrderPopulator">
+	</bean>
+
+	<alias name="defaultOcaOrderConverter" alias="orderConverter"/>
+	<bean id="defaultOcaOrderConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.order.data.OrderData"/>
+		<property name="populators">
+			<list merge="false">
+				<ref bean="orderPopulator"/>
+				<ref bean="ocaGroupOrderEntryPopulator"/>
+				<ref bean="ocaOrderSavingsPopulator"/>
+				<ref bean="ocaOrderPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="customerAccountActivationEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.CustomerAccountActivationEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+	<bean id="customerAccountVerificationEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.CustomerAccountVerificationEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
+
+	
+	<bean id="ocaPaymentFacade" class="com.olympus.oca.commerce.facades.payment.impl.DefaultOcaPaymentFacade">
+		<property name="modelService" ref="modelService" />
+		<property name="cartService" ref="cartService" />
+		<property name="ocaPaymentIntegrationService" ref="ocaPaymentIntegrationService" />
+		<property name="ocaCreditCardPaymentInfoReverseConverter" ref="ocaCreditCardPaymentInfoReverseConverter" />
+		<property name="b2bUnitService" ref="b2bUnitService" />
+	</bean>
+
+	<bean id="defaultOcaB2BCustomerReversePopulator" class="com.olympus.oca.commerce.facades.populators.OcaB2BCustomerReversePopulator">
+		<property name="b2BUnitService" ref="b2bUnitService"/>
+		<property name="ocaB2BCustomerService" ref="ocaB2BCustomerService"/>
+	</bean>
+
+	<alias name="defaultOcaB2BCustomerReverseConverter" alias="ocaB2BCustomerReverseConverter"/>
+	<bean id="defaultOcaB2BCustomerReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.b2b.model.B2BCustomerModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="defaultOcaB2BCustomerReversePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="orderSubmissionNotificationEmailContext" class="com.olympus.oca.commerce.facades.process.email.context.OrderSubmissionNotificationEmailContext" parent="abstractEmailContext" scope="prototype">
+		</bean>
+<alias name="ocaCreditCardPaymentInfoPopulator" alias="creditCardPaymentInfoPopulator"/>
+	<bean id="ocaCreditCardPaymentInfoPopulator"
+		  class="com.olympus.oca.commerce.facades.order.converters.populator.OcaCreditCardPaymentInfoPopulator"
+	parent="defaultCreditCardPaymentInfoPopulator">
+	</bean>
+	
+	<bean id="ocaCreditCardPaymentInfoReversePopulator" class="com.olympus.oca.commerce.facades.populators.OcaCreditCardPaymentInfoReversePopulator">
+		<property name="userService" ref="userService" />
+		<property name="commerceCardTypeService" ref="commerceCardTypeService" />
+	</bean>
+
+	<alias name="ocaCreditCardPaymentInfoReverseConverter" alias="ocaCreditCardPaymentInfoReverseConverter"/>
+	<bean id="ocaCreditCardPaymentInfoReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.core.model.order.payment.CreditCardPaymentInfoModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="ocaCreditCardPaymentInfoReversePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ocaPaymetricCreditCardParamsPopulator" class="com.olympus.oca.commerce.facades.populators.OcaPaymetricCreditCardParamsPopulator">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+	      
+	<bean id="ocaPaymetricCreditCardParamsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="java.util.HashMap"/>
+		<property name="populators">
+			<list>
+				<ref bean="ocaPaymetricCreditCardParamsPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultOcaPriceDataFactory" alias="priceDataFactory"/>
+	<bean id="defaultOcaPriceDataFactory" class="com.olympus.oca.commerce.facades.product.impl.DefaultOcaPriceDataFactory" parent="defaultPriceDataFactory">
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="i18NService" ref="i18NService"/>
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService"/>
+	</bean>
+
+	<alias name="defaultOcaSalesforceIntegrationFacade" alias="salesforceIntegrationFacade"/>
+	<bean id="defaultOcaSalesforceIntegrationFacade" class="com.olympus.oca.commerce.facades.salesforce.impl.DefaultOcaSalesforceIntegrationFacade">
+		<property name="salesforceIntegrationService" ref="salesforceIntegrationService"/>
+	</bean>
+</beans>

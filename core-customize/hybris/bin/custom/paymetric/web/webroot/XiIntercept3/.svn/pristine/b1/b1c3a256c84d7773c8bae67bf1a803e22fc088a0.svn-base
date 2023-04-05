@@ -1,0 +1,419 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #FFFFFF;
+    font-size: 13px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+label {
+    height: 24px;
+    line-height: 24px;
+    padding-right: 5px;
+    width: 120px;
+    text-align: right;
+    display: inline-block;
+}
+
+input {
+    margin-bottom: 2px;
+}
+
+.option-label {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    width: 200px;
+}
+.option {
+    height: 18px;
+    width: 18px;
+    vertical-align: text-bottom;
+}
+
+.merchant_combos {
+    margin-right: 10px;
+    width: 48% !important;
+    display: inline-block !important;
+}
+
+.paymetric-content .footer {
+     width: 450px;
+    text-align: right;
+    margin: 4px auto;
+}
+/* .payment-content { */
+/*     border: solid 2px #F0F0F0; */
+/*     background-color: floralwhite; */
+/*     width: 450px; */
+/*     border-radius: 15px; */
+/*     margin: 5px auto 0 auto; */
+/*     padding: 5px; */
+/* } */
+
+
+.merchant-logo {
+    background: #FFF url('../Images/acme.png') no-repeat right top;
+    height: 150px;
+    width: 400px;
+    margin: auto;
+    background-size: 60%;
+    background-position: center;
+}
+.billing-content {
+	background-color: floralwhite;
+    margin: auto;
+    padding: 4px 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.billing-header {
+    background-color: transparent;
+    width: 96%;
+    margin: auto;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px 0;
+}
+/* .billing-info { */
+/*     background-color: floralwhite; */
+/*     width: 96%; */
+/*     margin: auto; */
+/*     border: solid 2px #FFF; */
+/*     border-radius: 8px; */
+/* } */
+
+
+.payment-button {
+    background-color: #BBB;
+    width: 96%;
+    margin: auto;
+    margin-top: 10px;
+    margin-left: auto;
+    padding: 5px 0;
+    text-align: center;
+    border: solid 2px #F0F0F0;
+    border-radius: 8px;
+}
+
+ .payment-button input {
+        border: none;
+        border-radius: 3px;
+        font-weight: bold;
+        color: #FFF;
+        padding: 2px 10px;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+.payment-button .cancel-button {
+
+    background-color: #BBB;
+    border: solid 1px  #BBB;
+    margin-right: 10px;
+   
+}
+.payment-button .submit-button {
+    background-color: #0099FF;
+    border: solid 1px #0099FF;
+}
+.payment-content #c-content div,
+.payment-content #ec-content div {
+    border-top: solid 1px #e5e5e5;
+    padding: 3px 2px;
+    margin: 0 10px;
+}
+
+.payment-content div  #c-cvvh{
+    border-top: none;
+}
+[name='dieCommFrame'] {
+    padding-left: 5px;
+    overflow: hidden !important;
+}
+.IFrameButton {
+    border: 1px solid rgb(124, 123, 123);
+    background-color: #F0F0F0;
+    border-radius: 2px 3px;
+    padding: 4px;
+    margin: 20px 0 5px 310px;   
+}
+/* IFrame styles*/
+#html-main-content {
+    width: 555px;
+    
+}
+.valmsg, .error {
+    margin-left: 130px;
+    color: #c63b3b;
+}
+.valmsg-ac-type {
+    margin-left: 35px;
+    color: #c63b3b;
+}
+.valmsg-img {
+    background-image: url("../Images/red-info.png");
+    width:16px;
+    height:16px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+.errorTooltip {
+    background-color: white;
+    border: 1px solid #626161;
+    color: #c63b3b;
+    border-radius: 7px;
+}
+.xiInputError {
+     border: 1px solid #b94a48!important; 
+     background-color: #fef5f5!important;
+}
+.PaymentDetailHeader {
+    text-align: center;
+    width: 100%;
+    background-color: rgb(232, 6, 6);
+    color: white;
+    height: 20px;
+    padding-top: 2px;
+    /*margin: 5px 0;*/
+}
+
+>
+        .iframe-packetxml {
+    white-space: pre-wrap;
+    width: 775px;
+    height: 550px;
+    overflow-x: auto;
+}
+*,
+*:before,
+*:after {
+/*     box-sizing: border-box; */
+}
+
+/*body {
+            width: 100%;
+            min-height: 300px;
+        }*/
+
+.float-label {
+    width: 555px;
+    margin: 0 auto;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+}
+
+form legend {
+    font-size: 2em;
+    margin-bottom: 1em;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+.float-label .control {
+  /*  float: left;*/
+    display: block;
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    padding-top: 23px;
+    padding-bottom: 10px;
+}
+
+.float-label .control.small {
+    width: 30%;
+    border-right: 1px solid #ddd;
+}
+
+.float-label .control.medium {
+    width: 70%;
+    padding-left: 10px;
+}
+
+
+.float-label input,
+.float-label select,
+.float-label textarea {
+    display: block;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    resize: none;
+    font-size: 100%
+}
+
+
+.float-label input + label,
+.float-label input + span + label,
+.float-label input + div + label,
+.float-label select + label,
+.float-label select + span + label,
+.float-label textarea + label {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    transition: top 0.7s ease, opacity 0.7s ease;
+    opacity: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ccc;
+}
+
+.float-label input:valid + label,
+.float-label input:valid + span + label,
+.float-label input:valid + div + label,
+.float-label select:valid + label,
+.float-label select:valid + span + label,
+.float-label textarea:valid + label {
+    opacity: 1;
+    top: 3px;
+}
+
+.float-label input:focus + label,
+.float-label input:focus + span + label,
+.float-label input:focus + div + label,
+.float-label select:focus + label,
+.float-label select:focus + select + label,
+.float-label select:focus + span + label,
+.float-label textarea:focus + label,
+.float-label textarea:focus + span + label {
+    color: #2c8efe;
+}
+
+.cardIndicator {
+    display: inline-flex;
+    padding-top: 20px;
+    margin-left: 8px;
+}
+
+.axIndicator {
+    background-image: url("CardType-AMEX1.png");
+    width: 48px;
+    height: 30px;
+    vertical-align: middle;
+    margin-left: 22px;
+    opacity: .3;
+}
+.axIndicator.selected {
+    opacity: 1;
+}
+
+.dcIndicator {
+    background-image: url("CardType-DinersClub.png");
+    width: 27px;
+    height: 25px;
+    vertical-align: middle;
+    margin-left: 22px;
+    opacity: .3;
+}
+.dcIndicator.selected {
+    opacity: 1;
+}
+
+.diIndicator {
+    background-image: url("CardType-Discover1.jpg");
+    width: 48px;
+    height: 30px;
+    vertical-align: middle;
+    margin-left: 22px;
+    opacity: .3;
+}
+.diIndicator.selected {
+    opacity: 1;
+}
+
+.jcIndicator {
+    background-image: url("CardType-JCB.png");
+    width: 27px;
+    height: 25px;
+    vertical-align: middle;
+    margin-left: 22px;
+    opacity: .3;
+}
+.jcIndicator.selected {
+    opacity: 1;
+}
+
+.swIndicator {
+    background-image: url("CardType-Maestro.png");
+    width: 27px;
+    height: 25px;
+    vertical-align: middle;
+    margin-left: 22px;
+    opacity: .3;
+}
+.swIndicator.selected {
+    opacity: 1;
+}
+
+.mcIndicator {
+    background-image: url("CardType-Mastercard1.png");
+    width: 48px;
+    height: 30px;
+    vertical-align: middle;
+    margin-left: 22px;
+    opacity: .3;
+}
+.mcIndicator.selected {
+    opacity: 1;
+}
+
+.viIndicator {
+    background-image: url("CardType-Visa1.png");
+    width: 48px;
+    height: 30px;
+    vertical-align: middle;
+    margin-left: 22px;
+    opacity: .3;
+}
+.viIndicator.selected {
+    opacity: 1;
+}
+
+/*float labels*/
+.floatLabelSection label {
+    opacity: 0;
+}
+
+.inputdiv {
+    position: relative;
+    margin-left: 130px;
+}
+
+.inputdiv > input {
+    height: 33px;
+    padding-top: 12px;
+    padding-left: 6px;
+}
+
+.inputdiv > label {
+    opacity: 0;
+    height: 0;
+}
+
+.inputdiv .valmsg {
+    margin-left: 0;
+}
+
+.inputdiv input:valid + label, .inputdiv input:valid + span +label {
+    opacity: 1;
+    top: 100%;
+    position: absolute;
+    left: 3px;
+    top: -12%;
+    height: 24px;
+    /*margin-left: -228px;
+    margin-top: -40px;*/
+    color: red;
+    font-size: 10px;
+    text-align: left;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -1,0 +1,13 @@
+﻿
+#if ($ctx.invitecount==1)
+${ctx.messages.emailSubjectFirstTry}
+#end
+
+#if ($ctx.invitecount==2)
+${ctx.messages.emailSubjectSecondTry}
+
+#end
+
+#if ($ctx.invitecount==3)
+${ctx.messages.emailSubjectThirdTry}
+#end
